@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor.Experimental.GraphView;
+﻿using System;
 using UnityEditor;
-using UnityEngine.UIElements;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
-using System;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class StateMachineGraphWindow : EditorWindow
 {
@@ -29,6 +27,25 @@ public class StateMachineGraphWindow : EditorWindow
     private StateMachineGraphView graphView;
     private string _fileName = "New State Machine";
 
+    public class FuzzyVariable { };
+    public class FuzzyState { };
+    public class FuzzyData { };
+
+    public class FuzzyLogic
+    {
+        public string name;
+
+        FuzzyLogic(string a_name)
+        {
+            name = a_name;
+        }
+
+        public virtual FuzzyState Calculate(FuzzyVariable[] fuzzyVariables, FuzzyState[] fuzzyStates)
+        {
+            return fuzzyStates[0];
+        }
+    }
+
     public void Initialize()
     {
         if (isInitialize) return;
@@ -40,17 +57,14 @@ public class StateMachineGraphWindow : EditorWindow
             graphView = new StateMachineGraphView();
         }
 
-
-
-
-
+        graphView.RegisterCallback<KeyDownEvent>(KeyDown);
         this.rootVisualElement.Add(graphView);
 
         graphView.Initialize();
 
-        var toolbar = new Toolbar();
+        Toolbar toolbar = new Toolbar();
 
-        var fileNameTextField = new TextField("File Name:");
+        TextField fileNameTextField = new TextField("File Name:");
         fileNameTextField.SetValueWithoutNotify(_fileName);
         fileNameTextField.MarkDirtyRepaint();
         fileNameTextField.RegisterValueChangedCallback(evt => _fileName = evt.newValue);
@@ -59,9 +73,16 @@ public class StateMachineGraphWindow : EditorWindow
         toolbar.Add(new Button(() => RequestDataOperation(true)) { text = "Save Data" });
 
         toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
-        // toolbar.Add(new Button(() => _graphView.CreateNewDialogueNode("Dialogue Node")) {text = "New Node",});
+
         this.rootVisualElement.Add(toolbar);
     }
+
+    private void KeyDown(KeyDownEvent evt)
+    {
+
+    }
+
+    // Make Choice Visualiser
 
     private void RequestDataOperation(bool v)
     {
