@@ -20,6 +20,14 @@ public class StateMachineGraphView : GraphView
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
         this.AddManipulator(new ClickSelector());
+
+        Node outPutNode = CreateNode("Output", 200, 100, defaultBackgroundColor);
+        Port inputPort = CreatePort(outPutNode, "In", Color.yellow, Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(Object));
+        outPutNode.inputContainer.Add(inputPort);
+
+        outPutNode.SetPosition(new Rect(Vector2.zero, Vector2.zero));
+
+        AddElement(outPutNode);
     }
 
     private class TempGridBackground : GridBackground { }
@@ -155,7 +163,7 @@ public class StateMachineGraphView : GraphView
         Node n = CreateNode("New Logic", 300, 140, defaultBackgroundColor);
         n.inputContainer.Add(CreatePort(n, "In Variables", Color.red, Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(StateMachineGraphWindow.FuzzyVariable)));
         n.inputContainer.Add(CreatePort(n, "In States", Color.cyan, Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(Superior.FuzzyStateMachine.StateMachineState)));
-        n.outputContainer.Add(CreatePort(n, "Out State", Color.cyan, Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(Superior.FuzzyStateMachine.StateMachineState)));
+        n.outputContainer.Add(CreatePort(n, "Out Data", Color.yellow, Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(StateMachineGraphWindow.FuzzyData)));
 
         ObjectField fuzzyLogic = new ObjectField { name = "State Script", objectType = typeof(Superior.FuzzyStateMachine.StateMachineState) };
 
