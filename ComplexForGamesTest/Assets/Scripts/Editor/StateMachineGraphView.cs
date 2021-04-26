@@ -125,7 +125,7 @@ public class StateMachineGraphView : GraphView
     private void OnCreateState(DropdownMenuAction action)
     {
         Node n = CreateNode("New State", 200, 100, defaultBackgroundColor);
-        Port p = CreatePort(n, "Out", Color.cyan, Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(StateMachineGraphWindow.FuzzyState));
+        Port p = CreatePort(n, "Out", Color.cyan, Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(Superior.FuzzyStateMachine.StateMachineState));
         n.outputContainer.Add(p);
 
         ObjectField fuzzyLogic = new ObjectField { name = "State Script", objectType = typeof(Superior.FuzzyStateMachine.StateMachineState) };
