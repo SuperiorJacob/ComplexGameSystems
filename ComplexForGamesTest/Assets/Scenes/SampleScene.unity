@@ -288,14 +288,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: 60
-  ruleTest: 1
-  statement: 0
-  secondStatement: 1
-  veryDesirableStatement: 0
-  unDesirableStatement: 2
-  deffuziedOutput: 35.714287
-  desirability: {x: 0, y: 50, z: 100}
+  temperatureInput: 30
+  distanceInput: 80
+  deffuziedOutput: 20
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
 --- !u!4 &832775818
 Transform:
   m_ObjectHideFlags: 0

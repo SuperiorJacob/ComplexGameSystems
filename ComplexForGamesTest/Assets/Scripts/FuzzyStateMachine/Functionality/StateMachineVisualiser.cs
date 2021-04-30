@@ -55,35 +55,49 @@ namespace FuzzyStateMachine
             Handles.DrawAAPolyLine(width, points.Length, verticesBuffer);
         }
 
-        void Draw()
+        Color changeAlpha(Color col, float alpha)
+        {
+            return new Color(col.r, col.g, col.b, alpha);
+        }
+
+        void Draw(string cat, Dictionary<int, Variable.FuzzyMember> todraw)
         {
             DrawRect(minX, minY, maxX, maxY, Color.black, Color.black);
 
-            foreach (var fuz in smd.fuzzies)
+            foreach (var fuz in todraw)
             {
                 DrawLine(fuz.Value.color, 2, fuz.Value.Visualise());
 
+                //float f = (fuz.Value.lastCheck * fuz.Value.max)/ 10;
+
+                //DrawLine(changeAlpha(fuz.Value.color, 0.5f), 2, new Vector2(f, 1), new Vector2(f, -1));
+
                 //float d = fuz.Value.shape[0] > smd.desirability.z ? -smd.desirability.z : smd.desirability.x;
                 //float o = fuz.Value.shape[0] / 10;
-                //float x = o + (fuz.Value.lastCheck * (fuz.Value.shape[fuz.Value.shape.Length - 1]/10 - o));
-                //DrawLine(fuz.Value.color, 2, new Vector2(x, 1), new Vector2(x, -1));
+
+                //DrawRect(smd.deffuziedOutput/10 - 0.1f, fuz.Value.lastCheck - 0.1f, smd.deffuziedOutput/10 + 0.1f, fuz.Value.lastCheck + 0.1f, fuz.Value.color, Color.black);
             }
 
-            DrawLine(Color.white, 2, new Vector2(smd.deffuziedOutput/10, 1), new Vector2(smd.deffuziedOutput/10, -1));
-            DrawLine(Color.gray, 2, new Vector2(smd.input / 10, 1), new Vector2(smd.input / 10, -1));
+            float x = smd.deffuziedOutput / 10;
+            if (cat != "desire")
+            {
+                x = smd.logic.rule.inputs[cat] / 10;
+            }
+            
+            DrawLine(Color.white, 2, new Vector2(x, 1), new Vector2(x, -1));
+            //DrawLine(Color.gray, 2, new Vector2(smd.input / 10, 1), new Vector2(smd.input / 10, -1));
 
         }
 
-        public override void OnInspectorGUI()
+        public void CreateVisualiser(string name, Dictionary<int, Variable.FuzzyMember> todraw)
         {
-            base.OnInspectorGUI();
-
             MonoBehaviour monoBev = (MonoBehaviour)target;
             smd = monoBev.GetComponent<StateMachineDebugger>();
 
+            GUI.backgroundColor = Color.gray;
             using (new GUILayout.HorizontalScope(EditorStyles.toolbar))
             {
-                GUILayout.Label("Visualiser");
+                GUILayout.Label(name);
             }
 
             using (new GUILayout.HorizontalScope())
@@ -95,7 +109,30 @@ namespace FuzzyStateMachine
             rangeX = maxX - minX;
             rangeY = maxY - minY;
 
-            Draw();
+            Draw(name, todraw);
+
+            using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+            {
+                foreach (var fuz in todraw)
+                {
+                    Color prev = GUI.color;
+                    GUI.color = fuz.Value.color;
+                    GUILayout.Label(fuz.Value.name);
+                    GUI.color = prev;
+                }
+
+                GUILayout.Space(EditorGUI.indentLevel * 8f);
+            }
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            foreach (var cat in smd.logic.rule.GetMembersByCategory())
+            {
+                CreateVisualiser(cat.Key, cat.Value);
+            }
         }
     }
 }
