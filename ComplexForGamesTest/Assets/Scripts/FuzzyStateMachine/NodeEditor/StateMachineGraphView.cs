@@ -21,6 +21,8 @@ namespace FuzzyStateMachine
         public GridBackground gridBackground;
         public List<NodeInfo> listNodes = new List<NodeInfo>();
 
+        private Node outputNode;
+
         public void Initialize()
         {
             listNodes.Clear();
@@ -32,15 +34,6 @@ namespace FuzzyStateMachine
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(new ClickSelector());
-
-            Node outPutNode = CreateNode("Output", 200, 100, defaultBackgroundColor);
-            Port inputPort = CreatePort(outPutNode, "In", Color.yellow, Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(Object));
-            
-            outPutNode.inputContainer.Add(inputPort);
-
-            outPutNode.SetPosition(new Rect(Vector2.zero, Vector2.zero));
-
-            AddElement(outPutNode);
         }
 
         private class TempGridBackground : GridBackground { }
@@ -51,9 +44,6 @@ namespace FuzzyStateMachine
 
             gridBackground.name = "GridBackground";
             Insert(0, gridBackground);
-
-            //Set the background zoom range
-            this.SetupZoom(0.25f, 2.0f);
 
             //The expansion size is the same as the parent object
             this.StretchToParentSize();
@@ -80,8 +70,12 @@ namespace FuzzyStateMachine
             //evt.menu.AppendAction("Create", OnCreate, a => DropdownMenu.MenuAction.StatusFlags.Normal);
             evt.menu.AppendAction("Create/Variables", OnCreateVariables);
             evt.menu.AppendAction("Create/State", OnCreateState);
+            evt.menu.AppendAction("Create/RuleSet", OnCreateRuleSet);
             evt.menu.AppendAction("Create/Logic", OnCreateLogic);
+            evt.menu.AppendAction("Create/ShapeSet", OnCreateShapeSet);
+
         }
+
 
         private Node CreateNode(string title, float width, float height, StyleColor col)
         {
@@ -96,10 +90,31 @@ namespace FuzzyStateMachine
             };
 
             n.extensionContainer.style.backgroundColor = col;
-            n.capabilities &= ~Capabilities.Deletable;
+            //n.capabilities &= ~Capabilities.Deletable;
             n.capabilities |= Capabilities.Movable;
             n.capabilities |= Capabilities.Collapsible;
             n.capabilities |= Capabilities.Renamable;
+
+            n.RegisterCallback<DetachFromPanelEvent>(
+                obj => {
+                    int removal = -1;
+
+                    for (int i = 0; i < listNodes.Count; i++)
+                    {
+                        NodeInfo nI = listNodes[i];
+
+                        if (nI.node == n)
+                        {
+                            removal = i;
+                            break;
+                        }
+                    }
+
+                    //Debug.Log($"Trying to remove {n.title} at {removal}");
+
+                    if (removal > -1)
+                        listNodes.RemoveAt(removal);
+                });
 
             return n;
         }
@@ -114,38 +129,51 @@ namespace FuzzyStateMachine
         }
 
         private Color defaultBackgroundColor = new Color(0.6f, 0.24f, 0.24f, 0.8f);
+        public Dictionary<int, Port> portDictionary = new Dictionary<int, Port>();
 
         public NodeInfo CreateNodeByData(StateMachineGraph.NodeData data)
         {
             System.Type typ = System.Type.GetType(data.type);
 
-            Node n = CreateNode(typ.Name, data.w, data.h, defaultBackgroundColor);
+            Node n = CreateNode(data.name, data.w, data.h, defaultBackgroundColor);
+
+            NodeInfo nI = new NodeInfo { node = n, obj = null };
 
             ObjectField fuzzyLogic = new ObjectField();
 
-            fuzzyLogic.objectType = typ;
+            if (typ != null)
+            {
+                fuzzyLogic.objectType = typ;
 
-            fuzzyLogic.RegisterCallback<ChangeEvent<Object>>(
-                obj =>
-                {
-                    ObjectField vObj = (ObjectField)obj.target;
-                    n.title = vObj.value.ToString();
-                }
-            );
+                fuzzyLogic.RegisterCallback<ChangeEvent<Object>>(
+                    obj =>
+                    {
+                        ObjectField vObj = (ObjectField)obj.target;
+                        n.title = vObj.value.ToString();
+                    }
+                );
 
-            NodeInfo nI = new NodeInfo { node = n, obj = fuzzyLogic };
+                nI.obj = fuzzyLogic;
+                fuzzyLogic.value = data.value;
+                fuzzyLogic.name = typ + " Script";
 
-            fuzzyLogic.name = typ + " Script";
+                n.extensionContainer.Add(fuzzyLogic);
+            }
+
+            nI.ports = new List<Port>() { };
             
             foreach (StateMachineGraph.PortData port in data.ports)
             {
                 System.Type portTyp = System.Type.GetType(port.type);
 
                 Port p = CreatePort(n, port.name, port.color, port.orientation, port.direction, port.capacity, portTyp);
+                portDictionary[port.id] = p;
 
                 if (port.direction == Direction.Output)
                 {
-                    p.source = fuzzyLogic;
+                    if (typ != null) p.source = fuzzyLogic;
+                    else p.source = "Graph Output";
+ 
                     n.outputContainer.Add(p);
                 }
                 else
@@ -153,10 +181,8 @@ namespace FuzzyStateMachine
                     n.inputContainer.Add(p);
                 }
 
-                nI.ports = new List<Port>() { p };
+                nI.ports.Add(p);
             }
-
-            n.extensionContainer.Add(fuzzyLogic);
 
             n.RefreshExpandedState();
             n.RefreshPorts();
@@ -169,20 +195,43 @@ namespace FuzzyStateMachine
             return nI;
         }
 
+        public void ConnectPorts(NodeInfo nI, StateMachineGraph.NodeData data)
+        {
+            for (int i = 0; i < nI.ports.Count; i++)
+            {
+                StateMachineGraph.PortData port = data.ports[i];
+                Port p = nI.ports[i];
+
+                if (port.connections == null || p.connected) return; // Test if already connected or null, because connections can double up :)
+
+                foreach (StateMachineGraph.PortConnector pC in port.connections)
+                {
+                    if (port.direction == Direction.Output)
+                    {
+                        AddElement(p.ConnectTo(portDictionary[pC.output]));
+                    }
+                    else
+                    {
+                        AddElement(p.ConnectTo(portDictionary[pC.input]));
+                    }
+                }
+            }
+        }
+
         private void OnCreateVariables(DropdownMenuAction action)
         {
             StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
             {
-                w = 200, h = 100, x = action.eventInfo.mousePosition.x, y = action.eventInfo.mousePosition.y, type = typeof(StateMachineGraphWindow.FuzzyVariable).FullName
+                w = 200, h = 100, x = action.eventInfo.mousePosition.x, y = action.eventInfo.mousePosition.y, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName
             };
 
             data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.red, 
                 orientation = Orientation.Horizontal, direction = Direction.Output, 
-                capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyVariable).FullName } };
+                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName } };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Variables";
-            info.obj.objectType = typeof(StateMachineGraphWindow.FuzzyVariable);
+            info.obj.objectType = typeof(FuzzyStateMachine.Variable.FuzzyVariable);
         }
 
         private void OnCreateState(DropdownMenuAction action)
@@ -201,22 +250,64 @@ namespace FuzzyStateMachine
             info.obj.objectType = typeof(FuzzyStateMachine.StateMachineState);
         }
 
+        private void OnCreateShapeSet(DropdownMenuAction action)
+        {
+            StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
+            {
+                w = 200,
+                h = 100,
+                x = action.eventInfo.mousePosition.x,
+                y = action.eventInfo.mousePosition.y,
+                type = typeof(FuzzyStateMachine.Variable.FuzzyShapeSet).FullName
+            };
+
+            data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.green,
+                orientation = Orientation.Horizontal, direction = Direction.Output,
+                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.Variable.FuzzyShapeSet).FullName } };
+
+            NodeInfo info = CreateNodeByData(data);
+            info.node.title = "New Shape Set";
+            info.obj.objectType = typeof(FuzzyStateMachine.Variable.FuzzyShapeSet);
+        }
+
+        private void OnCreateRuleSet(DropdownMenuAction action)
+        {
+            StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
+            {
+                w = 200,
+                h = 100,
+                x = action.eventInfo.mousePosition.x,
+                y = action.eventInfo.mousePosition.y,
+                type = typeof(FuzzyRuleSet).FullName
+            };
+
+            data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.blue,
+                orientation = Orientation.Horizontal, direction = Direction.Output,
+                capacity = Port.Capacity.Multi, type = typeof(FuzzyRuleSet).FullName } };
+
+            NodeInfo info = CreateNodeByData(data);
+            info.node.title = "New Fuzzy RuleSet";
+            info.obj.objectType = typeof(FuzzyRuleSet);
+        }
+
         private void OnCreateLogic(DropdownMenuAction action)
         {
             StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
             {
-                w = 300, h = 140, x = action.eventInfo.mousePosition.x, y = action.eventInfo.mousePosition.y, type = typeof(StateMachineGraphWindow.FuzzyLogic).FullName
+                w = 300, h = 160, x = action.eventInfo.mousePosition.x, y = action.eventInfo.mousePosition.y, type = typeof(FuzzyLogic).FullName
             };
 
             data.ports = new StateMachineGraph.PortData[] { 
-                new StateMachineGraph.PortData { name = "In Variables", color = Color.red, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyVariable).FullName },
+                new StateMachineGraph.PortData { name = "In Variables", color = Color.red, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName },
+                new StateMachineGraph.PortData { name = "In Shape Set", color = Color.green, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(Variable.FuzzyShapeSet).FullName },
+                new StateMachineGraph.PortData { name = "In Rule Set", color = Color.blue, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyRuleSet).FullName },
                 new StateMachineGraph.PortData { name = "In States", color = Color.cyan, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.StateMachineState).FullName },
                 new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyData).FullName }
             };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Logic";
-            info.obj.objectType = typeof(StateMachineGraphWindow.FuzzyLogic);
+            info.obj.objectType = typeof(FuzzyLogic);
         }
     }
 }

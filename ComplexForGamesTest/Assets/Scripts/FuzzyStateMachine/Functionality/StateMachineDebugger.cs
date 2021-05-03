@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace FuzzyStateMachine
 {
+    [RequireComponent(typeof(StateMachineLoader))]
     public class StateMachineDebugger : MonoBehaviour
     {
         [Header("Test")]
@@ -19,7 +20,7 @@ namespace FuzzyStateMachine
         public FuzzyLogic logic;
 
         [ContextMenu("Perform")]
-        void Perform()
+        public void Perform()
         {
             // Category is extremely important as custom fuzzy rules RELY on them!
             logic = new FuzzyLogic(new Rules.Example.GetBlanket(
@@ -38,46 +39,13 @@ namespace FuzzyStateMachine
                     new Variable.FuzzyMember("far", "distance", Variable.FuzzyMember.FuzzyShapeType.RightShoulder, Color.red, 50, 90, 100, 100)
                 ));
 
-            logic.Calculate(new Dictionary<string, float>() 
-                { 
+            logic.Calculate(new Dictionary<string, float>()
+                {
                     { "temperature", temperatureInput },
                     { "distance", distanceInput  }
-                } 
+                }
             );
             deffuziedOutput = logic.Deffuzify();
-        }
-        
-        void Test()
-        {
-            //fuzzies["cold"] = new Variable.FuzzyMember("cold", Variable.FuzzyMember.FuzzyShapeType.LeftShoulder, Color.cyan, 0, 0, 20, 40);
-            //fuzzies["warm"] = new Variable.FuzzyMember("warm", Variable.FuzzyMember.FuzzyShapeType.Triangle, Color.yellow, 30, 50, 70);
-            //fuzzies["hot"] = new Variable.FuzzyMember("hot", Variable.FuzzyMember.FuzzyShapeType.RightShoulder, Color.red, 50, 80, 100, 100);
-
-            //float isCold = fuzzies["cold"].GetMembership(input);
-            //float isWarm = fuzzies["warm"].GetMembership(input);
-            //float isHot = fuzzies["hot"].GetMembership(input);
-
-            //float maxVeryDesirable = desirability.z;
-            //float maxDesirable = desirability.y;
-            //float maxUndesirable = desirability.x;
-
-            //float veryDesirable = isCold;
-
-            //float desirable = FuzzyLogic.AND(isCold, isWarm);
-
-            //float undesirable = isHot;
-
-            //// Centroid defuzz
-            //float desire = maxVeryDesirable * veryDesirable + maxDesirable * desirable + maxUndesirable * undesirable;
-            //desire /= (veryDesirable + desirable + undesirable);
-
-            //deffuziedOutput = desire;
-
-            //Debug.Log($"It's {input} (crisp) degrees, should I get a blanket? (fuzzification)");
-            //Debug.Log($"IsCold: {isCold}");
-            //Debug.Log($"IsWarm: {isWarm}");
-            //Debug.Log($"IsHot: {isHot}");
-            //Debug.Log($"Desirability to get a blanket: {desirable} {desire} (defuzzied)");
         }
     }
 }

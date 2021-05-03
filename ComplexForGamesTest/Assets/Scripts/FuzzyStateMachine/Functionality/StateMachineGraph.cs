@@ -10,9 +10,18 @@ namespace FuzzyStateMachine
         // Yep. Saving data time.
 
         [System.Serializable]
+        public struct PortConnector
+        {
+            public int input;
+            public int output;
+        }
+
+        [System.Serializable]
         public struct PortData
         {
             public string name;
+            public int id;
+            public PortConnector[] connections;
             public string type;
             public Color color;
             public UnityEditor.Experimental.GraphView.Orientation orientation;
@@ -23,6 +32,7 @@ namespace FuzzyStateMachine
         [System.Serializable]
         public struct NodeData
         {
+            public string name; // Node name.
             public Object value; // Data input.
             public string type; // Data input type.
             public PortData[] ports; // Ports data.
@@ -30,6 +40,10 @@ namespace FuzzyStateMachine
         }
 
         public List<NodeData> nodes = new List<NodeData>();
+        public int ports = 0;
+
+        // Hopefully wont save :)
+        public Dictionary<UnityEditor.Experimental.GraphView.Port, int> portDictionary = new Dictionary<UnityEditor.Experimental.GraphView.Port, int>();
 
         public void AddNode(StateMachineGraphView.NodeInfo node)
         {
@@ -37,23 +51,80 @@ namespace FuzzyStateMachine
             float h = node.node.style.height.value.value; // Like actually unity please...
             Rect xy = node.node.GetPosition(); // Peace finally.
 
-            NodeData nD = new NodeData { value = node.obj.value, x = xy.x, y = xy.y, w = w, h = h, type = node.obj.objectType.FullName};
+            NodeData nD = new NodeData { name = node.node.title, value = node.obj != null ? node.obj.value : null, x = xy.x, y = xy.y, w = w, h = h, type = node.obj != null ? node.obj.objectType.FullName : ""};
 
             nD.ports = new PortData[node.ports.Count];
             int index = 0;
 
+            // Declaration
             foreach (UnityEditor.Experimental.GraphView.Port port in node.ports)
             {
-                nD.ports[index] = new PortData { name = port.portName, color = port.portColor, 
+                if (port == null) continue;
+
+                nD.ports[index] = new PortData { id = ports + index, name = port.portName, color = port.portColor, 
                     orientation = port.orientation, direction = port.direction, 
                     capacity = port.capacity, type = port.portType.FullName };
+
+                portDictionary[port] = ports + index;
 
                 index++;
             }
 
+            ports += index;
+
             nodes.Add(nD);
 
             Debug.Log(node.node.title + "; ports: " + node.ports.Count);
+
+            UnityEditor.EditorUtility.SetDirty(this);
+            UnityEditor.AssetDatabase.SaveAssets();
+            UnityEditor.AssetDatabase.Refresh();
+        }
+
+        public void ConnectPorts(List<StateMachineGraphView.NodeInfo> nIList)
+        {
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                NodeData nD = nodes[i];
+                StateMachineGraphView.NodeInfo node = nIList[i];
+
+                // Port connection
+                for (int ii = 0; ii < node.ports.Count; ii++)
+                {
+                    UnityEditor.Experimental.GraphView.Port port = node.ports[ii];
+
+                    //nD.ports[ii].connections = new PortConnector[nD.ports[ii].connections.Length];
+
+                    if (port.connected)
+                    {
+                        List<PortConnector> pL = new List<PortConnector>();
+
+                        foreach (var connection in port.connections)
+                        {
+                            PortConnector c = new PortConnector
+                            {
+                                input = port.direction == UnityEditor.Experimental.GraphView.Direction.Input ? portDictionary[connection.output] : -1,
+                                output = port.direction == UnityEditor.Experimental.GraphView.Direction.Output ? portDictionary[connection.input] : -1
+                            };
+
+                            // Probably uneccessary but, this is so I cant break my own code.
+
+                            bool failed = false;
+                            foreach (PortConnector pC in pL)
+                            {
+                                if (pC.input == c.input && pC.input == c.input) failed = true;
+                            }
+
+                            if (!failed)
+                                pL.Add(c);
+                        }
+
+                        nD.ports[ii].connections = pL.ToArray();
+                    }
+                }
+
+                nodes[i] = nD;
+            }
 
             UnityEditor.EditorUtility.SetDirty(this);
             UnityEditor.AssetDatabase.SaveAssets();

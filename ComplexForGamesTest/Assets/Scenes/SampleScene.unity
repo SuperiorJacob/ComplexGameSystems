@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
+  _shapeSet: {fileID: 0}
+  deffuzifiedOutput: 0
 --- !u!4 &380882622
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +270,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 832775818}
+  - component: {fileID: 832775820}
   - component: {fileID: 832775817}
+  - component: {fileID: 832775819}
   m_Layer: 0
   m_Name: Tester
   m_TagString: Untagged
@@ -288,9 +292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temperatureInput: 30
-  distanceInput: 80
-  deffuziedOutput: 20
+  temperatureInput: 60
+  distanceInput: 100
+  deffuziedOutput: 7.5
   unDesirability: {x: 0, y: 40, z: 50}
   desirability: {x: 40, y: 50, z: 60}
   veryDesirability: {x: 50, y: 60, z: 100}
@@ -308,6 +312,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832775819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832775816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &832775820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832775816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
+  _shapeSet: {fileID: 0}
+  deffuzifiedOutput: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

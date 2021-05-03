@@ -5,13 +5,20 @@ using UnityEditor;
 
 namespace FuzzyStateMachine
 {
-    [CustomEditor(typeof(StateMachineDebugger))]
-    public class StateMachineVisualiser : Editor
+    [RequireComponent(typeof(StateMachineDebugger))]
+    public class StateMachineVisualiser : MonoBehaviour
+    {
+    }
+
+    [CustomEditor(typeof(StateMachineVisualiser))]
+    public class StateMachineVisualiserEditor : Editor
     {
         StateMachineDebugger smd;
 
         // Vertex buffers
         private Vector3[] verticesBuffer;
+        private bool visualised = false;
+        private FuzzyRuleSet ruleSet;
 
         float minX = 0,
             minY = -1,
@@ -81,7 +88,7 @@ namespace FuzzyStateMachine
             float x = smd.deffuziedOutput / 10;
             if (cat != "desire")
             {
-                x = smd.logic.rule.inputs[cat] / 10;
+                x = ruleSet.inputs[cat] / 10;
             }
             
             DrawLine(Color.white, 2, new Vector2(x, 1), new Vector2(x, -1));
@@ -89,11 +96,13 @@ namespace FuzzyStateMachine
 
         }
 
+        public void Visualize()
+        {
+            visualised = true;
+        }
+
         public void CreateVisualiser(string name, Dictionary<int, Variable.FuzzyMember> todraw)
         {
-            MonoBehaviour monoBev = (MonoBehaviour)target;
-            smd = monoBev.GetComponent<StateMachineDebugger>();
-
             GUI.backgroundColor = Color.gray;
             using (new GUILayout.HorizontalScope(EditorStyles.toolbar))
             {
@@ -129,9 +138,26 @@ namespace FuzzyStateMachine
         {
             base.OnInspectorGUI();
 
-            foreach (var cat in smd.logic.rule.GetMembersByCategory())
+            using (new GUILayout.HorizontalScope())
             {
-                CreateVisualiser(cat.Key, cat.Value);
+                if (GUILayout.Button("Visualize"))
+                {
+                    MonoBehaviour monoBev = (MonoBehaviour)target;
+                    smd = monoBev.GetComponent<StateMachineDebugger>();
+                    smd.Perform();
+
+                    ruleSet = smd.logic.rule;
+
+                    Visualize();
+                }
+            }
+
+            if (visualised)
+            {
+                foreach (var cat in ruleSet.GetMembersByCategory())
+                {
+                    CreateVisualiser(cat.Key, cat.Value);
+                }
             }
         }
     }

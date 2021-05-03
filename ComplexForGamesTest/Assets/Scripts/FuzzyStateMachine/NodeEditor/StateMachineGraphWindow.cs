@@ -17,8 +17,6 @@ namespace FuzzyStateMachine
 
         private Toolbar toolBar;
 
-        private string _fileName = "New State Machine";
-
         [MenuItem("Window/SME")]
         public static void ShowWindow()
         {
@@ -39,34 +37,39 @@ namespace FuzzyStateMachine
             GraphWindow.CreateToolbar();
 
             GraphView.listNodes.Clear();
+
+            if (a_graph.nodes.Count > 0 && a_graph.nodes[0].name != "Graph Output" || a_graph.nodes.Count == 0)
+            {
+                a_graph.nodes.Insert(0, new StateMachineGraph.NodeData { name = "Graph Output", w = 200, h = 100, type = "", value = null, x = 0, y = 0, ports = new StateMachineGraph.PortData[]
+                    {
+                        new StateMachineGraph.PortData { name = "In", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(StateMachineGraphWindow.FuzzyData).FullName }
+                    }
+                });
+            }
+
             foreach (StateMachineGraph.NodeData node in a_graph.nodes)
             {
                 GraphView.CreateNodeByData(node);
             }
+
+            for (int i = 0; i < a_graph.nodes.Count; i++)
+            {
+                StateMachineGraph.NodeData node = a_graph.nodes[i];
+                StateMachineGraphView.NodeInfo nI = GraphView.listNodes[i];
+
+                GraphView.ConnectPorts(nI, node);
+            }
+
+            GraphView.portDictionary.Clear();
+
+            GraphView.listNodes[0].node.Focus();
 
             // load graph
         }
 
         bool isInitialize = false;
 
-        public class FuzzyVariable { };
-        public class FuzzyState { };
         public class FuzzyData { };
-
-        public class FuzzyLogic
-        {
-            public string name;
-
-            FuzzyLogic(string a_name)
-            {
-                name = a_name;
-            }
-
-            public virtual FuzzyState Calculate(FuzzyVariable[] fuzzyVariables, FuzzyState[] fuzzyStates)
-            {
-                return fuzzyStates[0];
-            }
-        }
 
         public void CreateToolbar()
         {
@@ -132,11 +135,17 @@ namespace FuzzyStateMachine
             if (Graph != null && GraphView != null)
             {
                 Graph.nodes.Clear();
+                Graph.ports = 0;
 
                 foreach (StateMachineGraphView.NodeInfo node in GraphView.listNodes)
                 {
-                    Graph.AddNode(node);
+                    if (node.node != null)
+                        Graph.AddNode(node);
                 }
+
+                Graph.ConnectPorts(GraphView.listNodes);
+
+                Graph.portDictionary.Clear();
             }
         }
     }

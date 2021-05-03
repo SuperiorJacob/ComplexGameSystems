@@ -8,6 +8,8 @@ namespace FuzzyStateMachine
     public class FuzzyLogic
     {
         public FuzzyRuleSet rule;
+        public Variable.FuzzyVariable variables;
+        //public Variable.FuzzyShapeSet shapeSet;
 
         public float unDesirable, desirable, veryDesirable, maxUnDesirable, maxDesirable, maxVeryDesirable, lastDefuzz;
 
@@ -29,6 +31,11 @@ namespace FuzzyStateMachine
         public static float NOT(float a)
         {
             return (1 - a);
+        }
+
+        public void Calculate()
+        {
+            rule.Calculate(out unDesirable, out desirable, out veryDesirable, out maxUnDesirable, out maxDesirable, out maxVeryDesirable, variables.Get());
         }
 
         public void Calculate(Dictionary<string, float> a_crispSet)

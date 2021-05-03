@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b2004a91029af4f9887bc73c41de8a, type: 3}
+  m_Name: Demo_Graph
+  m_EditorClassIdentifier: 
+  nodes:
+  - name: Graph Output
+    value: {fileID: 0}
+    type: 
+    ports:
+    - name: In
+      id: 0
+      connections:
+      - input: 5
+        output: -1
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    x: 708
+    y: 73
+    w: 200
+    h: 100
+  - name: New Logic
+    value: {fileID: 0}
+    type: FuzzyStateMachine.FuzzyLogic
+    ports:
+    - name: In Variables
+      id: 1
+      connections:
+      - input: 6
+        output: -1
+      type: FuzzyStateMachine.Variable.FuzzyVariable
+      color: {r: 1, g: 0, b: 0, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: In Shape Set
+      id: 2
+      connections:
+      - input: 8
+        output: -1
+      type: FuzzyStateMachine.Variable.FuzzyShapeSet
+      color: {r: 0, g: 1, b: 0, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: In Rule Set
+      id: 3
+      connections:
+      - input: 7
+        output: -1
+      type: FuzzyStateMachine.FuzzyRuleSet
+      color: {r: 0, g: 0, b: 1, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: In States
+      id: 4
+      connections:
+      - input: 9
+        output: -1
+      type: FuzzyStateMachine.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 1
+    - name: Out Data
+      id: 5
+      connections:
+      - input: -1
+        output: 0
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 319
+    y: 38
+    w: 300
+    h: 160
+  - name: New Variables
+    value: {fileID: 0}
+    type: FuzzyStateMachine.Variable.FuzzyVariable
+    ports:
+    - name: Out
+      id: 6
+      connections:
+      - input: -1
+        output: 1
+      type: FuzzyStateMachine.Variable.FuzzyVariable
+      color: {r: 1, g: 0, b: 0, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: -10
+    y: -72
+    w: 200
+    h: 100
+  - name: New Fuzzy RuleSet
+    value: {fileID: 0}
+    type: FuzzyStateMachine.FuzzyRuleSet
+    ports:
+    - name: Out
+      id: 7
+      connections:
+      - input: -1
+        output: 3
+      type: FuzzyStateMachine.FuzzyRuleSet
+      color: {r: 0, g: 0, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: -23
+    y: 152
+    w: 200
+    h: 100
+  - name: Demo_ShapeSet (FuzzyStateMachine.Variable.FuzzyShapeSet)
+    value: {fileID: 11400000, guid: 199ec81189ceb69488ef14d37ae29892, type: 2}
+    type: FuzzyStateMachine.Variable.FuzzyShapeSet
+    ports:
+    - name: Out
+      id: 8
+      connections:
+      - input: -1
+        output: 2
+      type: FuzzyStateMachine.Variable.FuzzyShapeSet
+      color: {r: 0, g: 1, b: 0, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: -13
+    y: 35
+    w: 200
+    h: 100
+  - name: New State
+    value: {fileID: 0}
+    type: FuzzyStateMachine.StateMachineState
+    ports:
+    - name: Out
+      id: 9
+      connections:
+      - input: -1
+        output: 4
+      type: FuzzyStateMachine.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: -28
+    y: 292
+    w: 200
+    h: 100
+  ports: 10

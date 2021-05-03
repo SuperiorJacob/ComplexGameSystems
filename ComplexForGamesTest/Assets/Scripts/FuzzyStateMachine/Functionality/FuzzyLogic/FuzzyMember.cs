@@ -16,16 +16,16 @@ namespace FuzzyStateMachine.Variable
             Trapezium
         }
 
-        public int index; // Used by rules.
+        public string name;
+        public string category;
+        public float[] shape;
+        public FuzzyShapeType type;
+        public Color color = Color.white;
 
-        public readonly string name;
-        public readonly string category;
-        public readonly float[] shape;
-        public readonly FuzzyShapeType type;
-        public readonly Color color;
-        public readonly float min;
-        public readonly float max;
-        public float lastCheck = 0;
+        [HideInInspector] public int index; // Used by rules.
+        [HideInInspector] public float min;
+        [HideInInspector] public float max;
+        [HideInInspector] public float lastCheck = 0;
 
         private System.Func<float, float>[] memberShipFunctions;
 
