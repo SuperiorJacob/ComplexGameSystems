@@ -14,11 +14,6 @@ namespace FuzzyStateMachine.Variable
         [Space()]
         public FuzzyMember[] fuzzyMembers;
 
-        public virtual void Init()
-        {
-
-        }
-
         public FuzzyMember[] LoadShapeSet()
         {
             List<FuzzyMember> set = new List<FuzzyMember>()
@@ -30,7 +25,7 @@ namespace FuzzyStateMachine.Variable
 
             foreach (FuzzyMember fM in fuzzyMembers)
             {
-                set.Add(fM);
+                set.Add(new Variable.FuzzyMember(fM.name, fM.category, fM.type, fM.color, fM.shape));
             }
 
             return set.ToArray();

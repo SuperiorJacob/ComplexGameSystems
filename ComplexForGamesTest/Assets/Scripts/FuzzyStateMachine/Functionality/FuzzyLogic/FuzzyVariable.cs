@@ -4,10 +4,27 @@ using UnityEngine;
 
 namespace FuzzyStateMachine.Variable
 {
-    [System.Serializable]
-    public class FuzzyVariable
+    [CreateAssetMenu(fileName = "New Variables", menuName = "FuzzyStateMachine/Graph/Variable", order = 1)]
+    public class FuzzyVariable : ScriptableObject
     {
-        private Dictionary<string, float> m_variables = new Dictionary<string, float>(); // Our inputs.
+        [System.Serializable]
+        public struct Variables
+        {
+            public string name;
+            public float input;
+        }
+
+        public Variables[] variables;
+
+        internal Dictionary<string, float> m_variables = new Dictionary<string, float>(); // Our inputs.
+
+        public void Init()
+        {
+            foreach(Variables var in variables)
+            {
+                this[var.name] = var.input;
+            }
+        }
 
         public Dictionary<string, float> Get()
         {
@@ -42,6 +59,8 @@ namespace FuzzyStateMachine.Variable
             set
             {
                 m_variables[index] = value;
+
+                Debug.Log($"{index} = {value}");
             }
         }
 

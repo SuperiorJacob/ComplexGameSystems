@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FuzzyStateMachine
+namespace FuzzyStateMachine.States
 {
-    [CreateAssetMenu(fileName = "New State", menuName = "FuzzyStateMachine/Graph/State", order = 1)]
-    public class StateMachineState : ScriptableObject
+    public class StateMachineState
     {
         
     }

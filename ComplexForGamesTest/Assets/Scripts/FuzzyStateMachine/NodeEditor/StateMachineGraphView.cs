@@ -14,6 +14,7 @@ namespace FuzzyStateMachine
         public struct NodeInfo
         {
             public Node node;
+            public System.Type type;
             public ObjectField obj;
             public List<Port> ports;
         }
@@ -76,7 +77,6 @@ namespace FuzzyStateMachine
 
         }
 
-
         private Node CreateNode(string title, float width, float height, StyleColor col)
         {
             Node n = new Node
@@ -137,25 +137,48 @@ namespace FuzzyStateMachine
 
             Node n = CreateNode(data.name, data.w, data.h, defaultBackgroundColor);
 
-            NodeInfo nI = new NodeInfo { node = n, obj = null };
+            NodeInfo nI = new NodeInfo { node = n, obj = null, type = typ };
 
             ObjectField fuzzyLogic = new ObjectField();
 
             if (typ != null)
             {
-                fuzzyLogic.objectType = typ;
+                fuzzyLogic.objectType = typ.BaseType == typeof(ScriptableObject) ? typ : typeof(MonoScript);
 
                 fuzzyLogic.RegisterCallback<ChangeEvent<Object>>(
                     obj =>
                     {
                         ObjectField vObj = (ObjectField)obj.target;
-                        n.title = vObj.value.ToString();
+
+                        System.Type c = vObj.value.GetType();
+
+                        if (c == typeof(MonoScript))
+                        {
+                            c = ((MonoScript)vObj.value).GetClass();
+                        }
+
+                        if (vObj.value != null && (c == typ || c != null && c.BaseType == typ))
+                        {
+                            n.title = vObj.value.name;
+                        }
+                        else
+                        {
+                            // Throw exception for failure.
+                            if (vObj.value != null && c != null)
+                            {
+                                throw new System.Exception($"{typ.Name} is not the same as {(c != null ? c.Name : "null")} or {(c != null ? c.BaseType.Name : "")}!");
+                            }
+
+                            n.title = "New " + typ.Name;
+                            vObj.value = null;
+                        }
+
                     }
                 );
 
                 nI.obj = fuzzyLogic;
                 fuzzyLogic.value = data.value;
-                fuzzyLogic.name = typ + " Script";
+                fuzzyLogic.name = typ.Name + " Script";
 
                 n.extensionContainer.Add(fuzzyLogic);
             }
@@ -231,23 +254,21 @@ namespace FuzzyStateMachine
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Variables";
-            info.obj.objectType = typeof(FuzzyStateMachine.Variable.FuzzyVariable);
         }
 
         private void OnCreateState(DropdownMenuAction action)
         {
             StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
             {
-                w = 200, h = 100, x = action.eventInfo.mousePosition.x, y = action.eventInfo.mousePosition.y, type = typeof(FuzzyStateMachine.StateMachineState).FullName
+                w = 200, h = 100, x = action.eventInfo.mousePosition.x, y = action.eventInfo.mousePosition.y, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName
             };
 
             data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.cyan,
                 orientation = Orientation.Horizontal, direction = Direction.Output,
-                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.StateMachineState).FullName } };
+                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName } };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New State";
-            info.obj.objectType = typeof(FuzzyStateMachine.StateMachineState);
         }
 
         private void OnCreateShapeSet(DropdownMenuAction action)
@@ -267,7 +288,6 @@ namespace FuzzyStateMachine
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Shape Set";
-            info.obj.objectType = typeof(FuzzyStateMachine.Variable.FuzzyShapeSet);
         }
 
         private void OnCreateRuleSet(DropdownMenuAction action)
@@ -287,7 +307,6 @@ namespace FuzzyStateMachine
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Fuzzy RuleSet";
-            info.obj.objectType = typeof(FuzzyRuleSet);
         }
 
         private void OnCreateLogic(DropdownMenuAction action)
@@ -301,13 +320,12 @@ namespace FuzzyStateMachine
                 new StateMachineGraph.PortData { name = "In Variables", color = Color.red, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName },
                 new StateMachineGraph.PortData { name = "In Shape Set", color = Color.green, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(Variable.FuzzyShapeSet).FullName },
                 new StateMachineGraph.PortData { name = "In Rule Set", color = Color.blue, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyRuleSet).FullName },
-                new StateMachineGraph.PortData { name = "In States", color = Color.cyan, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.StateMachineState).FullName },
+                new StateMachineGraph.PortData { name = "In States", color = Color.cyan, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName },
                 new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyData).FullName }
             };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Logic";
-            info.obj.objectType = typeof(FuzzyLogic);
         }
     }
 }

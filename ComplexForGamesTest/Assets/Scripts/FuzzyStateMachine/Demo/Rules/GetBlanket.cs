@@ -6,6 +6,8 @@ namespace FuzzyStateMachine.Rules.Example
 {
     public class GetBlanket : FuzzyRuleSet
     {
+        public GetBlanket() { }
+
         public GetBlanket(params Variable.FuzzyMember[] a_members)
         {
             if (a_members.Length != 9)

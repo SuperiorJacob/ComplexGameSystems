@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
+  _variables: {fileID: 0}
   _shapeSet: {fileID: 0}
   deffuzifiedOutput: 0
 --- !u!4 &380882622
@@ -292,12 +293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temperatureInput: 60
-  distanceInput: 100
-  deffuziedOutput: 7.5
   unDesirability: {x: 0, y: 40, z: 50}
   desirability: {x: 40, y: 50, z: 60}
   veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 77.5
 --- !u!4 &832775818
 Transform:
   m_ObjectHideFlags: 0
@@ -337,8 +336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
-  _shapeSet: {fileID: 0}
-  deffuzifiedOutput: 0
+  _variables: {fileID: 0}
+  _shapeSet: {fileID: 11400000, guid: 199ec81189ceb69488ef14d37ae29892, type: 2}
+  deffuzifiedOutput: 77.5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

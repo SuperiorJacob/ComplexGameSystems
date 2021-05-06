@@ -13,6 +13,8 @@ namespace FuzzyStateMachine
 
         public float unDesirable, desirable, veryDesirable, maxUnDesirable, maxDesirable, maxVeryDesirable, lastDefuzz;
 
+        public FuzzyLogic() {}
+
         public FuzzyLogic(FuzzyRuleSet a_rule)
         {
             rule = a_rule;

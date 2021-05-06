@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aec49837585d614f8f33fec121cd2ef, type: 3}
   m_Name: Demo_ShapeSet
   m_EditorClassIdentifier: 
-  unDesirability: {x: 0, y: 0, z: 0}
-  desirability: {x: 0, y: 0, z: 0}
-  veryDesirability: {x: 0, y: 0, z: 0}
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
   fuzzyMembers:
   - name: cold
     category: temperature

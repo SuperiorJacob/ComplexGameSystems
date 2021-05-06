@@ -20,25 +20,79 @@ MonoBehaviour:
     - name: In
       id: 0
       connections:
-      - input: 5
+      - input: 8
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
       capacity: 0
-    x: 708
-    y: 73
+    x: 768
+    y: 232
     w: 200
     h: 100
-  - name: New Logic
-    value: {fileID: 0}
+  - name: Demo_Variables
+    value: {fileID: 11400000, guid: d050ec45ab1274b4c85ccfa22dcd9320, type: 2}
+    type: FuzzyStateMachine.Variable.FuzzyVariable
+    ports:
+    - name: Out
+      id: 1
+      connections:
+      - input: -1
+        output: 4
+      type: FuzzyStateMachine.Variable.FuzzyVariable
+      color: {r: 1, g: 0, b: 0, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 56
+    y: 129
+    w: 200
+    h: 100
+  - name: StateMachineState
+    value: {fileID: 11500000, guid: 3813b5c8abef6e04ead346cc5ccc2103, type: 3}
+    type: FuzzyStateMachine.States.StateMachineState
+    ports:
+    - name: Out
+      id: 2
+      connections:
+      - input: -1
+        output: 7
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 62
+    y: 473
+    w: 200
+    h: 100
+  - name: GetBlanket
+    value: {fileID: 11500000, guid: c486e372626b80c4c997eed92ed754f5, type: 3}
+    type: FuzzyStateMachine.FuzzyRuleSet
+    ports:
+    - name: Out
+      id: 3
+      connections:
+      - input: -1
+        output: 6
+      type: FuzzyStateMachine.FuzzyRuleSet
+      color: {r: 0, g: 0, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 58
+    y: 349
+    w: 200
+    h: 100
+  - name: FuzzyLogic
+    value: {fileID: 11500000, guid: 718d1546dff4d034a98f9a599f140de8, type: 3}
     type: FuzzyStateMachine.FuzzyLogic
     ports:
     - name: In Variables
-      id: 1
+      id: 4
       connections:
-      - input: 6
+      - input: 1
         output: -1
       type: FuzzyStateMachine.Variable.FuzzyVariable
       color: {r: 1, g: 0, b: 0, a: 1}
@@ -46,9 +100,9 @@ MonoBehaviour:
       direction: 0
       capacity: 0
     - name: In Shape Set
-      id: 2
+      id: 5
       connections:
-      - input: 8
+      - input: 9
         output: -1
       type: FuzzyStateMachine.Variable.FuzzyShapeSet
       color: {r: 0, g: 1, b: 0, a: 1}
@@ -56,9 +110,9 @@ MonoBehaviour:
       direction: 0
       capacity: 0
     - name: In Rule Set
-      id: 3
+      id: 6
       connections:
-      - input: 7
+      - input: 3
         output: -1
       type: FuzzyStateMachine.FuzzyRuleSet
       color: {r: 0, g: 0, b: 1, a: 1}
@@ -66,17 +120,17 @@ MonoBehaviour:
       direction: 0
       capacity: 0
     - name: In States
-      id: 4
+      id: 7
       connections:
-      - input: 9
+      - input: 2
         output: -1
-      type: FuzzyStateMachine.StateMachineState
+      type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
       orientation: 0
       direction: 0
       capacity: 1
     - name: Out Data
-      id: 5
+      id: 8
       connections:
       - input: -1
         output: 0
@@ -85,80 +139,26 @@ MonoBehaviour:
       orientation: 0
       direction: 1
       capacity: 1
-    x: 319
-    y: 38
+    x: 386
+    y: 257
     w: 300
     h: 160
-  - name: New Variables
-    value: {fileID: 0}
-    type: FuzzyStateMachine.Variable.FuzzyVariable
-    ports:
-    - name: Out
-      id: 6
-      connections:
-      - input: -1
-        output: 1
-      type: FuzzyStateMachine.Variable.FuzzyVariable
-      color: {r: 1, g: 0, b: 0, a: 1}
-      orientation: 0
-      direction: 1
-      capacity: 1
-    x: -10
-    y: -72
-    w: 200
-    h: 100
-  - name: New Fuzzy RuleSet
-    value: {fileID: 0}
-    type: FuzzyStateMachine.FuzzyRuleSet
-    ports:
-    - name: Out
-      id: 7
-      connections:
-      - input: -1
-        output: 3
-      type: FuzzyStateMachine.FuzzyRuleSet
-      color: {r: 0, g: 0, b: 1, a: 1}
-      orientation: 0
-      direction: 1
-      capacity: 1
-    x: -23
-    y: 152
-    w: 200
-    h: 100
-  - name: Demo_ShapeSet (FuzzyStateMachine.Variable.FuzzyShapeSet)
+  - name: Demo_ShapeSet
     value: {fileID: 11400000, guid: 199ec81189ceb69488ef14d37ae29892, type: 2}
     type: FuzzyStateMachine.Variable.FuzzyShapeSet
-    ports:
-    - name: Out
-      id: 8
-      connections:
-      - input: -1
-        output: 2
-      type: FuzzyStateMachine.Variable.FuzzyShapeSet
-      color: {r: 0, g: 1, b: 0, a: 1}
-      orientation: 0
-      direction: 1
-      capacity: 1
-    x: -13
-    y: 35
-    w: 200
-    h: 100
-  - name: New State
-    value: {fileID: 0}
-    type: FuzzyStateMachine.StateMachineState
     ports:
     - name: Out
       id: 9
       connections:
       - input: -1
-        output: 4
-      type: FuzzyStateMachine.StateMachineState
-      color: {r: 0, g: 1, b: 1, a: 1}
+        output: 5
+      type: FuzzyStateMachine.Variable.FuzzyShapeSet
+      color: {r: 0, g: 1, b: 0, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: -28
-    y: 292
+    x: 54
+    y: 239
     w: 200
     h: 100
   ports: 10

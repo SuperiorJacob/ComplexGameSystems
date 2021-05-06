@@ -27,8 +27,6 @@ namespace FuzzyStateMachine.Variable
         [HideInInspector] public float max;
         [HideInInspector] public float lastCheck = 0;
 
-        private System.Func<float, float>[] memberShipFunctions;
-
         public FuzzyMember(string a_name, string a_cat, FuzzyShapeType a_type, Color a_color, params float[] a_shape)
         {
             int count = (a_type == FuzzyShapeType.Singleton) ? 1 :
@@ -52,15 +50,6 @@ namespace FuzzyStateMachine.Variable
 
             min = Mathf.Min(shape);
             max = Mathf.Max(shape);
-
-            // Cursed :) Please fix this later... probably just use if statements...
-            memberShipFunctions = new System.Func<float, float>[5];
-
-            memberShipFunctions[(int)FuzzyShapeType.Singleton] = GetSingletonMembership;
-            memberShipFunctions[(int)FuzzyShapeType.LeftShoulder] = GetLeftShoulderMembership;
-            memberShipFunctions[(int)FuzzyShapeType.RightShoulder] = GetRightShoulderMembership;
-            memberShipFunctions[(int)FuzzyShapeType.Triangle] = GetTriangleMembership;
-            memberShipFunctions[(int)FuzzyShapeType.Trapezium] = GetTrapeziumMembership;
         }
 
         public Vector2[] Visualise()
@@ -195,7 +184,10 @@ namespace FuzzyStateMachine.Variable
 
         public float GetMembership(float x)
         {
-            lastCheck = Mathf.Abs(memberShipFunctions[(int)type](x));
+            lastCheck = Mathf.Abs(type == FuzzyShapeType.LeftShoulder ? GetLeftShoulderMembership(x) :
+                (type == FuzzyShapeType.RightShoulder ? GetRightShoulderMembership(x) :
+                (type == FuzzyShapeType.Triangle ? GetTriangleMembership(x) : max)));
+
             return lastCheck;
         }
 
