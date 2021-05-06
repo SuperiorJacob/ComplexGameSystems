@@ -16,6 +16,7 @@ namespace FuzzyStateMachine
             public Node node;
             public System.Type type;
             public ObjectField obj;
+            public FloatField flo;
             public List<Port> ports;
         }
 
@@ -74,7 +75,7 @@ namespace FuzzyStateMachine
             evt.menu.AppendAction("Create/RuleSet", OnCreateRuleSet);
             evt.menu.AppendAction("Create/Logic", OnCreateLogic);
             evt.menu.AppendAction("Create/ShapeSet", OnCreateShapeSet);
-
+            evt.menu.AppendAction("Create/Maths/Greater", OnCreateGreater);
         }
 
         private Node CreateNode(string title, float width, float height, StyleColor col)
@@ -128,7 +129,7 @@ namespace FuzzyStateMachine
             return p;
         }
 
-        private Color defaultBackgroundColor = new Color(0.6f, 0.24f, 0.24f, 0.8f);
+        private Color defaultBackgroundColor = new Color(0.24f, 0.24f, 0.24f, 0.8f);
         public Dictionary<int, Port> portDictionary = new Dictionary<int, Port>();
 
         public NodeInfo CreateNodeByData(StateMachineGraph.NodeData data)
@@ -139,48 +140,58 @@ namespace FuzzyStateMachine
 
             NodeInfo nI = new NodeInfo { node = n, obj = null, type = typ };
 
-            ObjectField fuzzyLogic = new ObjectField();
-
             if (typ != null)
             {
-                fuzzyLogic.objectType = typ.BaseType == typeof(ScriptableObject) ? typ : typeof(MonoScript);
+                if (data.type == "Greater")
+                {
+                    FloatField floatField = new FloatField(">", 100);
+                    floatField.value = data.value2;
+                    n.extensionContainer.Add(floatField);
+                }
+                else
+                {
+                    ObjectField fuzzyLogic = new ObjectField();
 
-                fuzzyLogic.RegisterCallback<ChangeEvent<Object>>(
-                    obj =>
-                    {
-                        ObjectField vObj = (ObjectField)obj.target;
+                    fuzzyLogic.objectType = typ.BaseType == typeof(ScriptableObject) ? typ : typeof(MonoScript);
 
-                        System.Type c = vObj.value.GetType();
-
-                        if (c == typeof(MonoScript))
+                    fuzzyLogic.RegisterCallback<ChangeEvent<Object>>(
+                        obj =>
                         {
-                            c = ((MonoScript)vObj.value).GetClass();
-                        }
+                            ObjectField vObj = (ObjectField)obj.target;
 
-                        if (vObj.value != null && (c == typ || c != null && c.BaseType == typ))
-                        {
-                            n.title = vObj.value.name;
-                        }
-                        else
-                        {
-                            // Throw exception for failure.
-                            if (vObj.value != null && c != null)
+                            System.Type c = vObj.value.GetType();
+
+                            if (c == typeof(MonoScript))
                             {
-                                throw new System.Exception($"{typ.Name} is not the same as {(c != null ? c.Name : "null")} or {(c != null ? c.BaseType.Name : "")}!");
+                                c = ((MonoScript)vObj.value).GetClass();
                             }
 
-                            n.title = "New " + typ.Name;
-                            vObj.value = null;
+                            if (vObj.value != null && (c == typ || c != null && c.BaseType == typ))
+                            {
+                                n.title = vObj.value.name;
+                            }
+                            else
+                            {
+                            // Throw exception for failure.
+                            if (vObj.value != null && c != null)
+                                {
+                                    throw new System.Exception($"{typ.Name} is not the same as {(c != null ? c.Name : "null")} or {(c != null ? c.BaseType.Name : "")}!");
+                                }
+
+                                n.title = "New " + typ.Name;
+                                vObj.value = null;
+                            }
+
                         }
+                    );
 
-                    }
-                );
+                    nI.obj = fuzzyLogic;
+                    fuzzyLogic.value = data.value;
+                    fuzzyLogic.name = typ.Name + " Script";
 
-                nI.obj = fuzzyLogic;
-                fuzzyLogic.value = data.value;
-                fuzzyLogic.name = typ.Name + " Script";
-
-                n.extensionContainer.Add(fuzzyLogic);
+                    n.extensionContainer.Add(fuzzyLogic);
+                }
+                
             }
 
             nI.ports = new List<Port>() { };
@@ -194,8 +205,8 @@ namespace FuzzyStateMachine
 
                 if (port.direction == Direction.Output)
                 {
-                    if (typ != null) p.source = fuzzyLogic;
-                    else p.source = "Graph Output";
+                    //if (typ != null) p.source = fuzzyLogic;
+                    //else p.source = "Graph Output";
  
                     n.outputContainer.Add(p);
                 }
@@ -320,12 +331,40 @@ namespace FuzzyStateMachine
                 new StateMachineGraph.PortData { name = "In Variables", color = Color.red, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName },
                 new StateMachineGraph.PortData { name = "In Shape Set", color = Color.green, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(Variable.FuzzyShapeSet).FullName },
                 new StateMachineGraph.PortData { name = "In Rule Set", color = Color.blue, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyRuleSet).FullName },
-                new StateMachineGraph.PortData { name = "In States", color = Color.cyan, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName },
                 new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyData).FullName }
             };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Logic";
+        }
+
+        private void OnCreateGreater(DropdownMenuAction action)
+        {
+            StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
+            {
+                w = 200,
+                h = 140,
+                x = action.eventInfo.mousePosition.x,
+                y = action.eventInfo.mousePosition.y,
+                type = "Greater"
+            };
+
+            data.ports = new StateMachineGraph.PortData[] 
+            {
+                new StateMachineGraph.PortData { name = "In Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(StateMachineGraphWindow.FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "In State", color = Color.cyan, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName },
+                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyData).FullName },
+            };
+
+            NodeInfo info = CreateNodeByData(data);
+
+            FloatField floatField = new FloatField(">", 100);
+
+            info.flo = floatField;
+            info.node.title = "Greater";
+            info.node.extensionContainer.Add(floatField);
+
+            info.node.RefreshExpandedState();
         }
     }
 }

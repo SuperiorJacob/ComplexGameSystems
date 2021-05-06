@@ -34,6 +34,7 @@ namespace FuzzyStateMachine
         {
             public string name; // Node name.
             public Object value; // Data input.
+            public float value2; // For floats inputs
             public string type; // Data input type.
             public PortData[] ports; // Ports data.
             public float x, y, w, h; // Size/Position.
@@ -51,7 +52,7 @@ namespace FuzzyStateMachine
             float h = node.node.style.height.value.value; // Like actually unity please...
             Rect xy = node.node.GetPosition(); // Peace finally.
 
-            NodeData nD = new NodeData { name = node.node.title, value = node.obj != null ? node.obj.value : null, x = xy.x, y = xy.y, w = w, h = h, type = node.obj != null ? node.type.FullName : ""};
+            NodeData nD = new NodeData { name = node.node.title, value = node.obj != null ? node.obj.value : null, value2 = node.flo != null ? node.flo.value : -1f, x = xy.x, y = xy.y, w = w, h = h, type = node.obj != null ? node.type.FullName : ""};
 
             nD.ports = new PortData[node.ports.Count];
             int index = 0;
