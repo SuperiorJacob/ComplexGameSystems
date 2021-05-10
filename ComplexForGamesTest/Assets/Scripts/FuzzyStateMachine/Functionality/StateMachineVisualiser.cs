@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Text;
 
 namespace FuzzyStateMachine
 {
@@ -18,7 +19,10 @@ namespace FuzzyStateMachine
         // Vertex buffers
         private Vector3[] verticesBuffer;
         private bool visualised = false;
+
+        private Vector2 scrollPos;
         private FuzzyRuleSet ruleSet;
+        private FuzzyLogic logic;
 
         float minX = 0,
             minY = -1,
@@ -85,7 +89,7 @@ namespace FuzzyStateMachine
                 //DrawRect(smd.deffuziedOutput/10 - 0.1f, fuz.Value.lastCheck - 0.1f, smd.deffuziedOutput/10 + 0.1f, fuz.Value.lastCheck + 0.1f, fuz.Value.color, Color.black);
             }
 
-            float x = smd.deffuziedOutput / 10;
+            float x = logic.lastDefuzz / 10;
             if (cat != "desire")
             {
                 x = ruleSet.inputs[cat] / 10;
@@ -152,11 +156,33 @@ namespace FuzzyStateMachine
 
             if (visualised)
             {
+                GUILayout.Label($"Command Output:");
+
+                using (var h = new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
+                {
+                    using (var scrollView = new EditorGUILayout.ScrollViewScope(scrollPos, GUILayout.Width(h.rect.width), GUILayout.Height(100)))
+                    {
+                        scrollPos = scrollView.scrollPosition;
+
+                        for (int i = 0; i < smd.debug.Count; i++)
+                        {
+                            string label = smd.debug[i];
+                            float w = label[0] == ' ' ? 0 : 1f;
+
+                            GUI.backgroundColor = new Color(w, w, w, (i % 2 == 0 ? 0.8f : 1f));
+                            using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
+                            {
+                                GUILayout.Label(label);
+                            }
+                        }
+                    }
+                }
+
                 GUILayout.Label($"Visualised Rules:");
 
-                foreach (var logic in smd.logic)
+                foreach (var log in smd.logic)
                 {
-                    FuzzyRuleSet logicRuleSet = logic.rule;
+                    FuzzyRuleSet logicRuleSet = log.rule;
                     using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
                         GUILayout.Label(logicRuleSet.GetType().Name);
@@ -165,6 +191,7 @@ namespace FuzzyStateMachine
                     }
 
                     ruleSet = logicRuleSet;
+                    logic = log;
                     foreach (var cat in logicRuleSet.GetMembersByCategory())
                     {
                         CreateVisualiser(cat.Key, cat.Value);

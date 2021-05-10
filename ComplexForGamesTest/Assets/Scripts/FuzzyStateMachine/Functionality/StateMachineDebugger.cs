@@ -14,6 +14,9 @@ namespace FuzzyStateMachine
         public Vector3 veryDesirability;
         public float deffuziedOutput;
 
+        // Loader output
+        public List<string> debug;
+
         public Dictionary<string, Variable.FuzzyMember> fuzzies = new Dictionary<string, Variable.FuzzyMember>();
 
         public FuzzyLogic[] logic;
@@ -25,6 +28,11 @@ namespace FuzzyStateMachine
             loader.Start();
 
             logic = loader._outPut.logic.ToArray();
+            debug = loader.logs;
+            unDesirability = loader._outPut.shapeSet.unDesirability;
+            desirability = loader._outPut.shapeSet.desirability;
+            veryDesirability = loader._outPut.shapeSet.veryDesirability;
+            deffuziedOutput = loader._outPut.deffuzied;
         }
     }
 }

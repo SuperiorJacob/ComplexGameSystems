@@ -153,9 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
-  _variables: {fileID: 0}
-  _shapeSet: {fileID: 0}
-  deffuzifiedOutput: 0
 --- !u!4 &380882622
 Transform:
   m_ObjectHideFlags: 0
@@ -335,10 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
-  _variables: {fileID: 0}
-  _shapeSet: {fileID: 11400000, guid: 199ec81189ceb69488ef14d37ae29892, type: 2}
-  deffuzifiedOutput: 77.5
+  _graph: {fileID: 11400000, guid: 1b4f9247e741e0547b25d8d0272fd480, type: 2}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -113,7 +113,7 @@ namespace FuzzyStateMachine
                             bool failed = false;
                             foreach (PortConnector pC in pL)
                             {
-                                if (pC.input == c.input && pC.input == c.input) failed = true;
+                                if (pC.input == c.input && pC.output == c.output) failed = true;
                             }
 
                             if (!failed)
