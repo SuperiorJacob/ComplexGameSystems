@@ -69,7 +69,7 @@ namespace FuzzyStateMachine
 
         bool isInitialize = false;
 
-        public class FuzzyData { };
+        public struct FuzzyData {};
 
         public void CreateToolbar()
         {

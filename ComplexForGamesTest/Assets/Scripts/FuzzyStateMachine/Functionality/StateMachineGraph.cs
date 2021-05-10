@@ -48,11 +48,11 @@ namespace FuzzyStateMachine
 
         public void AddNode(StateMachineGraphView.NodeInfo node)
         {
-            float w = node.node.style.width.value.value; // What the actual hell.
-            float h = node.node.style.height.value.value; // Like actually unity please...
-            Rect xy = node.node.GetPosition(); // Peace finally.
+            float w = node.node.style.width.value.value;
+            float h = node.node.style.height.value.value;
+            Rect xy = node.node.GetPosition();
 
-            NodeData nD = new NodeData { name = node.node.title, value = node.obj != null ? node.obj.value : null, value2 = node.flo != null ? node.flo.value : -1f, x = xy.x, y = xy.y, w = w, h = h, type = node.obj != null ? node.type.FullName : ""};
+            NodeData nD = new NodeData { name = node.node.title, value = node.obj != null ? node.obj.value : null, value2 = node.flo != null ? node.flo.value : -1f, x = xy.x, y = xy.y, w = w, h = h, type = node.typeString};
 
             nD.ports = new PortData[node.ports.Count];
             int index = 0;

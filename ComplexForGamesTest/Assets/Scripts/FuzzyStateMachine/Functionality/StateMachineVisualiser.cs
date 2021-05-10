@@ -146,18 +146,34 @@ namespace FuzzyStateMachine
                     smd = monoBev.GetComponent<StateMachineDebugger>();
                     smd.Perform();
 
-                    ruleSet = smd.logic.rule;
-
                     Visualize();
                 }
             }
 
             if (visualised)
             {
-                foreach (var cat in ruleSet.GetMembersByCategory())
+                GUILayout.Label($"Visualised Rules:");
+
+                foreach (var logic in smd.logic)
                 {
-                    CreateVisualiser(cat.Key, cat.Value);
+                    FuzzyRuleSet logicRuleSet = logic.rule;
+                    using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+                    {
+                        GUILayout.Label(logicRuleSet.GetType().Name);
+
+                        GUILayout.Space(EditorGUI.indentLevel * 8f);
+                    }
+
+                    ruleSet = logicRuleSet;
+                    foreach (var cat in logicRuleSet.GetMembersByCategory())
+                    {
+                        CreateVisualiser(cat.Key, cat.Value);
+                    }
+
+                    using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+                    { }
                 }
+
             }
         }
     }

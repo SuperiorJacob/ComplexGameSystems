@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variables:
   - name: temperature
-    input: 30
+    input: 65
   - name: distance
-    input: 10
+    input: 50

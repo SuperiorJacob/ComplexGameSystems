@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace FuzzyStateMachine
 {
     [RequireComponent(typeof(StateMachineLoader))]
     public class StateMachineDebugger : MonoBehaviour
     {
-        [Header("Test")]
+        [Header("Desire")]
         public Vector3 unDesirability;
         public Vector3 desirability;
         public Vector3 veryDesirability;
@@ -15,7 +16,7 @@ namespace FuzzyStateMachine
 
         public Dictionary<string, Variable.FuzzyMember> fuzzies = new Dictionary<string, Variable.FuzzyMember>();
 
-        public FuzzyLogic logic;
+        public FuzzyLogic[] logic;
 
         [ContextMenu("Perform")]
         public void Perform()
@@ -23,13 +24,7 @@ namespace FuzzyStateMachine
             StateMachineLoader loader = GetComponent<StateMachineLoader>();
             loader.Start();
 
-            logic = loader._logic;
-
-            unDesirability = loader._shapeSet.unDesirability;
-            desirability = loader._shapeSet.desirability;
-            veryDesirability = loader._shapeSet.veryDesirability;
-
-            deffuziedOutput = loader.deffuzifiedOutput;
+            logic = loader._outPut.logic.ToArray();
         }
     }
 }

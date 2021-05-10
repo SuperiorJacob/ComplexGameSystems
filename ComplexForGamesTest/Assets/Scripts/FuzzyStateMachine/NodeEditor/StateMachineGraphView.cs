@@ -17,6 +17,7 @@ namespace FuzzyStateMachine
             public System.Type type;
             public ObjectField obj;
             public FloatField flo;
+            public string typeString;
             public List<Port> ports;
         }
 
@@ -70,12 +71,17 @@ namespace FuzzyStateMachine
         {
             base.BuildContextualMenu(evt);
             //evt.menu.AppendAction("Create", OnCreate, a => DropdownMenu.MenuAction.StatusFlags.Normal);
-            evt.menu.AppendAction("Create/Variables", OnCreateVariables);
-            evt.menu.AppendAction("Create/State", OnCreateState);
-            evt.menu.AppendAction("Create/RuleSet", OnCreateRuleSet);
-            evt.menu.AppendAction("Create/Logic", OnCreateLogic);
-            evt.menu.AppendAction("Create/ShapeSet", OnCreateShapeSet);
+            evt.menu.AppendAction("Create/Inputs/Variables", OnCreateVariables);
+            evt.menu.AppendAction("Create/Inputs/State", OnCreateState);
+            evt.menu.AppendAction("Create/Inputs/RuleSet", OnCreateRuleSet);
+            evt.menu.AppendAction("Create/Inputs/ShapeSet", OnCreateShapeSet);
+
+            evt.menu.AppendAction("Create/Data/Logic", OnCreateLogic);
+            evt.menu.AppendAction("Create/Data/HasState", OnCreateHasState);
+
             evt.menu.AppendAction("Create/Maths/Greater", OnCreateGreater);
+            evt.menu.AppendAction("Create/Maths/Lesser", OnCreateLesser);
+            evt.menu.AppendAction("Create/Maths/Equal", OnCreateEqual);
         }
 
         private Node CreateNode(string title, float width, float height, StyleColor col)
@@ -138,17 +144,19 @@ namespace FuzzyStateMachine
 
             Node n = CreateNode(data.name, data.w, data.h, defaultBackgroundColor);
 
-            NodeInfo nI = new NodeInfo { node = n, obj = null, type = typ };
+            NodeInfo nI = new NodeInfo { node = n, obj = null, type = typ, typeString = data.type };
 
-            if (typ != null)
+            if (data.type == "Greater" || data.type == "Lesser" || data.type == "Equal")
             {
-                if (data.type == "Greater")
-                {
-                    FloatField floatField = new FloatField(">", 100);
-                    floatField.value = data.value2;
-                    n.extensionContainer.Add(floatField);
-                }
-                else
+                FloatField floatField = new FloatField(">", 100);
+                floatField.value = data.value2;
+                n.extensionContainer.Add(floatField);
+
+                nI.flo = floatField;
+            }
+            else
+            {
+                if (typ != null)
                 {
                     ObjectField fuzzyLogic = new ObjectField();
 
@@ -172,8 +180,8 @@ namespace FuzzyStateMachine
                             }
                             else
                             {
-                            // Throw exception for failure.
-                            if (vObj.value != null && c != null)
+                                // Throw exception for failure.
+                                if (vObj.value != null && c != null)
                                 {
                                     throw new System.Exception($"{typ.Name} is not the same as {(c != null ? c.Name : "null")} or {(c != null ? c.BaseType.Name : "")}!");
                                 }
@@ -191,7 +199,7 @@ namespace FuzzyStateMachine
 
                     n.extensionContainer.Add(fuzzyLogic);
                 }
-                
+
             }
 
             nI.ports = new List<Port>() { };
@@ -338,7 +346,7 @@ namespace FuzzyStateMachine
             info.node.title = "New Logic";
         }
 
-        private void OnCreateGreater(DropdownMenuAction action)
+        private void OnCreateMaths(DropdownMenuAction action, string a_type)
         {
             StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
             {
@@ -346,7 +354,9 @@ namespace FuzzyStateMachine
                 h = 140,
                 x = action.eventInfo.mousePosition.x,
                 y = action.eventInfo.mousePosition.y,
-                type = "Greater"
+                type = a_type,
+                name = a_type + " " + (a_type == "Equal" ? "To" : "Than"),
+                value2 = -1
             };
 
             data.ports = new StateMachineGraph.PortData[] 
@@ -356,15 +366,46 @@ namespace FuzzyStateMachine
                 new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyData).FullName },
             };
 
-            NodeInfo info = CreateNodeByData(data);
+            NodeInfo nI = CreateNodeByData(data);
+            nI.flo.label = (a_type == "Equal" ? "==" : (a_type == "Greater" ? ">" : "<"));
+        }
 
-            FloatField floatField = new FloatField(">", 100);
+        private void OnCreateGreater(DropdownMenuAction action)
+        {
+            OnCreateMaths(action, "Greater");
+        }
 
-            info.flo = floatField;
-            info.node.title = "Greater";
-            info.node.extensionContainer.Add(floatField);
+        private void OnCreateLesser(DropdownMenuAction action)
+        {
+            OnCreateMaths(action, "Lesser");
+        }
 
-            info.node.RefreshExpandedState();
+        private void OnCreateEqual(DropdownMenuAction action)
+        {
+            OnCreateMaths(action, "Equal");
+        }
+
+        private void OnCreateHasState(DropdownMenuAction action)
+        {
+            StateMachineGraph.NodeData data = new StateMachineGraph.NodeData
+            {
+                w = 200,
+                h = 140,
+                x = action.eventInfo.mousePosition.x,
+                y = action.eventInfo.mousePosition.y,
+                type = "HasState",
+                name = "Has State",
+                value2 = -1
+            };
+
+            data.ports = new StateMachineGraph.PortData[]
+            {
+                new StateMachineGraph.PortData { name = "In Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(StateMachineGraphWindow.FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "In Data 2", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(StateMachineGraphWindow.FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(StateMachineGraphWindow.FuzzyData).FullName },
+            };
+
+            CreateNodeByData(data);
         }
     }
 }

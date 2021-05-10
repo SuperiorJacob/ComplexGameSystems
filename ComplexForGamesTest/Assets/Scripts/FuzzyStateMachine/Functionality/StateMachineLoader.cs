@@ -1,96 +1,190 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace FuzzyStateMachine
 {
     public class StateMachineLoader : MonoBehaviour
     {
         public StateMachineGraph _graph;
-        public FuzzyLogic _logic;
-        public FuzzyRuleSet _rules;
-        public Variable.FuzzyVariable _variables;
-        public Variable.FuzzyShapeSet _shapeSet;
-        public Dictionary<string, States.StateMachineState> _states = new Dictionary<string, States.StateMachineState>();
+        public FunctionData _outPut;
 
-        public float deffuzifiedOutput;
-
-        public void Load()
+        public struct NodeBranch
         {
-            StateMachineGraph.NodeData data = new StateMachineGraph.NodeData { };
+            public StateMachineGraph.NodeData data;
+            public List<NodeBranch> outs;
+            public List<NodeBranch> ins;
+        }
 
-            // FIX THIS PLEASE
+        public struct FunctionData
+        {
+            public NodeBranch branch;
+            public List<FuzzyLogic> logic;
 
-            foreach (var node in _graph.nodes)
+            public Variable.FuzzyVariable variables;
+            public Variable.FuzzyShapeSet shapeSet;
+            public FuzzyRuleSet ruleSet;
+
+            public States.StateMachineState state;
+            public float deffuzied;
+        }
+
+        /// <summary>
+        /// Branches backwards from start node and creates a list of nodes heading towards the final node (the start node).
+        /// </summary>
+        /// <param name="a_startNode">The final node, where to start from going backwards</param>
+        /// <returns>A node branch tree</returns>
+        public NodeBranch BranchFromStartNode(StateMachineGraph.NodeData a_startNode)
+        {
+            Dictionary<int, StateMachineGraph.NodeData> portIDToNode = new Dictionary<int, StateMachineGraph.NodeData>();
+            Dictionary<StateMachineGraph.NodeData, NodeBranch> branchByNode = new Dictionary<StateMachineGraph.NodeData, NodeBranch>();
+
+            foreach (var n in _graph.nodes)
             {
-                if (System.Type.GetType(node.type) == typeof(FuzzyLogic))
+                branchByNode[n] = new NodeBranch { data = n, ins = new List<NodeBranch>(), outs = new List<NodeBranch>() };
+
+                for (int i = 0; i < n.ports.Length; i++)
                 {
-                    //System.Type typ = System.Type.GetType(node.type);
-                    //_logic = (FuzzyLogic)System.Activator.CreateInstance(typ);
-                    //_logic = new FuzzyLogic();
-
-                    data = node;
-
-                    _logic = (FuzzyLogic)System.Activator.CreateInstance(((UnityEditor.MonoScript)data.value).GetClass());
-
-                    break;
+                    portIDToNode[n.ports[i].id] = n;
                 }
             }
 
-            if (data.value != null)
+            foreach (var n in _graph.nodes)
             {
-                foreach (var node in _graph.nodes)
+                NodeBranch b = branchByNode[n];
+
+                for (int i = 0; i < n.ports.Length; i++)
                 {
-                    if (data.name != "Graph Output")
+                    portIDToNode[n.ports[i].id] = n;
+                }
+
+                for (int i = 0; i < n.ports.Length; i++)
+                {
+                    var port = n.ports[i];
+
+                    for (int p = 0; p < port.connections.Length; p++)
                     {
-                        // :) fix
-                        if (!(node.ports.Length > 0) || !(node.ports[0].connections.Length > 0)) continue;
+                        var c = port.connections[p];
 
-                        int o = node.ports[0].connections[0].output;
-
-                        if (o == data.ports[0].id)
+                        if (c.input > -1 && portIDToNode.ContainsKey(c.input) && branchByNode.ContainsKey(portIDToNode[c.input]))
                         {
-                            _variables = (Variable.FuzzyVariable)node.value;
+                            b.ins.Add(branchByNode[portIDToNode[c.input]]);
                         }
-                        else if (o == data.ports[1].id)
+                        else if (c.output > -1 && portIDToNode.ContainsKey(c.output) && branchByNode.ContainsKey(portIDToNode[c.output]))
                         {
-                            _shapeSet = (Variable.FuzzyShapeSet)node.value;
-                        }
-                        else if (o == data.ports[2].id)
-                        {
-                            _rules = (FuzzyRuleSet)System.Activator.CreateInstance(((UnityEditor.MonoScript)node.value).GetClass());
-                        }
-                        else if (o == data.ports[3].id)
-                        {
-                            UnityEditor.MonoScript typ = (UnityEditor.MonoScript)node.value;
-
-                            _states[typ.name] = (States.StateMachineState)System.Activator.CreateInstance(typ.GetClass());
+                            b.outs.Add(branchByNode[portIDToNode[c.output]]);
                         }
                     }
                 }
 
-                if (_rules != null && _shapeSet != null)
-                {
-                    _variables.Init();
-                    _rules.NewSet(_shapeSet.LoadShapeSet());
-                    _logic.rule = _rules;
-                    _logic.variables = _variables;
-                }
-                else throw new System.Exception("You must have shape, rules in your graph!");
+                branchByNode[n] = b;
             }
-            else throw new System.Exception("Your graph doesnt have fuzzy logic!");
+
+            return branchByNode[a_startNode];
+        }
+
+        public NodeBranch PreviousByIn(NodeBranch a_branch)
+        {
+            return a_branch.ins[0];
+        }
+
+        public NodeBranch BackBranchOfTree(NodeBranch a_tree)
+        {
+            if (a_tree.ins == null || a_tree.ins.Count < 1)
+            {
+                return a_tree.outs[0];
+            }
+
+            NodeBranch n = PreviousByIn(a_tree);
+
+            return BackBranchOfTree(n);
+        }
+
+        public FunctionData RunFunction(NodeBranch a_data, FunctionData a_pass = default)
+        {
+            FunctionData fD = a_pass;
+            if (fD.logic == null) fD.logic = new List<FuzzyLogic>();
+
+            fD.branch = a_data;
+
+            Debug.Log($"Calculating: {a_data.data.name}");
+
+            if (System.Type.GetType(a_data.data.type) == typeof(FuzzyLogic))
+            {
+                MonoScript l = (MonoScript)a_data.data.value;
+                FuzzyLogic logic = (FuzzyLogic)System.Activator.CreateInstance(l.GetClass());
+
+                if (a_data.ins[0].data.value != null)
+                {
+                    fD.variables = (Variable.FuzzyVariable)a_data.ins[0].data.value;
+                }
+                if (a_data.ins[1].data.value != null)
+                {
+                    fD.shapeSet = (Variable.FuzzyShapeSet)a_data.ins[1].data.value;
+                }
+                if (a_data.ins[2].data.value != null)
+                {
+                    l = (MonoScript)a_data.ins[2].data.value;
+                    fD.ruleSet = (FuzzyRuleSet)System.Activator.CreateInstance(l.GetClass());
+                }
+
+                fD.variables.Init();
+                fD.ruleSet.NewSet(fD.shapeSet.LoadShapeSet());
+
+                logic.rule = fD.ruleSet;
+                logic.variables = fD.variables;
+
+                logic.Calculate();
+                fD.deffuzied = logic.Deffuzify();
+
+                fD.logic.Add(logic);
+            }
+            else if ((a_data.data.type == "Greater" && fD.deffuzied > a_data.data.value2) || 
+                    (a_data.data.type == "Lesser" && fD.deffuzied < a_data.data.value2) || 
+                    (a_data.data.type == "Equal" && fD.deffuzied == a_data.data.value2))
+            {
+                MonoScript l = (MonoScript)a_data.ins[1].data.value;
+                fD.state = (States.StateMachineState)System.Activator.CreateInstance(l.GetClass());
+            }
+            else if (a_data.data.type == "HasState")
+            {
+                if (a_data.ins.Count > 0)
+                {
+                    // Because how the node graph works, it runs in order from far left to far right, however
+                    // has state is a middle man for two logics therefore it should be able to execute far left then
+                    // execute second logic left before it compares.
+
+                    NodeBranch startBranch = BackBranchOfTree(a_data.ins[1]);
+
+                    FunctionData data = RunFunction(startBranch);
+
+                    // If the second datas not null and the primary data is null or the desireability is higher then the other set primary state.
+                    if (data.state != null && (fD.state == null || fD.deffuzied < data.deffuzied))
+                    {
+                        fD.state = data.state;
+                    }
+                }
+            }
+
+            if (a_data.outs == null || a_data.outs.Count < 1) return fD;
+            else return RunFunction(a_data.outs[0], fD);
+        }
+
+        public void Load()
+        {
+            // Starting node is the Graph Output ALWAYS. Unless manually edited...
+            NodeBranch tree = BranchFromStartNode(_graph.nodes[0]);
+            NodeBranch startBranch = BackBranchOfTree(tree);
+
+            _outPut = RunFunction(startBranch);
+           
         }
 
         // Start is called before the first frame update
         public void Start()
         {
             Load();
-
-            if (_logic != null)
-            {
-                _logic.Calculate();
-                deffuzifiedOutput = _logic.Deffuzify();
-            }
         }
 
         // Update is called once per frame
