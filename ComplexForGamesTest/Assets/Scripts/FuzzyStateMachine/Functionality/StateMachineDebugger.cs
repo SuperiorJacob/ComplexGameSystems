@@ -17,9 +17,9 @@ namespace FuzzyStateMachine
         // Loader output
         [HideInInspector] public List<string> debug;
 
-        [HideInInspector] public Dictionary<string, Variable.FuzzyMember> fuzzies = new Dictionary<string, Variable.FuzzyMember>();
-
         [HideInInspector] public FuzzyLogic[] logic;
+
+        [HideInInspector] public StateMachineLoader.FunctionData mainRule;
 
         [ContextMenu("Perform")]
         public void Perform()
@@ -27,6 +27,8 @@ namespace FuzzyStateMachine
             StateMachineLoader loader = GetComponent<StateMachineLoader>();
             loader.Load();
 
+
+            mainRule = loader._outPut.ruleSet;
             logic = loader._outPut.logic.ToArray();
             debug = loader.logs;
             unDesirability = loader._outPut.shapeSet.unDesirability;

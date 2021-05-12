@@ -16,7 +16,7 @@ MonoBehaviour:
   desirability: {x: 40, y: 50, z: 60}
   veryDesirability: {x: 50, y: 60, z: 100}
   fuzzyMembers:
-  - name: energised
+  - name: exhausted
     category: exhaustion
     shape:
     - 0
@@ -24,12 +24,12 @@ MonoBehaviour:
     - 20
     - 40
     type: 1
-    color: {r: 1, g: 0.9902667, b: 0.28773582, a: 1}
+    color: {r: 1, g: 0.007843138, b: 0, a: 1}
     index: 3
     min: 0
     max: 0
     lastCheck: 0
-  - name: awake
+  - name: tired
     category: exhaustion
     shape:
     - 30
@@ -41,7 +41,7 @@ MonoBehaviour:
     min: 0
     max: 0
     lastCheck: 0
-  - name: tired
+  - name: awake
     category: exhaustion
     shape:
     - 60
@@ -91,7 +91,7 @@ MonoBehaviour:
     min: 0
     max: 0
     lastCheck: 0
-  - name: exhausted
+  - name: energised
     category: exhaustion
     shape:
     - 60
@@ -99,7 +99,7 @@ MonoBehaviour:
     - 100
     - 100
     type: 2
-    color: {r: 1, g: 0.00864207, b: 0, a: 1}
+    color: {r: 1, g: 0.72980815, b: 0, a: 1}
     index: 8
     min: 0
     max: 0

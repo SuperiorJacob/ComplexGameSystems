@@ -50,7 +50,7 @@ namespace FuzzyStateMachine.Demo
             a_max = this["verydesirable"].GetCenter();
 
             return Rule(
-                Is("nearDeath") // if (npc is near death) then we desire to seek health badly
+                Is("neardeath") // if (npc is near death) then we desire to seek health badly
             );
         }
     }

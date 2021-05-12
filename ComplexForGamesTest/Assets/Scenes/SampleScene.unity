@@ -123,6 +123,101 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &376318428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376318429}
+  - component: {fileID: 376318432}
+  - component: {fileID: 376318431}
+  - component: {fileID: 376318430}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &376318429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376318428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 832775818}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &376318430
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376318428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &376318431
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376318428}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &376318432
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376318428}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &380882620
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +261,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -258,7 +353,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &832775816
 GameObject:
@@ -295,7 +390,7 @@ MonoBehaviour:
   unDesirability: {x: 0, y: 40, z: 50}
   desirability: {x: 40, y: 50, z: 60}
   veryDesirability: {x: 50, y: 60, z: 100}
-  deffuziedOutput: 7.5
+  deffuziedOutput: 77.5
   debug:
   - Begin loading graph data into functionality...
   - 'Calculating function: FuzzyLogic'
@@ -306,8 +401,10 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 7.5'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: StateMachineState'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
@@ -319,12 +416,16 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 7.5'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
-  - ' 7.5 is > 0 !'
+  - ' 77.5 is > 0 !'
   - ' Accepted state: StateMachineState'
   - 'Calculating function: Greater Than'
-  - ' The secondary input (7.5) is more important than the primary input (7.5) !'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: MoveForwardStateTest'
+  - Finalizing connection data...
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
@@ -336,8 +437,10 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 7.5'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: StateMachineState'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
@@ -349,14 +452,20 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: NaN'
-  - 'Error: Deffuzified value returned NaN, canceling calculation.'
-  - 'Error: Logic calculation has been terminated due to an error.'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
-  - ' The primary input (7.5) is more important than the secondary input (NaN) !'
-  - ' The primary input (7.5) is more important than the secondary input (7.5) !'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: StateMachineState'
+  - Finalizing connection data...
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
+  - Finalizing connection data...
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
   - 'Calculating function: Graph Output'
-  - Successful load. Calculated in 0.04443359 ms.
+  - " Current desired state: \n  Name: FuzzyStateMachine.States.StateMachineState\n 
+    Execution Type: Update"
+  - Successful load. Calculated in 0.05394936 ms.
 --- !u!4 &832775818
 Transform:
   m_ObjectHideFlags: 0
@@ -367,9 +476,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.3194475, y: 8.653316, z: -4.3168135}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 376318429}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &832775819
 MonoBehaviour:
@@ -406,8 +517,10 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 7.5'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: StateMachineState'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
@@ -419,12 +532,16 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 7.5'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
-  - ' 7.5 is > 0 !'
+  - ' 77.5 is > 0 !'
   - ' Accepted state: StateMachineState'
   - 'Calculating function: Greater Than'
-  - ' The secondary input (7.5) is more important than the primary input (7.5) !'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: MoveForwardStateTest'
+  - Finalizing connection data...
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
@@ -436,8 +553,10 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 7.5'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: StateMachineState'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
@@ -449,14 +568,20 @@ MonoBehaviour:
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: NaN'
-  - 'Error: Deffuzified value returned NaN, canceling calculation.'
-  - 'Error: Logic calculation has been terminated due to an error.'
+  - ' Deffuzified: 77.5'
   - 'Calculating function: Greater Than'
-  - ' The primary input (7.5) is more important than the secondary input (NaN) !'
-  - ' The primary input (7.5) is more important than the secondary input (7.5) !'
+  - ' 77.5 is > 50 !'
+  - ' Accepted state: StateMachineState'
+  - Finalizing connection data...
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
+  - Finalizing connection data...
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
   - 'Calculating function: Graph Output'
-  - Successful load. Calculated in 0.04443359 ms.
+  - " Current desired state: \n  Name: FuzzyStateMachine.States.StateMachineState\n 
+    Execution Type: Update"
+  - Successful load. Calculated in 0.05394936 ms.
 --- !u!114 &832775821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,15 +594,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 30
   _maxHealth: 100
   _isDead: 0
-  nearestfood: 10
-  nearestwater: 20
-  nearestbed: 59
-  hunger: 50
-  thirst: 45
-  exhaustion: 0
+  nearestfood: 100
+  nearestwater: 100
+  nearestbed: 100
+  hunger: 100
+  thirst: 100
+  exhaustion: 100
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,10 +679,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5.6831865}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 832775818}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

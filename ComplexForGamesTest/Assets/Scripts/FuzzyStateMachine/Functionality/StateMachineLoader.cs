@@ -209,19 +209,22 @@ namespace FuzzyStateMachine
 
                     logs.Add($" Calculating functions...");
                     FunctionData data = RunFunction(startBranch, fD, depth);
-                    if (data.logic != null)
-                        fD.logic = data.logic;
 
                     // If the second datas not null and the primary data is null or the desireability is higher then the other set primary state.
+
+                    logs.Add($"Finalizing connection data...");
 
                     if (data.state != null && (fD.state == null || fD.deffuzied < data.deffuzied))
                     {
                         logs.Add($" The secondary input ({data.deffuzied}) is more important than the primary input ({fD.deffuzied}) !");
-                        fD.deffuzied = data.deffuzied;
                         fD.state = data.state;
                     }
                     else logs.Add($" The primary input ({fD.deffuzied}) is more important than the secondary input ({data.deffuzied}) !");
                 }
+            }
+            else if (a_data.data.type == "")
+            {
+                logs.Add($" Current desired state: \n  Name: {fD.state}\n  Execution Type: {(fD.state != null ? fD.state.executionType.ToString() : "")}");
             }
 
             if (a_data.outs == null || a_data.outs.Count < 1) return fD;

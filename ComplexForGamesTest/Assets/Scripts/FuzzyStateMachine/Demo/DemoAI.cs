@@ -46,7 +46,10 @@ namespace FuzzyStateMachine.Demo
 
         void Update()
         {
-
+            if (fuzzyMachine._outPut.state != null && fuzzyMachine._outPut.state.executionType == States.StateExecuteType.Update)
+            {
+                fuzzyMachine._outPut.state.Execute(gameObject);
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ namespace FuzzyStateMachine.Variable
             foreach(Variables var in variables)
             {
                 float a = var.input;
+
                 for (int i = 0; i < a_inputs.Length; i++)
                 {
                     if (a_inputs[i].name == var.name)

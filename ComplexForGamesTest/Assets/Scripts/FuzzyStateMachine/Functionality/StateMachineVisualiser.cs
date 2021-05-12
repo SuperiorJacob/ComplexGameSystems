@@ -206,6 +206,8 @@ namespace FuzzyStateMachine
                 foreach (var log in smd.logic)
                 {
                     FuzzyRuleSet logicRuleSet = log.rule;
+
+                    //smd.mainRule
                     using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
                         GUILayout.Label(logicRuleSet.GetType().Name);
