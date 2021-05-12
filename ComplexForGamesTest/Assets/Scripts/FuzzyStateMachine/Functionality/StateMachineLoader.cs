@@ -10,6 +10,8 @@ namespace FuzzyStateMachine
         public StateMachineGraph _graph;
         public FunctionData _outPut;
 
+        public (string name, float input)[] crispOverrides;
+
         public struct NodeBranch
         {
             public StateMachineGraph.NodeData data;
@@ -30,7 +32,7 @@ namespace FuzzyStateMachine
             public float deffuzied;
         }
 
-        public List<string> logs = new List<string>();
+        [HideInInspector] public List<string> logs = new List<string>();
 
         /// <summary>
         /// Branches backwards from start node and creates a list of nodes heading towards the final node (the start node).
@@ -65,19 +67,23 @@ namespace FuzzyStateMachine
                 {
                     var port = n.ports[i];
 
-                    for (int p = 0; p < port.connections.Length; p++)
+                    if (port.connections != null && port.connections.Length != 0)
                     {
-                        var c = port.connections[p];
+                        for (int p = 0; p < port.connections.Length; p++)
+                        {
+                            var c = port.connections[p];
 
-                        if (c.input > -1 && portIDToNode.ContainsKey(c.input) && branchByNode.ContainsKey(portIDToNode[c.input]))
-                        {
-                            b.ins.Add(branchByNode[portIDToNode[c.input]]);
-                        }
-                        else if (c.output > -1 && portIDToNode.ContainsKey(c.output) && branchByNode.ContainsKey(portIDToNode[c.output]))
-                        {
-                            b.outs.Add(branchByNode[portIDToNode[c.output]]);
+                            if (c.input > -1 && portIDToNode.ContainsKey(c.input) && branchByNode.ContainsKey(portIDToNode[c.input]))
+                            {
+                                b.ins.Add(branchByNode[portIDToNode[c.input]]);
+                            }
+                            else if (c.output > -1 && portIDToNode.ContainsKey(c.output) && branchByNode.ContainsKey(portIDToNode[c.output]))
+                            {
+                                b.outs.Add(branchByNode[portIDToNode[c.output]]);
+                            }
                         }
                     }
+                    else logs.Add($"Error: For some reason port ({b.data.name}.{port.name}) is unused. Ignoring.");
                 }
 
                 branchByNode[n] = b;
@@ -91,7 +97,7 @@ namespace FuzzyStateMachine
             return a_branch.ins[0];
         }
 
-        public NodeBranch BackBranchOfTree(NodeBranch a_tree, int a_depth, out int a_outDepth)
+        public NodeBranch BackBranchOfTree(NodeBranch a_tree, NodeBranch a_prev, int a_depth, out int a_outDepth)
         {
             a_depth = a_depth + 1;
             a_outDepth = a_depth;
@@ -99,12 +105,12 @@ namespace FuzzyStateMachine
             if (a_tree.ins == null || a_tree.ins.Count < 1)
             {
                 a_outDepth = a_depth - 1;
-                return a_tree.outs[0];
+                return a_prev;
             }
 
             NodeBranch n = PreviousByIn(a_tree);
 
-            return BackBranchOfTree(n, a_depth, out a_outDepth);
+            return BackBranchOfTree(n, a_tree, a_depth, out a_outDepth);
         }
 
         public FunctionData RunFunction(NodeBranch a_data, FunctionData a_pass = default, int a_depth = -1)
@@ -122,43 +128,62 @@ namespace FuzzyStateMachine
 
             if (System.Type.GetType(a_data.data.type) == typeof(FuzzyLogic))
             {
+                fD.variables = null;
+                fD.shapeSet = null;
+                fD.ruleSet = null;
+
                 MonoScript l = (MonoScript)a_data.data.value;
                 FuzzyLogic logic = (FuzzyLogic)System.Activator.CreateInstance(l.GetClass());
 
+                bool executionFailure = false;
+
                 logs.Add($"Initializing Logic: {a_data.data.type}");
 
-                if (a_data.ins[0].data.value != null)
+                foreach (NodeBranch ins in a_data.ins)
                 {
-                    fD.variables = (Variable.FuzzyVariable)a_data.ins[0].data.value;
-                    logs.Add($" Loading variables: {fD.variables.name}");
+                    if (ins.data.type == typeof(Variable.FuzzyVariable).FullName)
+                    {
+                        fD.variables = (Variable.FuzzyVariable)ins.data.value;
+                        logs.Add($" Loading variables: {fD.variables.name}");
+                    }
+                    else if (ins.data.type == typeof(Variable.FuzzyShapeSet).FullName)
+                    {
+                        fD.shapeSet = (Variable.FuzzyShapeSet)ins.data.value;
+                        logs.Add($" Loading shape set: {fD.shapeSet.name}");
+                    }
+                    else if (ins.data.type == typeof(FuzzyRuleSet).FullName)
+                    {
+                        l = (MonoScript)ins.data.value;
+                        fD.ruleSet = (FuzzyRuleSet)System.Activator.CreateInstance(l.GetClass());
+                        logs.Add($" Loading rules: {l.name}");
+                    }
                 }
-                if (a_data.ins[1].data.value != null)
+
+                if (fD.variables == null) { executionFailure = true; logs.Add($"Error: The variables do not exist, canceling calculation."); }
+                else { fD.variables.Init(crispOverrides); logs.Add($" Initializing variables..."); }
+
+                if (fD.ruleSet == null) { executionFailure = true; logs.Add($"Error: The rules do not exist, canceling calculation."); }
+                else { fD.ruleSet.NewSet(fD.shapeSet.LoadShapeSet()); logs.Add($" Loading set..."); }
+
+                if (!executionFailure)
                 {
-                    fD.shapeSet = (Variable.FuzzyShapeSet)a_data.ins[1].data.value;
-                    logs.Add($" Loading shape set: {fD.shapeSet.name}");
+                    logic.rule = fD.ruleSet;
+                    logic.variables = fD.variables;
+
+                    logs.Add($" Calculating logic...");
+                    logic.Calculate();
+
+                    fD.deffuzied = logic.Deffuzify();
+                    logs.Add($" Deffuzified: {fD.deffuzied}");
+
+                    if (float.IsNaN(fD.deffuzied))
+                    {
+                        logs.Add($"Error: Deffuzified value returned NaN, canceling calculation.");
+                        logs.Add($"Error: Logic calculation has been terminated due to an error.");
+                    }
+                    else fD.logic.Add(logic);
                 }
-                if (a_data.ins[2].data.value != null)
-                {
-                    l = (MonoScript)a_data.ins[2].data.value;
-                    fD.ruleSet = (FuzzyRuleSet)System.Activator.CreateInstance(l.GetClass());
-                    logs.Add($" Loading rules: {l.name}");
-                }
-
-                fD.variables.Init();
-                logs.Add($" Initializing variables...");
-                fD.ruleSet.NewSet(fD.shapeSet.LoadShapeSet());
-                logs.Add($" Loading set...");
-
-                logic.rule = fD.ruleSet;
-                logic.variables = fD.variables;
-
-                logs.Add($" Calculating logic...");
-                logic.Calculate();
-
-                fD.deffuzied = logic.Deffuzify();
-                logs.Add($" Deffuzified: {fD.deffuzied}");
-
-                fD.logic.Add(logic);
+                else logs.Add($"Error: Logic calculation has been terminated due to an error.");
             }
             else if ((a_data.data.type == "Greater" && fD.deffuzied > a_data.data.value2) || 
                     (a_data.data.type == "Lesser" && fD.deffuzied < a_data.data.value2) || 
@@ -180,11 +205,13 @@ namespace FuzzyStateMachine
 
                     logs.Add($" Finding connections...");
                     int depth;
-                    NodeBranch startBranch = BackBranchOfTree(a_data.ins[1], 1, out depth);
+                    NodeBranch startBranch = BackBranchOfTree(a_data.ins[1], a_data.ins[1], 1, out depth);
 
                     logs.Add($" Calculating functions...");
                     FunctionData data = RunFunction(startBranch, fD, depth);
-                    fD.logic = data.logic;
+                    if (data.logic != null)
+                        fD.logic = data.logic;
+
                     // If the second datas not null and the primary data is null or the desireability is higher then the other set primary state.
 
                     if (data.state != null && (fD.state == null || fD.deffuzied < data.deffuzied))
@@ -201,8 +228,10 @@ namespace FuzzyStateMachine
             else return RunFunction(a_data.outs[0], fD, a_depth);
         }
 
-        public void Load()
+        public void Load(params (string name, float input)[] a_inputs)
         {
+            crispOverrides = a_inputs;
+
             logs = new List<string>();
             logs.Add($"Begin loading graph data into functionality...");
 
@@ -212,25 +241,13 @@ namespace FuzzyStateMachine
 
             // Starting node is the Graph Output ALWAYS. Unless manually edited...
             NodeBranch tree = BranchFromStartNode(_graph.nodes[0]);
-            NodeBranch startBranch = BackBranchOfTree(tree, 0, out _);
+            NodeBranch startBranch = BackBranchOfTree(tree, tree, 0, out _);
 
             _outPut = RunFunction(startBranch);
 
             float endTime = (usingEditorTime ? (float)EditorApplication.timeSinceStartup : Time.realtimeSinceStartup) - startTime;
 
             logs.Add($"Successful load. Calculated in {endTime} ms.");
-        }
-
-        // Start is called before the first frame update
-        public void Start()
-        {
-            Load();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _graph: {fileID: 11400000, guid: d6907a2564ccdc44ea93da938a64fee0, type: 2}
+  _graph: {fileID: 0}
+  logs: []
 --- !u!4 &380882622
 Transform:
   m_ObjectHideFlags: 0
@@ -271,6 +272,7 @@ GameObject:
   - component: {fileID: 832775820}
   - component: {fileID: 832775817}
   - component: {fileID: 832775819}
+  - component: {fileID: 832775821}
   m_Layer: 0
   m_Name: Tester
   m_TagString: Untagged
@@ -293,7 +295,68 @@ MonoBehaviour:
   unDesirability: {x: 0, y: 40, z: 50}
   desirability: {x: 40, y: 50, z: 60}
   veryDesirability: {x: 50, y: 60, z: 100}
-  deffuziedOutput: 77.5
+  deffuziedOutput: 7.5
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Exhaustion_Shape'
+  - ' Loading rules: DemoGetSleep'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 7.5'
+  - 'Calculating function: Greater Than'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Health_Shape'
+  - ' Loading rules: DemoHealth'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 7.5'
+  - 'Calculating function: Greater Than'
+  - ' 7.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' The secondary input (7.5) is more important than the primary input (7.5) !'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Hunger_Shape'
+  - ' Loading rules: DemoGetFood'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 7.5'
+  - 'Calculating function: Greater Than'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Thirst_Shape'
+  - ' Loading rules: DemoGetWater'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: NaN'
+  - 'Error: Deffuzified value returned NaN, canceling calculation.'
+  - 'Error: Logic calculation has been terminated due to an error.'
+  - 'Calculating function: Greater Than'
+  - ' The primary input (7.5) is more important than the secondary input (NaN) !'
+  - ' The primary input (7.5) is more important than the secondary input (7.5) !'
+  - 'Calculating function: Graph Output'
+  - Successful load. Calculated in 0.04443359 ms.
 --- !u!4 &832775818
 Transform:
   m_ObjectHideFlags: 0
@@ -332,7 +395,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _graph: {fileID: 11400000, guid: 1b4f9247e741e0547b25d8d0272fd480, type: 2}
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Exhaustion_Shape'
+  - ' Loading rules: DemoGetSleep'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 7.5'
+  - 'Calculating function: Greater Than'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Health_Shape'
+  - ' Loading rules: DemoHealth'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 7.5'
+  - 'Calculating function: Greater Than'
+  - ' 7.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' The secondary input (7.5) is more important than the primary input (7.5) !'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Hunger_Shape'
+  - ' Loading rules: DemoGetFood'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 7.5'
+  - 'Calculating function: Greater Than'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Thirst_Shape'
+  - ' Loading rules: DemoGetWater'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: NaN'
+  - 'Error: Deffuzified value returned NaN, canceling calculation.'
+  - 'Error: Logic calculation has been terminated due to an error.'
+  - 'Calculating function: Greater Than'
+  - ' The primary input (7.5) is more important than the secondary input (NaN) !'
+  - ' The primary input (7.5) is more important than the secondary input (7.5) !'
+  - 'Calculating function: Graph Output'
+  - Successful load. Calculated in 0.04443359 ms.
+--- !u!114 &832775821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832775816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  _isDead: 0
+  nearestfood: 10
+  nearestwater: 20
+  nearestbed: 59
+  hunger: 50
+  thirst: 45
+  exhaustion: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,7 +102,7 @@ namespace FuzzyStateMachine
 
         public void Visualize()
         {
-            visualised = true;
+            visualised = !visualised;
         }
 
         public void CreateVisualiser(string name, Dictionary<int, Variable.FuzzyMember> todraw)
@@ -144,13 +144,27 @@ namespace FuzzyStateMachine
 
             using (new GUILayout.HorizontalScope())
             {
-                if (GUILayout.Button("Visualize"))
+                if (GUILayout.Button("Perform"))
                 {
                     MonoBehaviour monoBev = (MonoBehaviour)target;
                     smd = monoBev.GetComponent<StateMachineDebugger>();
-                    smd.Perform();
 
-                    Visualize();
+                    smd.Perform();
+                }
+
+                if (GUILayout.Button("Visualize"))
+                {
+                    if (visualised) Visualize();
+                    else
+                    {
+                        MonoBehaviour monoBev = (MonoBehaviour)target;
+                        smd = monoBev.GetComponent<StateMachineDebugger>();
+
+                        if (smd.logic == null || smd.logic.Length == 0)
+                            smd.Perform();
+
+                        Visualize();
+                    }
                 }
             }
 
@@ -167,9 +181,18 @@ namespace FuzzyStateMachine
                         for (int i = 0; i < smd.debug.Count; i++)
                         {
                             string label = smd.debug[i];
-                            float w = label[0] == ' ' ? 0 : 1f;
+                            bool error = label.Substring(0, label.IndexOf(" ")) == "Error:";
 
-                            GUI.backgroundColor = new Color(w, w, w, (i % 2 == 0 ? 0.8f : 1f));
+                            if (error) 
+                            {
+                                GUI.backgroundColor = new Color(1, 0.1f, 0.1f, 1);
+                            }
+                            else
+                            {
+                                float w = label[0] == ' ' ? 0 : 1f;
+                                GUI.backgroundColor = new Color(w, w, w, (i % 2 == 0 ? 0.8f : 1f));
+                            }
+
                             using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                             {
                                 GUILayout.Label(label);

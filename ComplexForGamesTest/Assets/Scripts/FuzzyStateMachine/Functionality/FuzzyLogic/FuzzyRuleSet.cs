@@ -118,6 +118,16 @@ namespace FuzzyStateMachine
             return 0.9f;
         }
 
+        public void CheckDesireCategory()
+        {
+            int desireCount = 0;
+            if (categories.TryGetValue("desire", out desireCount))
+            {
+                if (desireCount < 1)
+                    throw new System.Exception($"You have not setup the required DESIRE category!");
+            }
+        }
+
         public void Calculate(out float a_unDesirable, out float a_desirable, out float a_veryDesirable, out float a_maxUnDesirable, out float a_maxDesirable, out float a_maxVeryDesirable, Dictionary<string, float> a_inputs)
         {
             Debug.Log("Calculating rules");

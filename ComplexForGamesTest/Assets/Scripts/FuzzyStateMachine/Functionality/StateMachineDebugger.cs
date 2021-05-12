@@ -15,17 +15,17 @@ namespace FuzzyStateMachine
         public float deffuziedOutput;
 
         // Loader output
-        public List<string> debug;
+        [HideInInspector] public List<string> debug;
 
-        public Dictionary<string, Variable.FuzzyMember> fuzzies = new Dictionary<string, Variable.FuzzyMember>();
+        [HideInInspector] public Dictionary<string, Variable.FuzzyMember> fuzzies = new Dictionary<string, Variable.FuzzyMember>();
 
-        public FuzzyLogic[] logic;
+        [HideInInspector] public FuzzyLogic[] logic;
 
         [ContextMenu("Perform")]
         public void Perform()
         {
             StateMachineLoader loader = GetComponent<StateMachineLoader>();
-            loader.Start();
+            loader.Load();
 
             logic = loader._outPut.logic.ToArray();
             debug = loader.logs;

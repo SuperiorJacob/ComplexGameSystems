@@ -18,11 +18,21 @@ namespace FuzzyStateMachine.Variable
 
         internal Dictionary<string, float> m_variables = new Dictionary<string, float>(); // Our inputs.
 
-        public void Init()
+        public void Init(params (string name, float input)[] a_inputs)
         {
             foreach(Variables var in variables)
             {
-                this[var.name] = var.input;
+                float a = var.input;
+                for (int i = 0; i < a_inputs.Length; i++)
+                {
+                    if (a_inputs[i].name == var.name)
+                    {
+                        a = a_inputs[i].input;
+                        break;
+                    }
+                }
+
+                this[var.name] = a;
             }
         }
 

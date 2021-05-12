@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aec49837585d614f8f33fec121cd2ef, type: 3}
+  m_Name: Demo_Exhaustion_Shape
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  fuzzyMembers:
+  - name: energised
+    category: exhaustion
+    shape:
+    - 0
+    - 0
+    - 20
+    - 40
+    type: 1
+    color: {r: 1, g: 0.9902667, b: 0.28773582, a: 1}
+    index: 3
+    min: 0
+    max: 0
+    lastCheck: 0
+  - name: awake
+    category: exhaustion
+    shape:
+    - 30
+    - 50
+    - 70
+    type: 3
+    color: {r: 1, g: 0.7892605, b: 0.6179246, a: 1}
+    index: 4
+    min: 0
+    max: 0
+    lastCheck: 0
+  - name: tired
+    category: exhaustion
+    shape:
+    - 60
+    - 70
+    - 80
+    type: 3
+    color: {r: 1, g: 0, b: 0.8741455, a: 1}
+    index: 5
+    min: 0
+    max: 0
+    lastCheck: 0
+  - name: close
+    category: nearestbed
+    shape:
+    - 0
+    - 0
+    - 10
+    - 50
+    type: 1
+    color: {r: 0, g: 1, b: 0.9155474, a: 1}
+    index: 6
+    min: 0
+    max: 0
+    lastCheck: 0
+  - name: medium
+    category: nearestbed
+    shape:
+    - 10
+    - 50
+    - 90
+    type: 3
+    color: {r: 1, g: 0.8097832, b: 0, a: 1}
+    index: 7
+    min: 0
+    max: 0
+    lastCheck: 0
+  - name: far
+    category: nearestbed
+    shape:
+    - 50
+    - 90
+    - 100
+    - 100
+    type: 2
+    color: {r: 1, g: 0.00864207, b: 0, a: 1}
+    index: 8
+    min: 0
+    max: 0
+    lastCheck: 0
+  - name: exhausted
+    category: exhaustion
+    shape:
+    - 60
+    - 90
+    - 100
+    - 100
+    type: 2
+    color: {r: 1, g: 0.00864207, b: 0, a: 1}
+    index: 8
+    min: 0
+    max: 0
+    lastCheck: 0
