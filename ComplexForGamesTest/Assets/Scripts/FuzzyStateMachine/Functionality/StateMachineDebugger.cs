@@ -19,22 +19,32 @@ namespace FuzzyStateMachine
 
         [HideInInspector] public FuzzyLogic[] logic;
 
-        [HideInInspector] public StateMachineLoader.FunctionData mainRule;
+        [HideInInspector] public StateMachineLoader.FunctionData mainData;
+
+        private StateMachineLoader loader;
+
+        public void Load()
+        {
+            if (loader == null) 
+                loader = GetComponent<StateMachineLoader>();
+
+            mainData = loader._outPut;
+            logic = mainData.logic.ToArray();
+            debug = loader.logs;
+            unDesirability = mainData.shapeSet.unDesirability;
+            desirability = mainData.shapeSet.desirability;
+            veryDesirability = mainData.shapeSet.veryDesirability;
+            deffuziedOutput = mainData.deffuzied;
+        }
 
         [ContextMenu("Perform")]
         public void Perform()
         {
-            StateMachineLoader loader = GetComponent<StateMachineLoader>();
+            if (loader == null)
+                loader = GetComponent<StateMachineLoader>();
+
             loader.Load();
-
-
-            mainRule = loader._outPut.ruleSet;
-            logic = loader._outPut.logic.ToArray();
-            debug = loader.logs;
-            unDesirability = loader._outPut.shapeSet.unDesirability;
-            desirability = loader._outPut.shapeSet.desirability;
-            veryDesirability = loader._outPut.shapeSet.veryDesirability;
-            deffuziedOutput = loader._outPut.deffuzied;
+            Load();
         }
     }
 }

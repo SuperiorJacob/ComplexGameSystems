@@ -40,6 +40,11 @@ namespace FuzzyStateMachine.Demo
             return _health;
         }
 
+        public int GetMaxHealth()
+        {
+            return _maxHealth;
+        }
+
         public void SetHealth(int a_health)
         {
             _health = Mathf.Clamp(a_health, 0, _maxHealth);

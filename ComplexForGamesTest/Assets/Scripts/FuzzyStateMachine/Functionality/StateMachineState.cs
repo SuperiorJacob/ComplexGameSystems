@@ -14,19 +14,23 @@ namespace FuzzyStateMachine.States
     public class StateMachineState
     {
         public GameObject StateController { get; private set; }
-
+        public Dictionary<string, float> inputVariables;
+        public bool finished = false;
         public StateExecuteType executionType = StateExecuteType.Update;
 
         public StateMachineState() { }
 
-        public virtual void Execute(GameObject a_obj)
+        public virtual void Execute(GameObject a_obj, Dictionary<string, float> a_inputVariables)
         {
-            if (a_obj != StateController) StateController = a_obj;
+            inputVariables = a_inputVariables;
+
+            if (a_obj != StateController) 
+                StateController = a_obj;
         }
 
-        public virtual void Finish()
+        public virtual Dictionary<string, float> Finish()
         {
-
+            return inputVariables;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace FuzzyStateMachine.Variable
             {
                 m_variables[index] = value;
 
-                Debug.Log($"{index} = {value}");
+                //Debug.Log($"{index} = {value}");
             }
         }
 

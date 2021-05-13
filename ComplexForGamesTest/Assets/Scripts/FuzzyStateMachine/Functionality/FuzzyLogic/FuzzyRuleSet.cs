@@ -8,6 +8,8 @@ namespace FuzzyStateMachine
     {
         // Please don't hit me I like easy accessability. ;)
 
+        public float weight = 1;
+
         // Rule Category , Rule Input
         public Dictionary<string, float> inputs;
 
@@ -22,8 +24,15 @@ namespace FuzzyStateMachine
             NewSet(a_members);
         }
 
+        public virtual void SetupWeight()
+        {
+            weight = 1;
+        }
+
         public void NewSet(params Variable.FuzzyMember[] a_members)
         {
+            SetupWeight();
+
             for (int i = 0; i < a_members.Length; i++)
             {
                 this[i] = a_members[i];
@@ -130,7 +139,7 @@ namespace FuzzyStateMachine
 
         public void Calculate(out float a_unDesirable, out float a_desirable, out float a_veryDesirable, out float a_maxUnDesirable, out float a_maxDesirable, out float a_maxVeryDesirable, Dictionary<string, float> a_inputs)
         {
-            Debug.Log("Calculating rules");
+            //Debug.Log("Calculating rules");
 
             inputs = a_inputs;
 
@@ -138,9 +147,9 @@ namespace FuzzyStateMachine
             a_desirable = DesirableRules(out a_maxDesirable);
             a_veryDesirable = VeryDesirableRules(out a_maxVeryDesirable);
 
-            Debug.Log($"UnDesirable: {a_unDesirable} / {a_maxUnDesirable}");
-            Debug.Log($"Desirable: {a_desirable} / {a_maxDesirable}");
-            Debug.Log($"VeryDesirable: {a_veryDesirable} / {a_maxVeryDesirable}");
+            //Debug.Log($"UnDesirable: {a_unDesirable} / {a_maxUnDesirable}");
+            //Debug.Log($"Desirable: {a_desirable} / {a_maxDesirable}");
+            //Debug.Log($"VeryDesirable: {a_veryDesirable} / {a_maxVeryDesirable}");
         }
     }
 }

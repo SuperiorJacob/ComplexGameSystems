@@ -28,8 +28,8 @@ MonoBehaviour:
       orientation: 0
       direction: 0
       capacity: 0
-    x: 1179
-    y: 282
+    x: 1204
+    y: 203
     w: 200
     h: 100
   - name: FuzzyLogic
@@ -71,7 +71,7 @@ MonoBehaviour:
       id: 4
       connections:
       - input: -1
-        output: 44
+        output: 41
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
       id: 8
       connections:
       - input: -1
-        output: 47
+        output: 44
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
@@ -440,8 +440,8 @@ MonoBehaviour:
       orientation: 0
       direction: 1
       capacity: 1
-    x: 900
-    y: 283
+    x: 934
+    y: 205
     w: 200
     h: 140
   - name: Has State
@@ -452,7 +452,7 @@ MonoBehaviour:
     - name: In Data
       id: 29
       connections:
-      - input: 46
+      - input: 60
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -462,7 +462,7 @@ MonoBehaviour:
     - name: In Data 2
       id: 30
       connections:
-      - input: 43
+      - input: 51
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -491,7 +491,7 @@ MonoBehaviour:
     - name: In Data
       id: 32
       connections:
-      - input: 40
+      - input: 57
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -501,7 +501,7 @@ MonoBehaviour:
     - name: In Data 2
       id: 33
       connections:
-      - input: 37
+      - input: 54
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -518,13 +518,13 @@ MonoBehaviour:
       orientation: 0
       direction: 1
       capacity: 1
-    x: 697
-    y: 410
+    x: 1070
+    y: 532
     w: 200
     h: 140
   - name: Greater Than
     value: {fileID: 0}
-    value2: 50
+    value2: 0
     type: Greater
     ports:
     - name: In Data
@@ -540,7 +540,7 @@ MonoBehaviour:
     - name: In State
       id: 36
       connections:
-      - input: 53
+      - input: 47
         output: -1
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
@@ -551,19 +551,19 @@ MonoBehaviour:
       id: 37
       connections:
       - input: -1
-        output: 33
+        output: 52
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 633
-    y: 638
+    x: 408
+    y: 519
     w: 200
     h: 140
   - name: Greater Than
     value: {fileID: 0}
-    value2: 50
+    value2: 0
     type: Greater
     ports:
     - name: In Data
@@ -579,7 +579,7 @@ MonoBehaviour:
     - name: In State
       id: 39
       connections:
-      - input: 54
+      - input: 47
         output: -1
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
@@ -590,25 +590,25 @@ MonoBehaviour:
       id: 40
       connections:
       - input: -1
-        output: 32
+        output: 55
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 391
-    y: 378
+    x: 414
+    y: 303
     w: 200
     h: 140
   - name: Greater Than
     value: {fileID: 0}
-    value2: 50
+    value2: 0
     type: Greater
     ports:
     - name: In Data
       id: 41
       connections:
-      - input: 49
+      - input: 4
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -618,7 +618,7 @@ MonoBehaviour:
     - name: In State
       id: 42
       connections:
-      - input: 51
+      - input: 47
         output: -1
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
@@ -629,25 +629,25 @@ MonoBehaviour:
       id: 43
       connections:
       - input: -1
-        output: 30
+        output: 58
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 783
-    y: -38
+    x: 370
+    y: -179
     w: 200
     h: 140
   - name: Greater Than
     value: {fileID: 0}
-    value2: 50
+    value2: 0
     type: Greater
     ports:
     - name: In Data
       id: 44
       connections:
-      - input: 4
+      - input: 8
         output: -1
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -657,7 +657,7 @@ MonoBehaviour:
     - name: In State
       id: 45
       connections:
-      - input: 52
+      - input: 47
         output: -1
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
@@ -668,53 +668,14 @@ MonoBehaviour:
       id: 46
       connections:
       - input: -1
-        output: 29
+        output: 49
       type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 490
-    y: -158
-    w: 200
-    h: 140
-  - name: Greater Than
-    value: {fileID: 0}
-    value2: 0
-    type: Greater
-    ports:
-    - name: In Data
-      id: 47
-      connections:
-      - input: 8
-        output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
-      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-      orientation: 0
-      direction: 0
-      capacity: 0
-    - name: In State
-      id: 48
-      connections:
-      - input: 50
-        output: -1
-      type: FuzzyStateMachine.States.StateMachineState
-      color: {r: 0, g: 1, b: 1, a: 1}
-      orientation: 0
-      direction: 0
-      capacity: 0
-    - name: Out Data
-      id: 49
-      connections:
-      - input: -1
-        output: 41
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
-      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-      orientation: 0
-      direction: 1
-      capacity: 1
-    x: 480
-    y: 104
+    x: 381
+    y: 80
     w: 200
     h: 140
   - name: StateMachineState
@@ -723,17 +684,23 @@ MonoBehaviour:
     type: FuzzyStateMachine.States.StateMachineState
     ports:
     - name: Out
-      id: 50
+      id: 47
       connections:
       - input: -1
-        output: 48
+        output: 39
+      - input: -1
+        output: 45
+      - input: -1
+        output: 42
+      - input: -1
+        output: 36
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 379
-    y: 251
+    x: 65
+    y: -219
     w: 200
     h: 100
   - name: MoveForwardStateTest
@@ -742,74 +709,230 @@ MonoBehaviour:
     type: FuzzyStateMachine.States.StateMachineState
     ports:
     - name: Out
+      id: 48
+      connections:
+      - input: -1
+        output: 50
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 671
+    y: 120
+    w: 200
+    h: 100
+  - name: Greater Than
+    value: {fileID: 0}
+    value2: 0
+    type: Greater
+    ports:
+    - name: In Data
+      id: 49
+      connections:
+      - input: 46
+        output: -1
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: In State
+      id: 50
+      connections:
+      - input: 48
+        output: -1
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: Out Data
       id: 51
       connections:
       - input: -1
-        output: 42
-      type: FuzzyStateMachine.States.StateMachineState
-      color: {r: 0, g: 1, b: 1, a: 1}
+        output: 30
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 725
-    y: 132
+    x: 795
+    y: -66
     w: 200
-    h: 100
-  - name: StateMachineState
-    value: {fileID: 11500000, guid: 3813b5c8abef6e04ead346cc5ccc2103, type: 3}
-    value2: -1
-    type: FuzzyStateMachine.States.StateMachineState
+    h: 140
+  - name: Greater Than
+    value: {fileID: 0}
+    value2: 0
+    type: Greater
     ports:
-    - name: Out
+    - name: In Data
       id: 52
       connections:
-      - input: -1
-        output: 45
-      type: FuzzyStateMachine.States.StateMachineState
-      color: {r: 0, g: 1, b: 1, a: 1}
+      - input: 37
+        output: -1
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
-      direction: 1
-      capacity: 1
-    x: 225
-    y: -194
-    w: 200
-    h: 100
-  - name: StateMachineState
-    value: {fileID: 11500000, guid: 3813b5c8abef6e04ead346cc5ccc2103, type: 3}
-    value2: -1
-    type: FuzzyStateMachine.States.StateMachineState
-    ports:
-    - name: Out
+      direction: 0
+      capacity: 0
+    - name: In State
       id: 53
       connections:
-      - input: -1
-        output: 36
+      - input: 62
+        output: -1
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
       orientation: 0
-      direction: 1
-      capacity: 1
-    x: 396
-    y: 777
-    w: 200
-    h: 100
-  - name: StateMachineState
-    value: {fileID: 11500000, guid: 3813b5c8abef6e04ead346cc5ccc2103, type: 3}
-    value2: -1
-    type: FuzzyStateMachine.States.StateMachineState
-    ports:
-    - name: Out
+      direction: 0
+      capacity: 0
+    - name: Out Data
       id: 54
       connections:
       - input: -1
-        output: 39
+        output: 33
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 717
+    y: 589
+    w: 200
+    h: 140
+  - name: Greater Than
+    value: {fileID: 0}
+    value2: 0
+    type: Greater
+    ports:
+    - name: In Data
+      id: 55
+      connections:
+      - input: 40
+        output: -1
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: In State
+      id: 56
+      connections:
+      - input: 61
+        output: -1
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: Out Data
+      id: 57
+      connections:
+      - input: -1
+        output: 32
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 668
+    y: 308
+    w: 200
+    h: 140
+  - name: Greater Than
+    value: {fileID: 0}
+    value2: 0
+    type: Greater
+    ports:
+    - name: In Data
+      id: 58
+      connections:
+      - input: 43
+        output: -1
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: In State
+      id: 59
+      connections:
+      - input: 63
+        output: -1
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 0
+      capacity: 0
+    - name: Out Data
+      id: 60
+      connections:
+      - input: -1
+        output: 29
+      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 647
+    y: -247
+    w: 200
+    h: 140
+  - name: GetFoodState
+    value: {fileID: 11500000, guid: 0dfdfb9f7e5bf164d81f33843595645a, type: 3}
+    value2: -1
+    type: FuzzyStateMachine.States.StateMachineState
+    ports:
+    - name: Out
+      id: 61
+      connections:
+      - input: -1
+        output: 56
       type: FuzzyStateMachine.States.StateMachineState
       color: {r: 0, g: 1, b: 1, a: 1}
       orientation: 0
       direction: 1
       capacity: 1
-    x: 402
-    y: 540
+    x: 644
+    y: 454
     w: 200
     h: 100
-  ports: 55
+  - name: GetWaterState
+    value: {fileID: 11500000, guid: 95cdbda1d76672849b0f43399153dc65, type: 3}
+    value2: -1
+    type: FuzzyStateMachine.States.StateMachineState
+    ports:
+    - name: Out
+      id: 62
+      connections:
+      - input: -1
+        output: 53
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 658
+    y: 747
+    w: 200
+    h: 100
+  - name: GetRestState
+    value: {fileID: 11500000, guid: e077ef534644b044584d9492ae2798d4, type: 3}
+    value2: -1
+    type: FuzzyStateMachine.States.StateMachineState
+    ports:
+    - name: Out
+      id: 63
+      connections:
+      - input: -1
+        output: 59
+      type: FuzzyStateMachine.States.StateMachineState
+      color: {r: 0, g: 1, b: 1, a: 1}
+      orientation: 0
+      direction: 1
+      capacity: 1
+    x: 472
+    y: -434
+    w: 200
+    h: 100
+  ports: 64

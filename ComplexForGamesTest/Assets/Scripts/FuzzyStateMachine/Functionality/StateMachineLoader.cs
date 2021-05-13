@@ -83,7 +83,7 @@ namespace FuzzyStateMachine
                             }
                         }
                     }
-                    else logs.Add($"Error: For some reason port ({b.data.name}.{port.name}) is unused. Ignoring.");
+                    else logs.Add($"Error: For some reason port ({b.data.name}.[{port.id}]{port.name}) is unused. Ignoring.");
                 }
 
                 branchByNode[n] = b;
@@ -126,11 +126,12 @@ namespace FuzzyStateMachine
 
             logs.Add($"Calculating function: {a_data.data.name}");
 
+            bool calculated = false;
             if (System.Type.GetType(a_data.data.type) == typeof(FuzzyLogic))
             {
                 fD.variables = null;
-                fD.shapeSet = null;
                 fD.ruleSet = null;
+                fD.shapeSet = null;
 
                 MonoScript l = (MonoScript)a_data.data.value;
                 FuzzyLogic logic = (FuzzyLogic)System.Activator.CreateInstance(l.GetClass());
@@ -159,11 +160,27 @@ namespace FuzzyStateMachine
                     }
                 }
 
-                if (fD.variables == null) { executionFailure = true; logs.Add($"Error: The variables do not exist, canceling calculation."); }
-                else { fD.variables.Init(crispOverrides); logs.Add($" Initializing variables..."); }
+                if (fD.variables == null) 
+                { 
+                    executionFailure = true; 
+                    logs.Add($"Error: The variables do not exist, canceling calculation."); 
+                }
+                else 
+                { 
+                    fD.variables.Init(crispOverrides); 
+                    logs.Add($" Initializing variables..."); 
+                }
 
-                if (fD.ruleSet == null) { executionFailure = true; logs.Add($"Error: The rules do not exist, canceling calculation."); }
-                else { fD.ruleSet.NewSet(fD.shapeSet.LoadShapeSet()); logs.Add($" Loading set..."); }
+                if (fD.ruleSet == null) 
+                { 
+                    executionFailure = true; 
+                    logs.Add($"Error: The rules do not exist, canceling calculation."); 
+                }
+                else 
+                { 
+                    fD.ruleSet.NewSet(fD.shapeSet.LoadShapeSet()); 
+                    logs.Add($" Loading set..."); 
+                }
 
                 if (!executionFailure)
                 {
@@ -181,19 +198,30 @@ namespace FuzzyStateMachine
                         logs.Add($"Error: Deffuzified value returned NaN, canceling calculation.");
                         logs.Add($"Error: Logic calculation has been terminated due to an error.");
                     }
-                    else fD.logic.Add(logic);
+                    else
+                        fD.logic.Add(logic);
+
+                    calculated = true;
                 }
-                else logs.Add($"Error: Logic calculation has been terminated due to an error.");
+                else
+                    logs.Add($"Error: Logic calculation has been terminated due to an error.");
             }
             else if ((a_data.data.type == "Greater" && fD.deffuzied > a_data.data.value2) || 
                     (a_data.data.type == "Lesser" && fD.deffuzied < a_data.data.value2) || 
                     (a_data.data.type == "Equal" && fD.deffuzied == a_data.data.value2))
             {
-                MonoScript l = (MonoScript)a_data.ins[1].data.value;
-                fD.state = (States.StateMachineState)System.Activator.CreateInstance(l.GetClass());
-
                 logs.Add($" {fD.deffuzied} is {(a_data.data.type == "Greater" ? ">" : (a_data.data.type == "Lesser" ? "<" : "=="))} {a_data.data.value2} !");
-                logs.Add($" Accepted state: {l.name}");
+
+                if (a_data.ins.Count == 2)
+                {
+                    MonoScript l = (MonoScript)a_data.ins[1].data.value;
+                    fD.state = (States.StateMachineState)System.Activator.CreateInstance(l.GetClass());
+                    logs.Add($" Accepted state: {l.name}");
+                }
+                else 
+                    logs.Add($" No state found using old state.");
+
+                calculated = true;
             }
             else if (a_data.data.type == "HasState")
             {
@@ -213,22 +241,45 @@ namespace FuzzyStateMachine
                     // If the second datas not null and the primary data is null or the desireability is higher then the other set primary state.
 
                     logs.Add($"Finalizing connection data...");
+                    logs.Add($" Comparing (primary) {(fD.deffuzied * fD.ruleSet.weight)} < (secondary) {(data.deffuzied * data.ruleSet.weight)}");
 
-                    if (data.state != null && (fD.state == null || fD.deffuzied < data.deffuzied))
+                    if ((fD.deffuzied * fD.ruleSet.weight) < (data.deffuzied * data.ruleSet.weight))
                     {
                         logs.Add($" The secondary input ({data.deffuzied}) is more important than the primary input ({fD.deffuzied}) !");
-                        fD.state = data.state;
+
+                        fD = data;
                     }
-                    else logs.Add($" The primary input ({fD.deffuzied}) is more important than the secondary input ({data.deffuzied}) !");
+                    else
+                        logs.Add($" The primary input ({fD.deffuzied}) is more important than the secondary input ({data.deffuzied}) !");
+
+                    calculated = true;
                 }
             }
             else if (a_data.data.type == "")
             {
-                logs.Add($" Current desired state: \n  Name: {fD.state}\n  Execution Type: {(fD.state != null ? fD.state.executionType.ToString() : "")}");
+                logs.Add(
+                    $" Logics calculated: {fD.logic.Count}" +
+                    $"\n Deffuzied Desire: {fD.deffuzied} / 75.5" +
+                    $"\n Rule Set: {(fD.ruleSet != null ? fD.ruleSet.GetType().Name : "")}" +
+                    $"\n\n State Info:" +
+                    $"\n\t Name: {fD.state}" +
+                    $"\n\t Execution Type: {(fD.state != null ? fD.state.executionType.ToString() : "")}"
+                );
+
+                _outPut = fD;
+
+                return fD;
+            }
+            else
+            {
+                logs.Add($" No functionality needed to take place.");
+                calculated = true;
             }
 
-            if (a_data.outs == null || a_data.outs.Count < 1) return fD;
-            else return RunFunction(a_data.outs[0], fD, a_depth);
+            if (!calculated)
+                logs.Add($"Error: this function [{a_data.data.name}] has failed to execute !");
+
+            return (a_data.outs == null || a_data.outs.Count < 1) ? fD : RunFunction(a_data.outs[0], fD, a_depth);
         }
 
         public void Load(params (string name, float input)[] a_inputs)
@@ -246,7 +297,7 @@ namespace FuzzyStateMachine
             NodeBranch tree = BranchFromStartNode(_graph.nodes[0]);
             NodeBranch startBranch = BackBranchOfTree(tree, tree, 0, out _);
 
-            _outPut = RunFunction(startBranch);
+            RunFunction(startBranch);
 
             float endTime = (usingEditorTime ? (float)EditorApplication.timeSinceStartup : Time.realtimeSinceStartup) - startTime;
 

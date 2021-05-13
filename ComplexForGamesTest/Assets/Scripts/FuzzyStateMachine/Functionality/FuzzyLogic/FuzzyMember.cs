@@ -118,7 +118,7 @@ namespace FuzzyStateMachine.Variable
 
         public float GetLeftShoulderBarCenter()
         {
-            return ((max - shape[2]) / 2) + 2.5f;
+            return (max - shape[2]) + 2.5f;
         }
 
         public float GetRightShoulderMembership(float x)

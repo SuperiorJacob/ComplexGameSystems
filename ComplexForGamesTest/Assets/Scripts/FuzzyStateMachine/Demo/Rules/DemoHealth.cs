@@ -10,6 +10,8 @@ namespace FuzzyStateMachine.Demo
 
         public DemoHealth(params Variable.FuzzyMember[] a_members)
         {
+            weight = 1f;
+
             if (a_members.Length != 6)
             {
                 throw new System.Exception($"You do not have enough members for this rule! {a_members.Length} / 6");
@@ -19,6 +21,11 @@ namespace FuzzyStateMachine.Demo
             {
                 this[i] = a_members[i];
             }
+        }
+
+        public override void SetupWeight()
+        {
+            weight = 1f;
         }
 
         public override float UnDesirableRules(out float a_max)

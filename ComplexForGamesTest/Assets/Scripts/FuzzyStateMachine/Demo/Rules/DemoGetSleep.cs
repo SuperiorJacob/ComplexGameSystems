@@ -10,6 +10,8 @@ namespace FuzzyStateMachine.Demo
 
         public DemoGetSleep(params Variable.FuzzyMember[] a_members)
         {
+            weight = 0.6f;
+
             if (a_members.Length != 9)
             {
                 throw new System.Exception($"You do not have enough members for this rule! {a_members.Length} / 9");
@@ -21,6 +23,11 @@ namespace FuzzyStateMachine.Demo
             }
         }
 
+        public override void SetupWeight()
+        {
+            weight = 0.9f;
+        }
+
         public override float UnDesirableRules(out float a_max)
         {
             CheckDesireCategory();
@@ -28,7 +35,7 @@ namespace FuzzyStateMachine.Demo
             a_max = this["undesirable"].GetCenter();
 
             return Rule(
-                FuzzyLogic.OR(Is("far"), Is("energised")) // if (bed is far) or (npc is engergised) then we do not desire sleep
+                FuzzyLogic.OR(Is("far"), Is("energised")) // if (bed is far) and (npc is engergised) then we do not desire sleep
             );
         }
 
@@ -39,7 +46,7 @@ namespace FuzzyStateMachine.Demo
             a_max = this["desirable"].GetCenter();
 
             return Rule(
-                FuzzyLogic.AND(FuzzyLogic.OR(Is("medium"), Is("close")), FuzzyLogic.OR(Is("awake"), Is("tired"))) // if (bed is medium or close) and (npc is awake or tired) then we desire sleep
+                FuzzyLogic.AND(FuzzyLogic.OR(Is("medium"), Is("close")), Is("tired")) // if (bed is medium or close) and (npc is tired) then we desire sleep
             );
         }
 

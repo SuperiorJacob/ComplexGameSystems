@@ -21,6 +21,11 @@ namespace FuzzyStateMachine.Demo
             }
         }
 
+        public override void SetupWeight()
+        {
+            weight = 0.7f;
+        }
+
         public override float UnDesirableRules(out float a_max)
         {
             CheckDesireCategory();

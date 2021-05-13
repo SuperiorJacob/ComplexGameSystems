@@ -12,9 +12,10 @@ namespace FuzzyStateMachine
     }
 
     [CustomEditor(typeof(StateMachineVisualiser))]
+    [CanEditMultipleObjects]
     public class StateMachineVisualiserEditor : Editor
     {
-        StateMachineDebugger smd;
+        private StateMachineDebugger smd;
 
         // Vertex buffers
         private Vector3[] verticesBuffer;
@@ -91,9 +92,7 @@ namespace FuzzyStateMachine
 
             float x = logic.lastDefuzz / 10;
             if (cat != "desire")
-            {
                 x = ruleSet.inputs[cat] / 10;
-            }
             
             DrawLine(Color.white, 2, new Vector2(x, 1), new Vector2(x, -1));
             //DrawLine(Color.gray, 2, new Vector2(smd.input / 10, 1), new Vector2(smd.input / 10, -1));
@@ -146,7 +145,7 @@ namespace FuzzyStateMachine
             {
                 if (GUILayout.Button("Perform"))
                 {
-                    MonoBehaviour monoBev = (MonoBehaviour)target;
+                    MonoBehaviour monoBev = (MonoBehaviour)target; 
                     smd = monoBev.GetComponent<StateMachineDebugger>();
 
                     smd.Perform();
@@ -154,11 +153,14 @@ namespace FuzzyStateMachine
 
                 if (GUILayout.Button("Visualize"))
                 {
-                    if (visualised) Visualize();
+                    if (visualised) 
+                        Visualize();
                     else
                     {
                         MonoBehaviour monoBev = (MonoBehaviour)target;
                         smd = monoBev.GetComponent<StateMachineDebugger>();
+
+                        Debug.Log(smd.transform.name);
 
                         if (smd.logic == null || smd.logic.Length == 0)
                             smd.Perform();
@@ -184,9 +186,7 @@ namespace FuzzyStateMachine
                             bool error = label.Substring(0, label.IndexOf(" ")) == "Error:";
 
                             if (error) 
-                            {
                                 GUI.backgroundColor = new Color(1, 0.1f, 0.1f, 1);
-                            }
                             else
                             {
                                 float w = label[0] == ' ' ? 0 : 1f;
@@ -203,14 +203,18 @@ namespace FuzzyStateMachine
 
                 GUILayout.Label($"Visualised Rules:");
 
+                string lrn = smd.mainData.ruleSet != null ? smd.mainData.ruleSet.GetType().Name : "";
                 foreach (var log in smd.logic)
                 {
                     FuzzyRuleSet logicRuleSet = log.rule;
+                    string lrsn = logicRuleSet.GetType().Name;
 
-                    //smd.mainRule
+                    if (lrn == lrsn) GUI.backgroundColor = Color.green;
+                    else GUI.backgroundColor = Color.gray;
+
                     using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
-                        GUILayout.Label(logicRuleSet.GetType().Name);
+                        GUILayout.Label(lrsn);
 
                         GUILayout.Space(EditorGUI.indentLevel * 8f);
                     }
