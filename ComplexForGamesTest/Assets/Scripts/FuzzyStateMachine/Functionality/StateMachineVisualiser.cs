@@ -19,6 +19,7 @@ namespace FuzzyStateMachine
 
         // Vertex buffers
         private Vector3[] verticesBuffer;
+
         private bool visualised = false;
 
         private Vector2 scrollPos;

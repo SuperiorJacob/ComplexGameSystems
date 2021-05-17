@@ -123,6 +123,276 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &156943049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156943054}
+  - component: {fileID: 156943053}
+  - component: {fileID: 156943052}
+  - component: {fileID: 156943051}
+  - component: {fileID: 156943050}
+  m_Layer: 0
+  m_Name: Tester (4)
+  m_TagString: DemoBlue
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &156943050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156943049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  simulationSpeed: 1
+  hunger: 100
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1721276034}
+  target: {fileID: 0}
+--- !u!114 &156943051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156943049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &156943052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156943049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 77.5
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Exhaustion_Shape'
+  - ' Loading rules: DemoGetSleep'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetRestState'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Health_Shape'
+  - ' Loading rules: DemoHealth'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetHealthState'
+  - Finalizing connection data...
+  - ' Comparing (primary) 69.75 < (secondary) 77.5'
+  - ' The secondary input (77.5) is more important than the primary input (77.5)
+    !'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Hunger_Shape'
+  - ' Loading rules: DemoGetFood'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetFoodState'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Thirst_Shape'
+  - ' Loading rules: DemoGetWater'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetWaterState'
+  - Finalizing connection data...
+  - ' Comparing (primary) 54.25 < (secondary) 62'
+  - ' The secondary input (77.5) is more important than the primary input (77.5)
+    !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 77.5 < (secondary) 62'
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoHealth\n\nState
+    Info:\n\t Name: FuzzyStateMachine.States.GetHealthState\n\t Execution Type: Update"
+  - Successful load. Calculated in 0.0006198883 ms.
+--- !u!114 &156943053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156943049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+--- !u!4 &156943054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156943049}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 2.5900002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 685857298}
+  - {fileID: 239451587}
+  m_Father: {fileID: 1423924073}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &239451586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239451587}
+  - component: {fileID: 239451588}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239451587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239451586}
+  m_LocalRotation: {x: 0.114106834, y: -0, z: -0, w: 0.99346846}
+  m_LocalPosition: {x: 0, y: 3.07, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 156943054}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!20 &239451588
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239451586}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 1
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &257497185
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +467,227 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &327209044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327209045}
+  - component: {fileID: 327209049}
+  - component: {fileID: 327209048}
+  - component: {fileID: 327209047}
+  - component: {fileID: 327209046}
+  m_Layer: 0
+  m_Name: Tester (1)
+  m_TagString: DemoRed
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327209045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327209044}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -89.4, y: 0, z: -0.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1836433049}
+  - {fileID: 1951420010}
+  m_Father: {fileID: 1544730823}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &327209046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327209044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  simulationSpeed: 1
+  hunger: 100
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1300261169}
+  target: {fileID: 0}
+--- !u!114 &327209047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327209044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &327209048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327209044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 75
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
+--- !u!114 &327209049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327209044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
 --- !u!1 &376318428
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376318428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.95, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 832775818}
@@ -337,6 +828,196 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &632034854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 632034855}
+  - component: {fileID: 632034858}
+  - component: {fileID: 632034857}
+  - component: {fileID: 632034856}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632034855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632034854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.22, y: 0.5, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1485499526}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &632034856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632034854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &632034857
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632034854}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d4928ea7fd511444abd3b8a14aee9f74, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &632034858
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632034854}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &685857297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 685857298}
+  - component: {fileID: 685857301}
+  - component: {fileID: 685857300}
+  - component: {fileID: 685857299}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &685857298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685857297}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.26, y: 0.5, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 156943054}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &685857299
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685857297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &685857300
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685857297}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d4928ea7fd511444abd3b8a14aee9f74, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &685857301
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685857297}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &697174909
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +1033,7 @@ GameObject:
   - component: {fileID: 697174910}
   m_Layer: 0
   m_Name: Tester (1)
-  m_TagString: Untagged
+  m_TagString: DemoBlue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,17 +1052,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _maxHealth: 100
-  _isDead: 0
   simulationSpeed: 1
   hunger: 100
-  thirst: 100
-  exhaustion: 100
-  nearestfood: 100
-  nearestwater: 100
-  nearestbed: 100
-  food: {fileID: 2141046842}
-  water: {fileID: 1721276034}
-  bed: {fileID: 1300261169}
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1721276034}
+  target: {fileID: 0}
 --- !u!114 &697174911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,9 +1172,8 @@ MonoBehaviour:
   - ' The primary input (77.5) is more important than the secondary input (77.5)
     !'
   - 'Calculating function: Graph Output'
-  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoHealth\n\n
-    State Info:\n\t Name: FuzzyStateMachine.States.GetHealthState\n\t Execution Type:
-    Update"
+  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoHealth\n\nState
+    Info:\n\t Name: FuzzyStateMachine.States.GetHealthState\n\t Execution Type: Update"
   - Successful load. Calculated in 0.0006198883 ms.
 --- !u!114 &697174913
 MonoBehaviour:
@@ -516,89 +1193,11 @@ MonoBehaviour:
   - 'Calculating function: FuzzyLogic'
   - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
   - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Exhaustion_Shape'
-  - ' Loading rules: DemoGetSleep'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetRestState'
-  - 'Calculating function: Has State'
-  - ' Finding connections...'
-  - ' Calculating functions...'
-  - 'Calculating function: FuzzyLogic'
-  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
-  - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Health_Shape'
-  - ' Loading rules: DemoHealth'
-  - ' Initializing variables...'
-  - ' Loading set...'
-  - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetHealthState'
-  - Finalizing connection data...
-  - ' Comparing (primary) 69.75 < (secondary) 77.5'
-  - ' The secondary input (77.5) is more important than the primary input (77.5)
-    !'
-  - 'Calculating function: Has State'
-  - ' Finding connections...'
-  - ' Calculating functions...'
-  - 'Calculating function: FuzzyLogic'
-  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
-  - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Hunger_Shape'
-  - ' Loading rules: DemoGetFood'
-  - ' Initializing variables...'
-  - ' Loading set...'
-  - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetFoodState'
-  - 'Calculating function: Has State'
-  - ' Finding connections...'
-  - ' Calculating functions...'
-  - 'Calculating function: FuzzyLogic'
-  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
-  - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Thirst_Shape'
-  - ' Loading rules: DemoGetWater'
-  - ' Initializing variables...'
-  - ' Loading set...'
-  - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetWaterState'
-  - Finalizing connection data...
-  - ' Comparing (primary) 54.25 < (secondary) 62'
-  - ' The secondary input (77.5) is more important than the primary input (77.5)
-    !'
-  - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 62'
-  - ' The primary input (77.5) is more important than the secondary input (77.5)
-    !'
-  - 'Calculating function: Graph Output'
-  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoHealth\n\n
-    State Info:\n\t Name: FuzzyStateMachine.States.GetHealthState\n\t Execution Type:
-    Update"
-  - Successful load. Calculated in 0.0006198883 ms.
 --- !u!4 &697174914
 Transform:
   m_ObjectHideFlags: 0
@@ -606,15 +1205,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697174909}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -43.21, y: 0, z: 35.62}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 1.4600003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1982963952}
   - {fileID: 257497186}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_Father: {fileID: 1423924073}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +1306,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &832775816
+--- !u!1 &706702553
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -715,25 +1314,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 832775818}
-  - component: {fileID: 832775820}
-  - component: {fileID: 832775817}
-  - component: {fileID: 832775819}
-  - component: {fileID: 832775821}
+  - component: {fileID: 706702558}
+  - component: {fileID: 706702557}
+  - component: {fileID: 706702556}
+  - component: {fileID: 706702555}
+  - component: {fileID: 706702554}
   m_Layer: 0
-  m_Name: Tester
-  m_TagString: Untagged
+  m_Name: Tester (6)
+  m_TagString: DemoBlue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &832775817
+--- !u!114 &706702554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832775816}
+  m_GameObject: {fileID: 706702553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  simulationSpeed: 1
+  hunger: 100
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1721276034}
+  target: {fileID: 0}
+--- !u!114 &706702555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706702553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &706702556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706702553}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
@@ -779,8 +1412,8 @@ MonoBehaviour:
   - ' 77.5 is > 0 !'
   - ' Accepted state: GetHealthState'
   - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 77.5'
-  - ' The primary input (77.5) is more important than the secondary input (77.5)
+  - ' Comparing (primary) 69.75 < (secondary) 77.5'
+  - ' The secondary input (77.5) is more important than the primary input (77.5)
     !'
   - 'Calculating function: Has State'
   - ' Finding connections...'
@@ -819,18 +1452,227 @@ MonoBehaviour:
   - ' 77.5 is > 0 !'
   - ' Accepted state: GetWaterState'
   - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 77.5'
-  - ' The primary input (77.5) is more important than the secondary input (77.5)
+  - ' Comparing (primary) 54.25 < (secondary) 62'
+  - ' The secondary input (77.5) is more important than the primary input (77.5)
     !'
   - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 77.5'
+  - ' Comparing (primary) 77.5 < (secondary) 62'
   - ' The primary input (77.5) is more important than the secondary input (77.5)
     !'
   - 'Calculating function: Graph Output'
-  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoGetSleep\n\n
-    State Info:\n\t Name: FuzzyStateMachine.States.GetRestState\n\t Execution Type:
-    Update"
-  - Successful load. Calculated in 0.0006256104 ms.
+  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoHealth\n\nState
+    Info:\n\t Name: FuzzyStateMachine.States.GetHealthState\n\t Execution Type: Update"
+  - Successful load. Calculated in 0.0006198883 ms.
+--- !u!114 &706702557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706702553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+--- !u!4 &706702558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706702553}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1142872055}
+  - {fileID: 1643001898}
+  m_Father: {fileID: 1423924073}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &772906288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 772906289}
+  - component: {fileID: 772906291}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &772906289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772906288}
+  m_LocalRotation: {x: 0.114106834, y: -0, z: -0, w: 0.99346846}
+  m_LocalPosition: {x: 0, y: 3.07, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1833227632}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!20 &772906291
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772906288}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!1 &832775816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 832775818}
+  - component: {fileID: 832775820}
+  - component: {fileID: 832775817}
+  - component: {fileID: 832775819}
+  - component: {fileID: 832775821}
+  m_Layer: 0
+  m_Name: Tester
+  m_TagString: DemoRed
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &832775817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832775816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 75
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
 --- !u!4 &832775818
 Transform:
   m_ObjectHideFlags: 0
@@ -838,15 +1680,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832775816}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -49}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -89.4, y: 0, z: 1.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 376318429}
   - {fileID: 963194228}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1544730823}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &832775819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,89 +1719,62 @@ MonoBehaviour:
   - 'Calculating function: FuzzyLogic'
   - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
   - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Exhaustion_Shape'
-  - ' Loading rules: DemoGetSleep'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
+  - ' Deffuzified: 75'
   - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetRestState'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
   - 'Calculating function: FuzzyLogic'
   - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
   - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Health_Shape'
-  - ' Loading rules: DemoHealth'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
+  - ' Deffuzified: 62.5'
   - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetHealthState'
-  - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 77.5'
-  - ' The primary input (77.5) is more important than the secondary input (77.5)
-    !'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
   - 'Calculating function: Has State'
   - ' Finding connections...'
   - ' Calculating functions...'
   - 'Calculating function: FuzzyLogic'
   - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
   - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Hunger_Shape'
-  - ' Loading rules: DemoGetFood'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
   - ' Initializing variables...'
   - ' Loading set...'
   - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
+  - ' Deffuzified: 15'
   - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
   - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetFoodState'
-  - 'Calculating function: Has State'
-  - ' Finding connections...'
-  - ' Calculating functions...'
-  - 'Calculating function: FuzzyLogic'
-  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
-  - ' Loading variables: Demo_AI_Variables'
-  - ' Loading shape set: Demo_Thirst_Shape'
-  - ' Loading rules: DemoGetWater'
-  - ' Initializing variables...'
-  - ' Loading set...'
-  - ' Calculating logic...'
-  - ' Deffuzified: 77.5'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: StateMachineState'
-  - 'Calculating function: Greater Than'
-  - ' 77.5 is > 0 !'
-  - ' Accepted state: GetWaterState'
+  - ' No functionality needed to take place.'
   - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 77.5'
-  - ' The primary input (77.5) is more important than the secondary input (77.5)
-    !'
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
   - Finalizing connection data...
-  - ' Comparing (primary) 77.5 < (secondary) 77.5'
-  - ' The primary input (77.5) is more important than the secondary input (77.5)
-    !'
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
   - 'Calculating function: Graph Output'
-  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoGetSleep\n\n
-    State Info:\n\t Name: FuzzyStateMachine.States.GetRestState\n\t Execution Type:
-    Update"
-  - Successful load. Calculated in 0.0006256104 ms.
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
 --- !u!114 &832775821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,17 +1789,109 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _maxHealth: 100
-  _isDead: 0
   simulationSpeed: 1
   hunger: 100
-  thirst: 100
-  exhaustion: 100
-  nearestfood: 100
-  nearestwater: 100
-  nearestbed: 100
-  food: {fileID: 2141046842}
-  water: {fileID: 1721276034}
-  bed: {fileID: 1300261169}
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1300261169}
+  target: {fileID: 0}
+--- !u!1 &837976608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 837976609}
+  - component: {fileID: 837976612}
+  - component: {fileID: 837976611}
+  - component: {fileID: 837976610}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &837976609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837976608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.89, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1833227632}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &837976610
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837976608}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &837976611
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837976608}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8f05ab965d8d5b244a9ded4b08d370cd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &837976612
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837976608}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1975,101 @@ Transform:
   m_Father: {fileID: 832775818}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!1 &1142872054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1142872055}
+  - component: {fileID: 1142872058}
+  - component: {fileID: 1142872057}
+  - component: {fileID: 1142872056}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1142872055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142872054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.87, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 706702558}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1142872056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142872054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1142872057
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142872054}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d4928ea7fd511444abd3b8a14aee9f74, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1142872058
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142872054}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1190620543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,102 +2163,7 @@ Transform:
   m_LocalScale: {x: 100, y: 0.01, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1190711706
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1190711710}
-  - component: {fileID: 1190711709}
-  - component: {fileID: 1190711708}
-  - component: {fileID: 1190711707}
-  m_Layer: 0
-  m_Name: Health Pad
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1190711707
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190711706}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1190711708
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190711706}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: c508343eff9e47048b6d9396b48c8abf, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1190711709
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190711706}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1190711710
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190711706}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 5, y: 0.01, z: 5}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1300261165
 GameObject:
@@ -1270,9 +2177,10 @@ GameObject:
   - component: {fileID: 1300261168}
   - component: {fileID: 1300261167}
   - component: {fileID: 1300261166}
+  - component: {fileID: 1300261170}
   m_Layer: 0
-  m_Name: Rest Pad
-  m_TagString: Untagged
+  m_Name: Red Base
+  m_TagString: DemoRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1309,7 +2217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3ef91d9c898106042b038f41ad223486, type: 2}
+  - {fileID: 2100000, guid: 8f05ab965d8d5b244a9ded4b08d370cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1351,8 +2259,529 @@ Transform:
   m_LocalScale: {x: 5, y: 0.01, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1300261170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300261165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14354e27cb3a754da95311388a8cce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+--- !u!1 &1330325863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330325864}
+  - component: {fileID: 1330325865}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1330325864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330325863}
+  m_LocalRotation: {x: 0.114106834, y: -0, z: -0, w: 0.99346846}
+  m_LocalPosition: {x: 0, y: 3.07, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1485499526}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!20 &1330325865
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330325863}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 1
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!1 &1356812731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356812732}
+  - component: {fileID: 1356812735}
+  - component: {fileID: 1356812734}
+  - component: {fileID: 1356812733}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1356812732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356812731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.78, y: 0.5, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1844714047}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1356812733
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356812731}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1356812734
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356812731}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8f05ab965d8d5b244a9ded4b08d370cd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1356812735
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356812731}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1423924072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1423924073}
+  m_Layer: 0
+  m_Name: DemoBlue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1423924073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423924072}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 45, y: 0, z: -1.7600002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 706702558}
+  - {fileID: 1485499526}
+  - {fileID: 156943054}
+  - {fileID: 697174914}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1485499521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1485499526}
+  - component: {fileID: 1485499525}
+  - component: {fileID: 1485499524}
+  - component: {fileID: 1485499523}
+  - component: {fileID: 1485499522}
+  m_Layer: 0
+  m_Name: Tester (5)
+  m_TagString: DemoBlue
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1485499522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485499521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  simulationSpeed: 1
+  hunger: 100
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1721276034}
+  target: {fileID: 0}
+--- !u!114 &1485499523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485499521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1485499524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485499521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 77.5
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Exhaustion_Shape'
+  - ' Loading rules: DemoGetSleep'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetRestState'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Health_Shape'
+  - ' Loading rules: DemoHealth'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetHealthState'
+  - Finalizing connection data...
+  - ' Comparing (primary) 69.75 < (secondary) 77.5'
+  - ' The secondary input (77.5) is more important than the primary input (77.5)
+    !'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Hunger_Shape'
+  - ' Loading rules: DemoGetFood'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetFoodState'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Thirst_Shape'
+  - ' Loading rules: DemoGetWater'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 77.5'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: StateMachineState'
+  - 'Calculating function: Greater Than'
+  - ' 77.5 is > 0 !'
+  - ' Accepted state: GetWaterState'
+  - Finalizing connection data...
+  - ' Comparing (primary) 54.25 < (secondary) 62'
+  - ' The secondary input (77.5) is more important than the primary input (77.5)
+    !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 77.5 < (secondary) 62'
+  - ' The primary input (77.5) is more important than the secondary input (77.5)
+    !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 4\n Deffuzied Desire: 77.5 / 75.5\n Rule Set: DemoHealth\n\nState
+    Info:\n\t Name: FuzzyStateMachine.States.GetHealthState\n\t Execution Type: Update"
+  - Successful load. Calculated in 0.0006198883 ms.
+--- !u!114 &1485499525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485499521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+--- !u!4 &1485499526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485499521}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 3.7300003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 632034855}
+  - {fileID: 1330325864}
+  m_Father: {fileID: 1423924073}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &1544730822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544730823}
+  m_Layer: 0
+  m_Name: RedTeam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544730823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544730822}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 45, y: 0, z: -0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 832775818}
+  - {fileID: 1844714047}
+  - {fileID: 1833227632}
+  - {fileID: 327209045}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1643001897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643001898}
+  - component: {fileID: 1643001899}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1643001898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643001897}
+  m_LocalRotation: {x: 0.114106834, y: -0, z: -0, w: 0.99346846}
+  m_LocalPosition: {x: 0, y: 3.07, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 706702558}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!20 &1643001899
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643001897}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 1
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1721276030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,9 +2794,10 @@ GameObject:
   - component: {fileID: 1721276033}
   - component: {fileID: 1721276032}
   - component: {fileID: 1721276031}
+  - component: {fileID: 1721276035}
   m_Layer: 0
-  m_Name: Water Pad
-  m_TagString: Untagged
+  m_Name: Blue Base
+  m_TagString: DemoBlue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1446,8 +2876,707 @@ Transform:
   m_LocalScale: {x: 5, y: 0.01, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721276035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721276030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14354e27cb3a754da95311388a8cce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+--- !u!1 &1833227627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833227632}
+  - component: {fileID: 1833227631}
+  - component: {fileID: 1833227630}
+  - component: {fileID: 1833227629}
+  - component: {fileID: 1833227628}
+  m_Layer: 0
+  m_Name: Tester (2)
+  m_TagString: DemoRed
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1833227628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833227627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  simulationSpeed: 1
+  hunger: 100
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1300261169}
+  target: {fileID: 0}
+--- !u!114 &1833227629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833227627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1833227630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833227627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 75
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
+--- !u!114 &1833227631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833227627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
+--- !u!4 &1833227632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833227627}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -89.4, y: 0, z: -1.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 837976609}
+  - {fileID: 772906289}
+  m_Father: {fileID: 1544730823}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1836433048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836433049}
+  - component: {fileID: 1836433052}
+  - component: {fileID: 1836433051}
+  - component: {fileID: 1836433050}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1836433049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836433048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.08, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 327209045}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1836433050
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836433048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1836433051
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836433048}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8f05ab965d8d5b244a9ded4b08d370cd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1836433052
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836433048}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1844714042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844714047}
+  - component: {fileID: 1844714046}
+  - component: {fileID: 1844714045}
+  - component: {fileID: 1844714044}
+  - component: {fileID: 1844714043}
+  m_Layer: 0
+  m_Name: Tester (3)
+  m_TagString: DemoRed
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1844714043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844714042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1139af92a6a9d469a7fc68d51ee673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
+  simulationSpeed: 1
+  hunger: 100
+  courage: 100
+  leadership: 100
+  maxTeammates: 5
+  teammates: 5
+  camp: {fileID: 1300261169}
+  target: {fileID: 0}
+--- !u!114 &1844714044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844714042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5d54b2d4f6e74d97d7bae5f698eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1844714045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844714042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecf16cf75ad8c42ba315b77a047e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unDesirability: {x: 0, y: 40, z: 50}
+  desirability: {x: 40, y: 50, z: 60}
+  veryDesirability: {x: 50, y: 60, z: 100}
+  deffuziedOutput: 75
+  debug:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
+--- !u!114 &1844714046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844714042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ec6d34340103f49b6820b1c2812b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graph: {fileID: 11400000, guid: 682865b3e4cc65649ab6b89113002249, type: 2}
+  logs:
+  - Begin loading graph data into functionality...
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoHealthRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 75'
+  - 'Calculating function: Greater Than'
+  - ' 75 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFoodRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 62.5'
+  - 'Calculating function: Greater Than'
+  - ' 62.5 is > 49 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Lesser Than'
+  - ' No functionality needed to take place.'
+  - 'Calculating function: Has State'
+  - ' Finding connections...'
+  - ' Calculating functions...'
+  - 'Calculating function: FuzzyLogic'
+  - 'Initializing Logic: FuzzyStateMachine.FuzzyLogic'
+  - ' Loading variables: Demo_AI_Variables'
+  - ' Loading shape set: Demo_Warrior_Shape'
+  - ' Loading rules: DemoFightRule'
+  - ' Initializing variables...'
+  - ' Loading set...'
+  - ' Calculating logic...'
+  - ' Deffuzified: 15'
+  - 'Calculating function: Greater Than'
+  - ' 15 is > 0 !'
+  - ' Accepted state: DemoRetreatState'
+  - 'Calculating function: Greater Than'
+  - ' No functionality needed to take place.'
+  - Finalizing connection data...
+  - ' Comparing (primary) 43.75 < (secondary) 13.5'
+  - ' The primary input (62.5) is more important than the secondary input (15) !'
+  - Finalizing connection data...
+  - ' Comparing (primary) 75 < (secondary) 43.75'
+  - ' The primary input (75) is more important than the secondary input (62.5) !'
+  - 'Calculating function: Graph Output'
+  - " Logics calculated: 3\n Deffuzied Desire: 75 / 75.5\n Rule Set: DemoHealthRule\n\n
+    State Info:\n\t Name: FuzzyStateMachine.States.DemoRetreatState\n\t Execution
+    Type: Update"
+  - Successful load. Calculated in 0.0004959106 ms.
+--- !u!4 &1844714047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844714042}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -89.4, y: 0, z: 2.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1356812732}
+  - {fileID: 1884902995}
+  m_Father: {fileID: 1544730823}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1884902994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1884902995}
+  - component: {fileID: 1884902997}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1884902995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884902994}
+  m_LocalRotation: {x: 0.114106834, y: -0, z: -0, w: 0.99346846}
+  m_LocalPosition: {x: 0, y: 3.07, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1844714047}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!20 &1884902997
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884902994}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!1 &1951420009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951420010}
+  - component: {fileID: 1951420012}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1951420010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951420009}
+  m_LocalRotation: {x: 0.114106834, y: -0, z: -0, w: 0.99346846}
+  m_LocalPosition: {x: 0, y: 3.07, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 327209045}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 13.104, y: 0, z: 0}
+--- !u!20 &1951420012
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951420009}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1982963951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +3604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982963951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: -2.02, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 697174914}
@@ -1513,7 +3642,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f05ab965d8d5b244a9ded4b08d370cd, type: 2}
+  - {fileID: 2100000, guid: d4928ea7fd511444abd3b8a14aee9f74, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1543,98 +3672,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982963951}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2141046838
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2141046842}
-  - component: {fileID: 2141046841}
-  - component: {fileID: 2141046840}
-  - component: {fileID: 2141046839}
-  m_Layer: 0
-  m_Name: Food Pad
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &2141046839
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141046838}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &2141046840
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141046838}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: adba79737d21ade42953e888e837c88f, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2141046841
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141046838}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2141046842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141046838}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 45}
-  m_LocalScale: {x: 5, y: 0.01, z: 5}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -9,17 +9,17 @@ namespace FuzzyStateMachine.Demo
         [Header("Health")]
         [SerializeField] private int _health = 100;
         [SerializeField] private int _maxHealth = 100;
-        [SerializeField] private bool _isDead;
+        public bool IsDead { get; private set; }
 
-        public void TakeDamage(int a_damage)
+        public virtual void TakeDamage(int a_damage)
         {
-            if (_isDead) return;
+            if (IsDead) return;
 
             _health -= a_damage;
 
-            if (_health < 0)
+            if (_health <= 0)
             {
-                _isDead = true;
+                IsDead = true;
             }
         }
 
@@ -30,7 +30,7 @@ namespace FuzzyStateMachine.Demo
 
         public void AddHealth(int a_health)
         {
-            if (_isDead) return;
+            if (IsDead) return;
 
             _health = Mathf.Clamp(_health + a_health, 0, _maxHealth);
         }
@@ -48,6 +48,11 @@ namespace FuzzyStateMachine.Demo
         public void SetHealth(int a_health)
         {
             _health = Mathf.Clamp(a_health, 0, _maxHealth);
+
+            if (_health <= 0) 
+                IsDead = true;
+            else if (_health > 0) 
+                IsDead = false;
         }
 
         public void SetMaxHealth(int a_maxHealth)

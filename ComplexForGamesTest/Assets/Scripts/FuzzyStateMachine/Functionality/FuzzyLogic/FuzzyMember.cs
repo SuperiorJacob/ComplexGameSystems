@@ -23,8 +23,9 @@ namespace FuzzyStateMachine.Variable
         public Color color = Color.white;
 
         [HideInInspector] public int index; // Used by rules.
-        [HideInInspector] public float min;
-        [HideInInspector] public float max;
+        [HideInInspector] public float min; // Lowest we can go
+        [HideInInspector] public float max; // Highest we can go
+        [HideInInspector] public float slope; // Slope calculated and halfed.
         [HideInInspector] public float lastCheck = 0;
 
         public FuzzyMember(string a_name, string a_cat, FuzzyShapeType a_type, Color a_color, params float[] a_shape)
@@ -50,6 +51,9 @@ namespace FuzzyStateMachine.Variable
 
             min = Mathf.Min(shape);
             max = Mathf.Max(shape);
+
+            slope = type == FuzzyShapeType.LeftShoulder ? GetSlope(shape[2], 0, shape[3], 1) :
+                (type == FuzzyShapeType.RightShoulder ? GetSlope(shape[0], 1, shape[1], 0) : 0);
         }
 
         public Vector2[] Visualise()
@@ -118,7 +122,7 @@ namespace FuzzyStateMachine.Variable
 
         public float GetLeftShoulderBarCenter()
         {
-            return (max - shape[2]) + 2.5f;
+            return (max - shape[2]) + slope;
         }
 
         public float GetRightShoulderMembership(float x)
@@ -142,7 +146,7 @@ namespace FuzzyStateMachine.Variable
 
         public float GetRightShoulderBarCenter()
         {
-            return (shape[1] + (max - shape[1])/2) - 2.5f;
+            return (shape[1] + (max - shape[1])/2) - slope;
         }
 
         public float GetTriangleMembership(float x)
@@ -180,6 +184,14 @@ namespace FuzzyStateMachine.Variable
             return type == FuzzyShapeType.LeftShoulder ? GetLeftShoulderBarCenter() :
                 (type == FuzzyShapeType.RightShoulder ? GetRightShoulderBarCenter() :
                 (type == FuzzyShapeType.Triangle ? GetTriangleCenter() : max));
+        }
+
+        /// <summary>
+        /// Get's the slope of the bar, very useful for perfect center calculation.
+        /// </summary>
+        public float GetSlope(float a_x1, float a_y1, float a_x2, float a_y2)
+        {
+            return (Mathf.Abs((a_y2 - a_y1) / (a_x2 - a_x1)) * 100) / 2;
         }
 
         public float GetMembership(float x)

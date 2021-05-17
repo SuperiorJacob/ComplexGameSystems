@@ -15,61 +15,61 @@ namespace FuzzyStateMachine.Demo
         // TEST
         public float simulationSpeed = 1;
 
-        public float hunger = 100;
-        public float thirst = 100;
-        public float exhaustion = 100;
+        public float hunger = 0;
+        public float courage = 0;
+        public float leadership = 0;
+        public float maxTeammates = 5;
+        public float teammates = 5;
 
-        public float nearestfood = 100;
-        public float nearestwater = 100;
-        public float nearestbed = 100;
-
-        public Transform food;
-        public Transform water;
-        public Transform bed;
+        public Transform camp;
+        public Transform target;
 
         public Dictionary<string, float> variables;
+
+        [System.NonSerialized] public float overrideHealth = 0;
 
         private bool finished = false;
 
         public void UpdateBasedOnVariables()
         {
-            nearestfood = variables["nearestfood"] * 100;
-            nearestwater = variables["nearestwater"] * 100;
-            nearestbed = variables["nearestbed"] * 100;
             hunger = variables["hunger"] * 100;
-            exhaustion = variables["exhaustion"] * 100;
-            thirst = variables["thirst"] * 100;
-            SetHealth((int)(variables["health"] * 100));
+            courage = variables["courage"] * 100;
+            leadership = variables["leadership"] * 100;
 
             if (hunger < 0) hunger = 0;
-            if (thirst < 0) thirst = 0;
-            if (exhaustion < 0) exhaustion = 0;
         }
 
         public void Begin()
         {
+            GetTarget();
+
+            teammates = GameObject.FindGameObjectsWithTag(gameObject.tag).Length;
+            
+            courage = Mathf.Clamp(
+                (leadership > 60 && teammates < (maxTeammates / 2) ? 100 // If is a leader, and teammates are low, enrage.
+                : ((teammates / maxTeammates) + (GetHealth() / GetMaxHealth())) / 2) * (1 + GetLeaders()) * 100, // if not leader, courage is dependant.
+                0, 100); 
+
             finished = false;
 
             fuzzyMachine = GetComponent<StateMachineLoader>();
 
+            float tm = (teammates / maxTeammates);
+
             fuzzyMachine.Load(
-                ("nearestfood", nearestfood),
-                ("nearestwater", nearestwater),
-                ("nearestbed", nearestbed),
                 ("hunger", hunger),
-                ("exhaustion", exhaustion),
-                ("thirst", thirst),
+                ("courage", courage),
+                ("leadership", leadership),
+                ("teammates", tm * 100),
                 ("health", GetHealth())
             );
 
             variables = new Dictionary<string, float>();
-            variables["nearestfood"] = nearestfood / 100;
-            variables["nearestwater"] = nearestwater / 100;
-            variables["nearestbed"] = nearestbed / 100;
             variables["hunger"] = hunger / 100;
-            variables["exhaustion"] = exhaustion / 100;
-            variables["thirst"] = thirst / 100;
-            variables["health"] = GetHealth()/GetMaxHealth();
+            variables["courage"] = courage / 100;
+            variables["leadership"] = leadership / 100;
+            variables["teammates"] = tm;
+            variables["health"] = GetHealth() / 100;
 
             if (TryGetComponent(out debug))
             {
@@ -79,6 +79,12 @@ namespace FuzzyStateMachine.Demo
 
         void Start()
         {
+            maxTeammates = GameObject.FindGameObjectsWithTag(gameObject.tag).Length;
+            teammates = maxTeammates;
+
+            // This reassures we wont have more then 1 full leader in a group.
+            leadership = Random.Range(0, 100);
+
             StartCoroutine("UpdateData");
         }
 
@@ -89,30 +95,62 @@ namespace FuzzyStateMachine.Demo
             Begin();
         }
 
+        public (float reach, Transform enemy) GetTarget()
+        {
+            float max = 10000;
+            Transform t = null;
+
+            foreach (DemoAI agent in FindObjectsOfType<DemoAI>())
+            {
+                if (agent.tag != gameObject.tag)
+                {
+                    float dist = Vector3.Distance(agent.transform.position, transform.position);
+                    if (dist < max)
+                    {
+                        max = dist;
+                        t = agent.transform;
+                    }
+                }
+            }
+
+            target = t;
+
+            return (max, t);
+        }
+
+        public float GetLeaders()
+        {
+            float leaders = 0;
+            foreach (DemoAI agent in FindObjectsOfType<DemoAI>())
+            {
+                if (!agent.IsDead && agent.tag == gameObject.tag)
+                {
+                    // If our leadership is greater then 60% then they are most likely a leader.
+                    if (agent.GetHealth() > 0 && agent.leadership > 60)
+                    {
+                        leaders += 0.25f;
+                    }
+                }
+            }
+
+            return leaders;
+        }
+
         IEnumerator UpdateData()
         {
             while (true)
             {
-                hunger -= 0.5f * simulationSpeed;
-                thirst -= 0.8f * simulationSpeed;
+                hunger -= 0.01f * simulationSpeed;
 
                 if (hunger < 0) hunger = 0;
-                if (thirst < 0) thirst = 0;
-                if (exhaustion < 0) exhaustion = 0;
 
-                if (thirst == 0 || hunger == 0)
+                if (hunger == 0)
                 {
-                    TakeDamage(thirst == 0 && hunger == 0 ? 10 : 1);
+                    TakeDamage(1);
                 }
 
                 if (!finished)
                 {
-                    exhaustion -= 1 * simulationSpeed;
-
-                    nearestfood = Vector3.Distance(transform.position, food.position);
-                    nearestwater = Vector3.Distance(transform.position, water.position);
-                    nearestbed = Vector3.Distance(transform.position, bed.position);
-
                     Begin();
                 }
                 else
@@ -128,6 +166,12 @@ namespace FuzzyStateMachine.Demo
 
         void Update()
         {
+            if (GetHealth() <= 0)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             if (finished)
                 return;
 
@@ -136,6 +180,7 @@ namespace FuzzyStateMachine.Demo
                 if (fuzzyMachine._outPut.state.finished)
                 {
                     variables = fuzzyMachine._outPut.state.Finish();
+
                     UpdateBasedOnVariables();
                     finished = true;
                 }
@@ -143,5 +188,6 @@ namespace FuzzyStateMachine.Demo
                     fuzzyMachine._outPut.state.Execute(gameObject, variables);
             }
         }
+
     }
 }

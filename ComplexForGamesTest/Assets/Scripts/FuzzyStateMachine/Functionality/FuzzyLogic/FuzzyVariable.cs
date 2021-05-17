@@ -16,11 +16,13 @@ namespace FuzzyStateMachine.Variable
 
         public Variables[] variables;
 
-        internal Dictionary<string, float> m_variables = new Dictionary<string, float>(); // Our inputs.
+        [System.NonSerialized] private Dictionary<string, float> m_variables; // Our inputs.
 
         public void Init(params (string name, float input)[] a_inputs)
         {
-            foreach(Variables var in variables)
+            m_variables = new Dictionary<string, float>();
+
+            foreach (Variables var in variables)
             {
                 float a = var.input;
 

@@ -13,17 +13,13 @@ MonoBehaviour:
   m_Name: Demo_AI_Variables
   m_EditorClassIdentifier: 
   variables:
-  - name: nearestfood
-    input: 0
-  - name: nearestwater
-    input: 0
-  - name: nearestbed
+  - name: health
     input: 0
   - name: hunger
     input: 0
-  - name: exhaustion
+  - name: courage
     input: 0
-  - name: thirst
+  - name: leadership
     input: 0
-  - name: health
+  - name: teammates
     input: 0
