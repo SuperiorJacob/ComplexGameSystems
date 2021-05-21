@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +8,16 @@ namespace FuzzyStateMachine.Variable
     public class FuzzyShapeSet : ScriptableObject
     {
         [Header("Must have desirability!")]
-        public Vector3 unDesirability;
-        public Vector3 desirability;
-        public Vector3 veryDesirability;
+        [Tooltip("Un Desirability of doing the action.")] public Vector3 unDesirability;
+        [Tooltip("Desirability of doing the action.")] public Vector3 desirability;
+        [Tooltip("Very Desirability of doing the action.")] public Vector3 veryDesirability;
         [Space()]
-        public FuzzyMember[] fuzzyMembers;
+        [Tooltip("Fuzzy member data used for visualizing and calculation.")] public FuzzyMember[] fuzzyMembers;
 
+        /// <summary>
+        /// Load fuzzymembersfrom a shape set
+        /// </summary>
+        /// <returns></returns>
         public FuzzyMember[] LoadShapeSet()
         {
             List<FuzzyMember> set = new List<FuzzyMember>()

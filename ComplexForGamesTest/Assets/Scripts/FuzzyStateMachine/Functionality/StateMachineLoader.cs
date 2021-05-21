@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -7,7 +7,7 @@ namespace FuzzyStateMachine
 {
     public class StateMachineLoader : MonoBehaviour
     {
-        public StateMachineGraph _graph;
+        [Tooltip("Graph input used to be loaded (without one nothing happens)")] public StateMachineGraph _graph;
         public FunctionData _outPut;
 
         public (string name, float input)[] crispOverrides;

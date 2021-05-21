@@ -23,7 +23,7 @@ MonoBehaviour:
       connections:
       - input: 19
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 29
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -121,7 +121,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 26
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -170,7 +170,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 23
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -269,7 +269,7 @@ MonoBehaviour:
       connections:
       - input: 40
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
       connections:
       - input: 22
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 0
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -308,7 +308,7 @@ MonoBehaviour:
       connections:
       - input: 43
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
       connections:
       - input: 36
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 18
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -347,7 +347,7 @@ MonoBehaviour:
       connections:
       - input: 12
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 34
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -386,7 +386,7 @@ MonoBehaviour:
       connections:
       - input: 8
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 41
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -425,7 +425,7 @@ MonoBehaviour:
       connections:
       - input: 4
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 38
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -510,7 +510,7 @@ MonoBehaviour:
       connections:
       - input: 25
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -530,7 +530,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 21
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -572,7 +572,7 @@ MonoBehaviour:
       connections:
       - input: 31
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 17
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
@@ -611,7 +611,7 @@ MonoBehaviour:
       connections:
       - input: 28
         output: -1
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
       connections:
       - input: -1
         output: 20
-      type: FuzzyStateMachine.StateMachineGraphWindow+FuzzyData
+      type: 
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       orientation: 0
       direction: 1
