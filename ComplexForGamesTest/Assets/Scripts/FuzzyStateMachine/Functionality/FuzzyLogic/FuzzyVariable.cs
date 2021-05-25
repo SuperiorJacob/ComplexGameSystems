@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,20 +7,28 @@ namespace FuzzyStateMachine.Variable
     [CreateAssetMenu(fileName = "New Variables", menuName = "FuzzyStateMachine/Graph/Variable", order = 1)]
     public class FuzzyVariable : ScriptableObject
     {
+        /// <summary>
+        /// Variable inputs
+        /// </summary>
         [System.Serializable]
         public struct Variables
         {
-            public string name;
-            public float input;
+            [Tooltip("Name of the variable")] public string name;
+            [Tooltip("The float input of the variable")] public float input;
         }
 
-        public Variables[] variables;
+        [Tooltip("An array of variables to use later")] public Variables[] variables;
 
-        [System.NonSerialized] private Dictionary<string, float> m_variables; // Our inputs.
+        // Variable inputs.
+        [System.NonSerialized] private Dictionary<string, float> _variables;
 
+        /// <summary>
+        /// Initialize the variables
+        /// </summary>
+        /// <param name="a_inputs">Inputs to initialize with</param>
         public void Init(params (string name, float input)[] a_inputs)
         {
-            m_variables = new Dictionary<string, float>();
+            _variables = new Dictionary<string, float>();
 
             foreach (Variables var in variables)
             {
@@ -39,9 +47,13 @@ namespace FuzzyStateMachine.Variable
             }
         }
 
+        /// <summary>
+        /// Get the variable dictionary
+        /// </summary>
+        /// <returns>The variable dictionary</returns>
         public Dictionary<string, float> Get()
         {
-            return m_variables;
+            return _variables;
         }
 
         /// <summary>
@@ -63,15 +75,20 @@ namespace FuzzyStateMachine.Variable
             this[a_name] = a_input;
         }
 
-        public float this[string index]
+        /// <summary>
+        /// Get a variable by index
+        /// </summary>
+        /// <param name="a_index">String to index</param>
+        /// <returns>A float variable</returns>
+        public float this[string a_index]
         {
             get
             {
-                return m_variables[index];
+                return _variables[a_index];
             }
             set
             {
-                m_variables[index] = value;
+                _variables[a_index] = value;
 
                 //Debug.Log($"{index} = {value}");
             }

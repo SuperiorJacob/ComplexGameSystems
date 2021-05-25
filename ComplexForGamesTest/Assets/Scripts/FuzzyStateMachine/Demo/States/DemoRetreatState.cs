@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +7,10 @@ namespace FuzzyStateMachine.States
     public class DemoRetreatState : StateMachineState
     {
         private Demo.DemoAI ai;
+
         private bool initializied = false;
 
-        public DemoRetreatState() { executionType = StateExecuteType.Update; }
+        public DemoRetreatState() { executionType = StateExecuteType.Update; icon = "♥"; iconColor = Color.white; }
 
         public override void Execute(GameObject a_obj, Dictionary<string, float> a_inputVariables)
         {
@@ -21,12 +22,17 @@ namespace FuzzyStateMachine.States
                 initializied = true;
             }
 
-            StateController.transform.LookAt(ai.camp.position);
-            StateController.transform.position = Vector3.MoveTowards(StateController.transform.position, ai.camp.position, Time.fixedDeltaTime * 10f);
+            Vector3 goal = ai.camp.position;
+            goal.y = StateController.transform.position.y;
 
-            if (Vector3.Distance(StateController.transform.position, ai.camp.position) < 0.1f)
+            if (Vector3.Distance(StateController.transform.position, goal) < 0.01f)
             {
                 finished = true;
+            }
+            else
+            {
+                StateController.transform.LookAt(goal);
+                StateController.transform.position = Vector3.MoveTowards(StateController.transform.position, goal, Time.fixedDeltaTime * 3f * Mathf.Clamp(ai.GetHealth()/ai.GetMaxHealth(), 0.3f, 1));
             }
         }
 
@@ -34,7 +40,7 @@ namespace FuzzyStateMachine.States
         {
             if (ai.camp.position != null)
             {
-                inputVariables["health"] = 100;
+                ai.SetHealth(ai.GetMaxHealth());
                 inputVariables["hunger"] = 1;
             }
 

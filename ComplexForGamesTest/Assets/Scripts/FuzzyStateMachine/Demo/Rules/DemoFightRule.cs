@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace FuzzyStateMachine.Demo
 
         public override void SetupWeight()
         {
-            weight = 0.9f;
+            weight = 0.7f;
         }
 
         public override float UnDesirableRules(out float a_max)

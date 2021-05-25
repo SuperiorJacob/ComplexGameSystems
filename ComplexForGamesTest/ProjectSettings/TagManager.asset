@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DemoRed
   - DemoBlue
+  - DemoPurple
   layers:
   - Default
   - TransparentFX

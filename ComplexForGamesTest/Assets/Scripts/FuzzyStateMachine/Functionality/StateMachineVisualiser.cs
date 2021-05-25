@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -12,121 +12,150 @@ namespace FuzzyStateMachine
     }
 
     [CustomEditor(typeof(StateMachineVisualiser))]
-    [CanEditMultipleObjects]
+    [CanEditMultipleObjects] // Allows us to have multiple shapes open at once!
     public class StateMachineVisualiserEditor : Editor
     {
-        private StateMachineDebugger smd;
+        #region Fields
+
+        private StateMachineDebugger _smd;
 
         // Vertex buffers
-        private Vector3[] verticesBuffer;
+        private Vector3[] _verticesBuffer;
 
-        private bool visualised = false;
+        private bool _visualised = false;
 
-        private Vector2 scrollPos;
-        private FuzzyRuleSet ruleSet;
-        private FuzzyLogic logic;
+        private Vector2 _scrollPos;
+        private FuzzyRuleSet _ruleSet;
+        private FuzzyLogic _logic;
 
-        float minX = 0,
-            minY = -1,
-            maxX = 10, 
-            maxY = 1;
+        private float _minX = 0,
+            _minY = -1,
+            _maxX = 10, 
+            _maxY = 1;
 
-        Rect rect;
-        float rangeX = 10;
-        float rangeY = 10;
+        private Rect _rect;
+        private float _rangeX = 10;
+        private float _rangeY = 10;
 
-        Vector3 UnitToGraph(float x, float y)
+        #endregion
+
+        /// <summary>
+        /// Plot the coordinates on the graph and lerp them too
+        /// </summary>
+        /// <param name="a_x">X position</param>
+        /// <param name="a_y">Y position</param>
+        /// <returns>Graph position</returns>
+        private Vector3 UnitToGraph(float a_x, float a_y)
         {
-            x = Mathf.Lerp(rect.x, rect.xMax, (x - minX) / rangeX);
-            y = Mathf.Lerp(rect.yMax, rect.y, (y - minY) / rangeY);
+            a_x = Mathf.Lerp(_rect.x, _rect.xMax, (a_x - _minX) / _rangeX);
+            a_y = Mathf.Lerp(_rect.yMax, _rect.y, (a_y - _minY) / _rangeY);
 
-            return new Vector3(x, y, 0);
+            return new Vector3(a_x, a_y, 0);
         }
 
-        void DrawRect(float x1, float y1, float x2, float y2, Color fill, Color line)
+        /// <summary>
+        /// Draw a rectangle with fill color and outline color
+        /// </summary>
+        /// <param name="a_x1">Left</param>
+        /// <param name="a_y1">Top</param>
+        /// <param name="a_x2">Right</param>
+        /// <param name="a_y2">Bottom</param>
+        /// <param name="a_fill">Color fill of the rectangle</param>
+        /// <param name="a_line">Color oiutline of the rectangle</param>
+        private void DrawRect(float a_x1, float a_y1, float a_x2, float a_y2, Color a_fill, Color a_line)
         {
-            verticesBuffer = new Vector3[4];
+            _verticesBuffer = new Vector3[4];
 
-            verticesBuffer[0] = UnitToGraph(x1, y1);
-            verticesBuffer[1] = UnitToGraph(x2, y1);
-            verticesBuffer[2] = UnitToGraph(x2, y2);
-            verticesBuffer[3] = UnitToGraph(x1, y2);
+            _verticesBuffer[0] = UnitToGraph(a_x1, a_y1);
+            _verticesBuffer[1] = UnitToGraph(a_x2, a_y1);
+            _verticesBuffer[2] = UnitToGraph(a_x2, a_y2);
+            _verticesBuffer[3] = UnitToGraph(a_x1, a_y2);
 
-            Handles.DrawSolidRectangleWithOutline(verticesBuffer, fill, line);
+            Handles.DrawSolidRectangleWithOutline(_verticesBuffer, a_fill, a_line);
         }
 
-        void DrawLine(Color color, float width, params Vector2[] points)
+        /// <summary>
+        /// Draw a visual line.
+        /// </summary>
+        /// <param name="a_color">The color of the line.</param>
+        /// <param name="a_width">The width of the line</param>
+        /// <param name="a_points">The point of each line</param>
+        private void DrawLine(Color a_color, float a_width, params Vector2[] a_points)
         {
-            verticesBuffer = new Vector3[points.Length];
+            _verticesBuffer = new Vector3[a_points.Length];
 
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < a_points.Length; i++)
             {
-                verticesBuffer[i] = UnitToGraph(points[i].x, points[i].y);
+                _verticesBuffer[i] = UnitToGraph(a_points[i].x, a_points[i].y);
             }
 
-            Handles.color = color;
-            Handles.DrawAAPolyLine(width, points.Length, verticesBuffer);
+            Handles.color = a_color;
+            Handles.DrawAAPolyLine(a_width, a_points.Length, _verticesBuffer);
         }
 
-        Color changeAlpha(Color col, float alpha)
+        /// <summary>
+        /// Drawing a category based visualisation
+        /// </summary>
+        /// <param name="a_cat">Category name</param>
+        /// <param name="a_todraw">Category shapes</param>
+        private void Draw(string a_cat, Dictionary<int, Variable.FuzzyMember> a_todraw)
         {
-            return new Color(col.r, col.g, col.b, alpha);
-        }
+            DrawRect(_minX, _minY, _maxX, _maxY, Color.black, Color.black);
 
-        void Draw(string cat, Dictionary<int, Variable.FuzzyMember> todraw)
-        {
-            DrawRect(minX, minY, maxX, maxY, Color.black, Color.black);
-
-            foreach (var fuz in todraw)
+            foreach (KeyValuePair<int, Variable.FuzzyMember> fuz in a_todraw)
             {
                 DrawLine(fuz.Value.color, 2, fuz.Value.Visualise());
-
-                //float f = (fuz.Value.lastCheck * fuz.Value.max)/ 10;
-
-                //DrawLine(changeAlpha(fuz.Value.color, 0.5f), 2, new Vector2(f, 1), new Vector2(f, -1));
-
-                //float d = fuz.Value.shape[0] > smd.desirability.z ? -smd.desirability.z : smd.desirability.x;
-                //float o = fuz.Value.shape[0] / 10;
-
-                //DrawRect(smd.deffuziedOutput/10 - 0.1f, fuz.Value.lastCheck - 0.1f, smd.deffuziedOutput/10 + 0.1f, fuz.Value.lastCheck + 0.1f, fuz.Value.color, Color.black);
             }
 
-            float x = logic.lastDefuzz / 10;
-            if (cat != "desire")
-                x = ruleSet.inputs[cat] / 10;
+            float x = _logic.lastDefuzz / 10;
+            if (a_cat != "desire")
+                x = _ruleSet.inputs[a_cat] / 10;
             
             DrawLine(Color.white, 2, new Vector2(x, 1), new Vector2(x, -1));
-            //DrawLine(Color.gray, 2, new Vector2(smd.input / 10, 1), new Vector2(smd.input / 10, -1));
 
         }
 
+        /// <summary>
+        /// Toggles our visualiser
+        /// </summary>
         public void Visualize()
         {
-            visualised = !visualised;
+            _visualised = !_visualised;
         }
 
-        public void CreateVisualiser(string name, Dictionary<int, Variable.FuzzyMember> todraw)
+        /// <summary>
+        /// Create the shape visualiser
+        /// </summary>
+        /// <param name="a_name">Name of the category</param>
+        /// <param name="a_todraw">Shape to draw</param>
+        public void CreateVisualiser(string a_name, Dictionary<int, Variable.FuzzyMember> a_todraw)
         {
+            // Visualiser title box
+
             GUI.backgroundColor = Color.gray;
             using (new GUILayout.HorizontalScope(EditorStyles.toolbar))
             {
-                GUILayout.Label(name);
+                GUILayout.Label(a_name);
             }
 
             using (new GUILayout.HorizontalScope())
             {
                 GUILayout.Space(EditorGUI.indentLevel * 15f);
-                rect = GUILayoutUtility.GetRect(128, 80);
+                _rect = GUILayoutUtility.GetRect(128, 80);
             }
 
-            rangeX = maxX - minX;
-            rangeY = maxY - minY;
+            _rangeX = _maxX - _minX;
+            _rangeY = _maxY - _minY;
 
-            Draw(name, todraw);
+            // Draw the graph
+
+            Draw(a_name, a_todraw);
+
+            // Graph legend / exit bar
 
             using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
             {
-                foreach (var fuz in todraw)
+                foreach (var fuz in a_todraw)
                 {
                     Color prev = GUI.color;
                     GUI.color = fuz.Value.color;
@@ -138,56 +167,68 @@ namespace FuzzyStateMachine
             }
         }
 
+        /// <summary>
+        /// When the inspector loads this, draw our Shape visualiser
+        /// </summary>
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
             using (new GUILayout.HorizontalScope())
             {
+                // Tests the loader code
                 if (GUILayout.Button("Perform"))
                 {
                     MonoBehaviour monoBev = (MonoBehaviour)target; 
-                    smd = monoBev.GetComponent<StateMachineDebugger>();
+                    _smd = monoBev.GetComponent<StateMachineDebugger>();
 
-                    smd.Perform();
+                    _smd.Perform();
                 }
 
+                // Visualises the graphs after execution
                 if (GUILayout.Button("Visualize"))
                 {
-                    if (visualised) 
+                    if (_visualised)
+                    {
                         Visualize();
+                    }
                     else
                     {
                         MonoBehaviour monoBev = (MonoBehaviour)target;
-                        smd = monoBev.GetComponent<StateMachineDebugger>();
+                        _smd = monoBev.GetComponent<StateMachineDebugger>();
 
-                        Debug.Log(smd.transform.name);
+                        Debug.Log(_smd.transform.name);
 
-                        if (smd.logic == null || smd.logic.Length == 0)
-                            smd.Perform();
+                        if (_smd.logic == null || _smd.logic.Length == 0)
+                        {
+                            _smd.Perform();
+                        }
 
                         Visualize();
                     }
                 }
             }
 
-            if (visualised)
+            if (_visualised)
             {
+                // Draw output logs
                 GUILayout.Label($"Command Output:");
 
-                using (var h = new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
+                using (EditorGUILayout.HorizontalScope h = new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                 {
-                    using (var scrollView = new EditorGUILayout.ScrollViewScope(scrollPos, GUILayout.Width(h.rect.width), GUILayout.Height(100)))
+                    using (EditorGUILayout.ScrollViewScope scrollView = new EditorGUILayout.ScrollViewScope(_scrollPos, GUILayout.Width(h.rect.width), GUILayout.Height(100)))
                     {
-                        scrollPos = scrollView.scrollPosition;
+                        _scrollPos = scrollView.scrollPosition;
 
-                        for (int i = 0; i < smd.debug.Count; i++)
+                        for (int i = 0; i < _smd.debug.Count; i++)
                         {
-                            string label = smd.debug[i];
+                            string label = _smd.debug[i];
                             bool error = label.Substring(0, label.IndexOf(" ")) == "Error:";
 
-                            if (error) 
+                            if (error)
+                            {
                                 GUI.backgroundColor = new Color(1, 0.1f, 0.1f, 1);
+                            }
                             else
                             {
                                 float w = label[0] == ' ' ? 0 : 1f;
@@ -204,8 +245,10 @@ namespace FuzzyStateMachine
 
                 GUILayout.Label($"Visualised Rules:");
 
-                string lrn = smd.mainData.ruleSet != null ? smd.mainData.ruleSet.GetType().Name : "";
-                foreach (var log in smd.logic)
+                // Visualised graph
+
+                string lrn = _smd.mainData.ruleSet != null ? _smd.mainData.ruleSet.GetType().Name : "";
+                foreach (FuzzyLogic log in _smd.logic)
                 {
                     FuzzyRuleSet logicRuleSet = log.rule;
                     string lrsn = logicRuleSet.GetType().Name;
@@ -220,9 +263,9 @@ namespace FuzzyStateMachine
                         GUILayout.Space(EditorGUI.indentLevel * 8f);
                     }
 
-                    ruleSet = logicRuleSet;
-                    logic = log;
-                    foreach (var cat in logicRuleSet.GetMembersByCategory())
+                    _ruleSet = logicRuleSet;
+                    _logic = log;
+                    foreach (KeyValuePair<string, Dictionary<int, Variable.FuzzyMember>> cat in logicRuleSet.GetMembersByCategory())
                     {
                         CreateVisualiser(cat.Key, cat.Value);
                     }

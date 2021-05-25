@@ -1,7 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 /* This little demo AI requires the use of demo variables and rules.
  */
 
@@ -9,8 +9,8 @@ namespace FuzzyStateMachine.Demo
 {
     public class DemoAI : DemoDamageable
     {
-        private StateMachineLoader fuzzyMachine;
-        private StateMachineDebugger debug;
+        private StateMachineLoader _fuzzyMachine;
+        private StateMachineDebugger _debug;
 
         // TEST
         public float simulationSpeed = 1;
@@ -23,12 +23,11 @@ namespace FuzzyStateMachine.Demo
 
         public Transform camp;
         public Transform target;
+        public Text symbol;
 
         public Dictionary<string, float> variables;
 
         [System.NonSerialized] public float overrideHealth = 0;
-
-        private bool finished = false;
 
         public void UpdateBasedOnVariables()
         {
@@ -50,13 +49,9 @@ namespace FuzzyStateMachine.Demo
                 : ((teammates / maxTeammates) + (GetHealth() / GetMaxHealth())) / 2) * (1 + GetLeaders()) * 100, // if not leader, courage is dependant.
                 0, 100); 
 
-            finished = false;
-
-            fuzzyMachine = GetComponent<StateMachineLoader>();
-
             float tm = (teammates / maxTeammates);
 
-            fuzzyMachine.Load(
+            _fuzzyMachine.Load(
                 ("hunger", hunger),
                 ("courage", courage),
                 ("leadership", leadership),
@@ -64,21 +59,36 @@ namespace FuzzyStateMachine.Demo
                 ("health", GetHealth())
             );
 
-            variables = new Dictionary<string, float>();
-            variables["hunger"] = hunger / 100;
-            variables["courage"] = courage / 100;
-            variables["leadership"] = leadership / 100;
-            variables["teammates"] = tm;
-            variables["health"] = GetHealth() / 100;
-
-            if (TryGetComponent(out debug))
+            variables = new Dictionary<string, float>
             {
-                debug.Load();
+                ["hunger"] = hunger / 100,
+                ["courage"] = courage / 100,
+                ["leadership"] = leadership / 100,
+                ["teammates"] = tm,
+                ["health"] = GetHealth() / 100
+            };
+
+            if (TryGetComponent(out _debug))
+            {
+                _debug.Load();
             }
+
+            string item = _fuzzyMachine._outPut.state == null ? "" : _fuzzyMachine._outPut.state.icon;
+            Color col = _fuzzyMachine._outPut.state == null ? Color.white : _fuzzyMachine._outPut.state.iconColor;
+
+            if (leadership > 60)
+            {
+                item = "§\n" + item;
+            }
+            symbol.fontSize = 100;
+            symbol.text = item;
+            symbol.color = col;
         }
 
         void Start()
         {
+            _fuzzyMachine = GetComponent<StateMachineLoader>();
+
             maxTeammates = GameObject.FindGameObjectsWithTag(gameObject.tag).Length;
             teammates = maxTeammates;
 
@@ -87,7 +97,6 @@ namespace FuzzyStateMachine.Demo
 
             StartCoroutine("UpdateData");
         }
-
 
         [ContextMenu("Update Values")]
         public void UpdateValues()
@@ -140,25 +149,28 @@ namespace FuzzyStateMachine.Demo
         {
             while (true)
             {
-                hunger -= 0.01f * simulationSpeed;
+                if (_fuzzyMachine._outPut.state == null)
+                {
+                    Begin();
+                }
+                else if (_fuzzyMachine._outPut.state.finished)
+                {
+                    variables = _fuzzyMachine._outPut.state.Finish();
 
-                if (hunger < 0) hunger = 0;
+                    UpdateBasedOnVariables();
 
-                if (hunger == 0)
+                    Begin();
+                }
+
+                variables["hunger"] -= 0.05f * simulationSpeed;
+
+                if (variables["hunger"] < 0) variables["hunger"] = 0;
+
+                if (variables["hunger"] == 0)
                 {
                     TakeDamage(1);
                 }
 
-                if (!finished)
-                {
-                    Begin();
-                }
-                else
-                {
-                    yield return new WaitForSeconds(1f);
-
-                    Begin();
-                }
 
                 yield return new WaitForSeconds(1f);
             }
@@ -172,20 +184,9 @@ namespace FuzzyStateMachine.Demo
                 return;
             }
 
-            if (finished)
-                return;
-
-            if (fuzzyMachine._outPut.state != null && fuzzyMachine._outPut.state.executionType == States.StateExecuteType.Update)
+            if (_fuzzyMachine._outPut.state != null && _fuzzyMachine._outPut.state.executionType == States.StateExecuteType.Update)
             {
-                if (fuzzyMachine._outPut.state.finished)
-                {
-                    variables = fuzzyMachine._outPut.state.Finish();
-
-                    UpdateBasedOnVariables();
-                    finished = true;
-                }
-                else
-                    fuzzyMachine._outPut.state.Execute(gameObject, variables);
+                _fuzzyMachine._outPut.state.Execute(gameObject, variables);
             }
         }
 
