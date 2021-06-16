@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor.Experimental.GraphView;
+#endif
 
 namespace FuzzyStateMachine
 {
@@ -32,9 +34,9 @@ namespace FuzzyStateMachine
             [Tooltip("Port connections")] public PortConnector[] connections;
             [Tooltip("Port connection type")] public string type;
             [Tooltip("Port visual color")] public Color color;
-            [Tooltip("Port orientation")] public Orientation orientation;
-            [Tooltip("Port direction")] public Direction direction;
-            [Tooltip("Port capacity")] public Port.Capacity capacity;
+            [Tooltip("Port orientation")] public int orientation;
+            [Tooltip("Port direction")] public int direction;
+            [Tooltip("Port capacity")] public int capacity;
         }
 
         /// <summary>
@@ -45,6 +47,7 @@ namespace FuzzyStateMachine
         {
             public string name; // Node name.
             public Object value; // Data input.
+            public string value1; // Data input type.
             public float value2; // For floats inputs
             public string type; // Data input type.
             public PortData[] ports; // Ports data.
@@ -61,12 +64,13 @@ namespace FuzzyStateMachine
         [Tooltip("How many ports are we working with? *used for id*")]
         public int ports = 0;
 
+        #endregion
+
+#if UNITY_EDITOR
         /// <summary>
         /// Dictionary of ports used by our saver, will clear it after.
         /// </summary>
         [System.NonSerialized] public Dictionary<Port, int> portDictionary = new Dictionary<Port, int>();
-
-        #endregion
 
         /// <summary>
         /// Add a node and save it.
@@ -80,7 +84,7 @@ namespace FuzzyStateMachine
             Rect xy = a_node.node.GetPosition();
 
             // Create node info
-            NodeData nD = new NodeData { name = a_node.node.title, value = a_node.obj?.value, value2 = a_node.flo != null ? a_node.flo.value : -1f, x = xy.x, y = xy.y, w = w, h = h, type = a_node.typeString};
+            NodeData nD = new NodeData { name = a_node.node.title, value = a_node.obj?.value, value1 = a_node.obj?.value != null ? (a_node.obj.value.GetType() == typeof(UnityEditor.MonoScript) ? ((UnityEditor.MonoScript)a_node.obj.value).GetClass().ToString() : a_node.obj.value.GetType().ToString()) : null, value2 = a_node.flo != null ? a_node.flo.value : -1f, x = xy.x, y = xy.y, w = w, h = h, type = a_node.typeString};
 
             nD.ports = new PortData[a_node.ports.Count];
             int index = 0;
@@ -95,8 +99,8 @@ namespace FuzzyStateMachine
                 }
 
                 nD.ports[index] = new PortData { id = ports + index, name = port.portName, color = port.portColor, 
-                    orientation = port.orientation, direction = port.direction, 
-                    capacity = port.capacity, type = port.portType?.FullName };
+                    orientation = (int)port.orientation, direction = (int)port.direction, 
+                    capacity = (int)port.capacity, type = port.portType?.FullName };
 
                 portDictionary[port] = nD.ports[index].id;
 
@@ -191,5 +195,6 @@ namespace FuzzyStateMachine
             
             return false;
         }
+#endif
     }
 }

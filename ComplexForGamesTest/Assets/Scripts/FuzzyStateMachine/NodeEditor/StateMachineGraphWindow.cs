@@ -69,7 +69,7 @@ namespace FuzzyStateMachine
             {
                 a_graph.nodes.Insert(0, new StateMachineGraph.NodeData { name = "Graph Output", w = 200, h = 100, type = "", value = null, x = 0, y = 0, ports = new StateMachineGraph.PortData[]
                     {
-                        new StateMachineGraph.PortData { name = "In", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(StateMachineGraphView.FuzzyData).FullName }
+                        new StateMachineGraph.PortData { name = "In", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(StateMachineGraphView.FuzzyData).FullName }
                     }
                 });
             }

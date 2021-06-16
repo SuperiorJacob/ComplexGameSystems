@@ -172,14 +172,15 @@ namespace FuzzyStateMachine
             logs.Add($"Calculating function: {a_data.data.name}");
 
             bool calculated = false;
-            if (System.Type.GetType(a_data.data.type) == typeof(FuzzyLogic))
+            if (System.Type.GetType(a_data.data.type) != null
+                && (System.Type.GetType(a_data.data.type) == typeof(FuzzyLogic) || System.Type.GetType(a_data.data.type).IsSubclassOf(typeof(FuzzyLogic))))
             {
                 fD.variables = null;
                 fD.ruleSet = null;
                 fD.shapeSet = null;
 
-                MonoScript l = (MonoScript)a_data.data.value;
-                FuzzyLogic logic = (FuzzyLogic)System.Activator.CreateInstance(l.GetClass());
+                System.Type l = System.Type.GetType(a_data.data.value1);
+                FuzzyLogic logic = (FuzzyLogic)System.Activator.CreateInstance(l);
 
                 bool executionFailure = false;
 
@@ -199,9 +200,9 @@ namespace FuzzyStateMachine
                     }
                     else if (ins.data.type == typeof(FuzzyRuleSet).FullName)
                     {
-                        l = (MonoScript)ins.data.value;
-                        fD.ruleSet = (FuzzyRuleSet)System.Activator.CreateInstance(l.GetClass());
-                        logs.Add($" Loading rules: {l.name}");
+                        l = System.Type.GetType(ins.data.value1);
+                        fD.ruleSet = (FuzzyRuleSet)System.Activator.CreateInstance(l);
+                        logs.Add($" Loading rules: {l.Name}");
                     }
                 }
 
@@ -259,9 +260,9 @@ namespace FuzzyStateMachine
 
                 if (a_data.ins.Count == 2)
                 {
-                    MonoScript l = (MonoScript)a_data.ins[1].data.value;
-                    fD.state = (States.StateMachineState)System.Activator.CreateInstance(l.GetClass());
-                    logs.Add($" Accepted state: {l.name}");
+                    System.Type l = System.Type.GetType(a_data.ins[1].data.value1);
+                    fD.state = (States.StateMachineState)System.Activator.CreateInstance(l);
+                    logs.Add($" Accepted state: {l.Name}");
                 }
                 else 
                     logs.Add($" No state found using old state.");
@@ -337,9 +338,12 @@ namespace FuzzyStateMachine
 
             logs = new List<string>{ $"Begin loading graph data into functionality..." };
 
+#if UNITY_EDITOR
             bool usingEditorTime = !(Time.realtimeSinceStartup > 0);
-
             float startTime = usingEditorTime ? (float)EditorApplication.timeSinceStartup : Time.realtimeSinceStartup;
+#else
+            float startTime = Time.realtimeSinceStartup;
+#endif
 
             if (_graph == null)
             {
@@ -354,7 +358,11 @@ namespace FuzzyStateMachine
                 RunFunction(startBranch);
             }
 
+#if UNITY_EDITOR
             float endTime = (usingEditorTime ? (float)EditorApplication.timeSinceStartup : Time.realtimeSinceStartup) - startTime;
+#else
+            float endTime = Time.realtimeSinceStartup - startTime;
+#endif
 
             logs.Add($"Successful load. Calculated in {endTime} ms.");
         }

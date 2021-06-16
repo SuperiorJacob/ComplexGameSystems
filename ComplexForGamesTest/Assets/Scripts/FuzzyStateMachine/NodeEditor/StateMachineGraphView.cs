@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,6 @@ namespace FuzzyStateMachine
         /// </summary>
         public struct FuzzyData { };
 
-#if UNITY_EDITOR // Editor only assembly, we will not be using any of the below code during runtime so this is perfect.
         #region Fields
 
         /// <summary>
@@ -244,10 +244,10 @@ namespace FuzzyStateMachine
             {
                 System.Type portTyp = System.Type.GetType(port.type);
 
-                Port p = CreatePort(n, port.name, port.color, port.orientation, port.direction, port.capacity, portTyp);
+                Port p = CreatePort(n, port.name, port.color, (Orientation)port.orientation, (Direction)port.direction, (Port.Capacity)port.capacity, portTyp);
                 portDictionary[port.id] = p;
 
-                if (port.direction == Direction.Output)
+                if (port.direction == (int)Direction.Output)
                 {
                     n.outputContainer.Add(p);
                 }
@@ -287,7 +287,7 @@ namespace FuzzyStateMachine
                 // Connecting respected ports on the graph and visualise it.
                 foreach (StateMachineGraph.PortConnector pC in port.connections)
                 {
-                    if (port.direction == Direction.Output)
+                    if (port.direction == (int)Direction.Output)
                     {
                         AddElement(p.ConnectTo(portDictionary[pC.output]));
                     }
@@ -341,9 +341,9 @@ namespace FuzzyStateMachine
 
             data.ports = new StateMachineGraph.PortData[]
             {
-                new StateMachineGraph.PortData { name = "In Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyData).FullName },
-                new StateMachineGraph.PortData { name = "In Data 2", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyData).FullName },
-                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "In Data", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "In Data 2", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output, capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyData).FullName },
             };
 
             CreateNodeByData(data);
@@ -360,8 +360,8 @@ namespace FuzzyStateMachine
             };
 
             data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.red, 
-                orientation = Orientation.Horizontal, direction = Direction.Output, 
-                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName } };
+                orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output, 
+                capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName } };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Variables";
@@ -378,8 +378,8 @@ namespace FuzzyStateMachine
             };
 
             data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.cyan,
-                orientation = Orientation.Horizontal, direction = Direction.Output,
-                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName } };
+                orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output,
+                capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName } };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New State";
@@ -400,8 +400,8 @@ namespace FuzzyStateMachine
             };
 
             data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.green,
-                orientation = Orientation.Horizontal, direction = Direction.Output,
-                capacity = Port.Capacity.Multi, type = typeof(FuzzyStateMachine.Variable.FuzzyShapeSet).FullName } };
+                orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output,
+                capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyStateMachine.Variable.FuzzyShapeSet).FullName } };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Shape Set";
@@ -422,8 +422,8 @@ namespace FuzzyStateMachine
             };
 
             data.ports = new StateMachineGraph.PortData[] { new StateMachineGraph.PortData { name = "Out", color = Color.blue,
-                orientation = Orientation.Horizontal, direction = Direction.Output,
-                capacity = Port.Capacity.Multi, type = typeof(FuzzyRuleSet).FullName } };
+                orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output,
+                capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyRuleSet).FullName } };
 
             NodeInfo info = CreateNodeByData(data);
             info.node.title = "New Fuzzy RuleSet";
@@ -440,10 +440,10 @@ namespace FuzzyStateMachine
             };
 
             data.ports = new StateMachineGraph.PortData[] { 
-                new StateMachineGraph.PortData { name = "In Variables", color = Color.red, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName },
-                new StateMachineGraph.PortData { name = "In Shape Set", color = Color.green, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(Variable.FuzzyShapeSet).FullName },
-                new StateMachineGraph.PortData { name = "In Rule Set", color = Color.blue, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyRuleSet).FullName },
-                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(FuzzyData).FullName }
+                new StateMachineGraph.PortData { name = "In Variables", color = Color.red, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(FuzzyStateMachine.Variable.FuzzyVariable).FullName },
+                new StateMachineGraph.PortData { name = "In Shape Set", color = Color.green, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(Variable.FuzzyShapeSet).FullName },
+                new StateMachineGraph.PortData { name = "In Rule Set", color = Color.blue, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(FuzzyRuleSet).FullName },
+                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output, capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyData).FullName }
             };
 
             NodeInfo info = CreateNodeByData(data);
@@ -468,9 +468,9 @@ namespace FuzzyStateMachine
 
             data.ports = new StateMachineGraph.PortData[] 
             {
-                new StateMachineGraph.PortData { name = "In Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyData).FullName },
-                new StateMachineGraph.PortData { name = "In State", color = Color.cyan, orientation = Orientation.Horizontal, direction = Direction.Input, capacity = Port.Capacity.Single, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName },
-                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = Orientation.Horizontal, direction = Direction.Output, capacity = Port.Capacity.Multi, type = typeof(FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "In Data", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(FuzzyData).FullName },
+                new StateMachineGraph.PortData { name = "In State", color = Color.cyan, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Input, capacity = (int)Port.Capacity.Single, type = typeof(FuzzyStateMachine.States.StateMachineState).FullName },
+                new StateMachineGraph.PortData { name = "Out Data", color = Color.yellow, orientation = (int)Orientation.Horizontal, direction = (int)Direction.Output, capacity = (int)Port.Capacity.Multi, type = typeof(FuzzyData).FullName },
             };
 
             NodeInfo nI = CreateNodeByData(data);
@@ -502,6 +502,6 @@ namespace FuzzyStateMachine
         }
 
         #endregion
-#endif
     }
 }
+#endif

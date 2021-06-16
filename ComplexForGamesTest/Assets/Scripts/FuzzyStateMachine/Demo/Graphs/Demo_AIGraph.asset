@@ -15,6 +15,7 @@ MonoBehaviour:
   nodes:
   - name: Graph Output
     value: {fileID: 0}
+    value1: 
     value2: -1
     type: 
     ports:
@@ -34,6 +35,7 @@ MonoBehaviour:
     h: 100
   - name: FuzzyLogic
     value: {fileID: 11500000, guid: 718d1546dff4d034a98f9a599f140de8, type: 3}
+    value1: FuzzyStateMachine.FuzzyLogic
     value2: -1
     type: FuzzyStateMachine.FuzzyLogic
     ports:
@@ -83,6 +85,7 @@ MonoBehaviour:
     h: 160
   - name: FuzzyLogic
     value: {fileID: 11500000, guid: 718d1546dff4d034a98f9a599f140de8, type: 3}
+    value1: FuzzyStateMachine.FuzzyLogic
     value2: -1
     type: FuzzyStateMachine.FuzzyLogic
     ports:
@@ -132,6 +135,7 @@ MonoBehaviour:
     h: 160
   - name: FuzzyLogic
     value: {fileID: 11500000, guid: 718d1546dff4d034a98f9a599f140de8, type: 3}
+    value1: FuzzyStateMachine.FuzzyLogic
     value2: -1
     type: FuzzyStateMachine.FuzzyLogic
     ports:
@@ -181,6 +185,7 @@ MonoBehaviour:
     h: 160
   - name: Demo_AI_Variables
     value: {fileID: 11400000, guid: 93d969275c3188c479bd60e852d3dee3, type: 2}
+    value1: FuzzyStateMachine.Variable.FuzzyVariable
     value2: -1
     type: FuzzyStateMachine.Variable.FuzzyVariable
     ports:
@@ -204,6 +209,7 @@ MonoBehaviour:
     h: 100
   - name: DemoHealth
     value: {fileID: 11500000, guid: 46f0c0a2474f1d844b56c63c059e9fe3, type: 3}
+    value1: FuzzyStateMachine.Demo.DemoHealthRule
     value2: -1
     type: FuzzyStateMachine.FuzzyRuleSet
     ports:
@@ -223,6 +229,7 @@ MonoBehaviour:
     h: 100
   - name: DemoFoodRule
     value: {fileID: 11500000, guid: 137c46d91451ff14d93827d5e22054ca, type: 3}
+    value1: FuzzyStateMachine.Demo.DemoFoodRule
     value2: -1
     type: FuzzyStateMachine.FuzzyRuleSet
     ports:
@@ -242,6 +249,7 @@ MonoBehaviour:
     h: 100
   - name: DemoFightRule
     value: {fileID: 11500000, guid: a2028e7cfb9386946b67e7fb155cd914, type: 3}
+    value1: FuzzyStateMachine.Demo.DemoFightRule
     value2: -1
     type: FuzzyStateMachine.FuzzyRuleSet
     ports:
@@ -261,6 +269,7 @@ MonoBehaviour:
     h: 100
   - name: Has State
     value: {fileID: 0}
+    value1: 
     value2: -1
     type: HasState
     ports:
@@ -300,6 +309,7 @@ MonoBehaviour:
     h: 140
   - name: Has State
     value: {fileID: 0}
+    value1: 
     value2: -1
     type: HasState
     ports:
@@ -339,6 +349,7 @@ MonoBehaviour:
     h: 140
   - name: Greater Than
     value: {fileID: 0}
+    value1: 
     value2: 0
     type: Greater
     ports:
@@ -378,6 +389,7 @@ MonoBehaviour:
     h: 140
   - name: Greater Than
     value: {fileID: 0}
+    value1: 
     value2: 49
     type: Greater
     ports:
@@ -417,6 +429,7 @@ MonoBehaviour:
     h: 140
   - name: Greater Than
     value: {fileID: 0}
+    value1: 
     value2: 49
     type: Greater
     ports:
@@ -456,6 +469,7 @@ MonoBehaviour:
     h: 140
   - name: DemoRetreatState
     value: {fileID: 11500000, guid: 250e1140277cbe74e9e460fdfdebd12e, type: 3}
+    value1: FuzzyStateMachine.States.DemoRetreatState
     value2: -1
     type: FuzzyStateMachine.States.StateMachineState
     ports:
@@ -479,6 +493,7 @@ MonoBehaviour:
     h: 100
   - name: DemoAttackState
     value: {fileID: 11500000, guid: e077ef534644b044584d9492ae2798d4, type: 3}
+    value1: FuzzyStateMachine.States.DemoAttackState
     value2: -1
     type: FuzzyStateMachine.States.StateMachineState
     ports:
@@ -502,6 +517,7 @@ MonoBehaviour:
     h: 100
   - name: Greater Than
     value: {fileID: 0}
+    value1: 
     value2: 39
     type: Greater
     ports:
@@ -541,6 +557,7 @@ MonoBehaviour:
     h: 140
   - name: Demo_Warrior_Shape
     value: {fileID: 11400000, guid: 6ece5956177113d4e9ccb5c9f31741b5, type: 2}
+    value1: FuzzyStateMachine.Variable.FuzzyShapeSet
     value2: -1
     type: FuzzyStateMachine.Variable.FuzzyShapeSet
     ports:
@@ -564,6 +581,7 @@ MonoBehaviour:
     h: 100
   - name: Lesser Than
     value: {fileID: 0}
+    value1: 
     value2: 50
     type: Lesser
     ports:
@@ -603,6 +621,7 @@ MonoBehaviour:
     h: 140
   - name: Lesser Than
     value: {fileID: 0}
+    value1: 
     value2: 50
     type: Lesser
     ports:
